@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LOC/KLOC Counter Tool – User Manual</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <h1>📊 LOC & KLOC Counter Tool</h1>
+      <p class="subtitle">Simple User Guide for Beginners</p>
+    </header>
+
+    <nav class="nav">
+      <ul>
+        <li><a href="#what-is-it">What Is It?</a></li>
+        <li><a href="#why-use">Why Use It?</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#how-to-use">How To Use</a></li>
+        <li><a href="#output">Understanding the Output</a></li>
+        <li><a href="#tips">Helpful Tips</a></li>
+      </ul>
+    </nav>
+
+    <main class="content">
+      <section id="what-is-it" class="section">
+        <h2>🔍 What Is It?</h2>
+        <p>This tool helps you count meaningful lines of code (LOC) and KLOC in all <code>.cpp</code> and <code>.h</code> files inside a folder.</p>
+        <div class="simple-list">
+          <div class="bullet-point">✅ Ignores blank lines and comments</div>
+          <div class="bullet-point">✅ Separates count for header and source files</div>
+          <div class="bullet-point">✅ Explains what LOC and KLOC mean in simple terms</div>
+        </div>
+      </section>
+
+      <section id="why-use" class="section">
+        <h2>🎯 Why Use It?</h2>
+        <div class="purpose-cards">
+          <div class="purpose-card">
+            <h3>📏 Measure Size</h3>
+            <p>Helps you know how much code your project contains</p>
+          </div>
+          <div class="purpose-card">
+            <h3>📊 Track Progress</h3>
+            <p>Useful for tracking how much new code is written</p>
+          </div>
+          <div class="purpose-card">
+            <h3>✅ Clean Reporting</h3>
+            <p>Ignores non-code lines like comments and empty lines</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="section">
+        <h2>⚙️ How It Works</h2>
+        <ul>
+          <li>Reads every <code>.cpp</code> and <code>.h</code> file inside the selected folder</li>
+          <li>Skips lines that are:
+            <ul>
+              <li>Empty</li>
+              <li>Start with <code>//</code>, <code>/*</code>, <code>*</code>, <code>*/</code>, or <code>#</code></li>
+            </ul>
+          </li>
+          <li>Counts only meaningful code lines</li>
+        </ul>
+      </section>
+
+      <section id="how-to-use" class="section">
+        <h2>👣 How To Use It</h2>
+        <div class="step-container">
+          <div class="simple-step">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h3>Run the Script</h3>
+              <p>Open it in your Python editor or terminal</p>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h3>Enter Folder Path</h3>
+              <p>When asked, paste the full path to the folder containing your C++ files</p>
+              <code>C:\Users\You\Projects\MyCppApp</code>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h3>See Results</h3>
+              <p>The tool will show LOC for each file, and total KLOC for headers and source files</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="output" class="section">
+        <h2>📄 Understanding the Output</h2>
+        <p>The tool prints two sections:</p>
+        <ul>
+          <li><strong>Header Files (LOC Count):</strong> LOC for all <code>.h</code> files</li>
+          <li><strong>Source Files (LOC Count):</strong> LOC for all <code>.cpp</code> files</li>
+        </ul>
+        <div class="info-box">
+          <p><strong>KLOC</strong> means "Kilo Lines of Code"</p>
+          <p><code>KLOC = LOC ÷ 1000</code></p>
+        </div>
+        <p>Then you will see a final summary like:</p>
+        <pre>
+Total LOC for Header Files: 1342
+KLOC = 1.34
+
+Total LOC for Source Files: 5289
+KLOC = 5.29
+        </pre>
+      </section>
+
+      <section id="tips" class="section">
+        <h2>💡 Helpful Tips</h2>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <div class="tip-icon">📁</div>
+            <h3>Organize Code</h3>
+            <p>Keep all your source files in one folder for easy counting</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">💬</div>
+            <h3>No Comments Counted</h3>
+            <p>Lines with //, /*, or # are not counted</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🚫</div>
+            <h3>Empty Lines Skipped</h3>
+            <p>Only actual lines of code are counted</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📈</div>
+            <h3>Use in Reports</h3>
+            <p>Great for project size estimates or team metrics</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>🎉 Done! Now you know how many real lines of code are in your project.</p>
+      <p>Happy coding! ✨</p>
+    </footer>
+  </div>
+
+</body>
+</html>

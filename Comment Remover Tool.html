@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧹 Comment Remover Tool – User Manual</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🧹 Comment Remover Tool</h1>
+      <p class="subtitle">Clean up your code by removing // comments from text files</p>
+    </header>
+
+    <main class="content">
+      <section class="section">
+        <h2>📌 What Is It?</h2>
+        <p>This tool helps you clean up source or log files by removing all lines that start with <strong>//</strong> (single-line comments), and also removes inline comments from code lines.</p>
+      </section>
+
+      <section class="section">
+        <h2>🎯 Why Use It?</h2>
+        <ul class="simple-list">
+          <li>✅ Quickly remove unnecessary comments from files</li>
+          <li>✅ Make your files cleaner and easier to review</li>
+          <li>✅ Saves the cleaned file separately — your original file stays safe</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>👣 How To Use</h2>
+        <ol>
+          <li>Run the tool.</li>
+          <li>When prompted, select the file you want to clean.</li>
+          <li>The tool will automatically:
+            <ul>
+              <li>Skip lines that start with <code>//</code></li>
+              <li>Remove <code>//</code> comments from the middle of lines</li>
+              <li>Keep only meaningful, non-empty lines</li>
+            </ul>
+          </li>
+          <li>A new file will be created with "<strong>_cleaned</strong>" added to the original name.</li>
+          <li>The cleaned file will be highlighted in your file explorer automatically.</li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2>📂 Output Location</h2>
+        <p>The cleaned file is saved in the same folder as the original file, with <strong>_cleaned</strong> added to the filename.</p>
+        <p>Example: <code>original.txt</code> → <code>original_cleaned.txt</code></p>
+      </section>
+
+      <section class="section">
+        <h2>💡 Tips for Beginners</h2>
+        <ul>
+          <li>✔️ Use this tool before sharing code or logs — it makes them cleaner.</li>
+          <li>✔️ Don’t worry, your original file won’t be changed.</li>
+          <li>✔️ Works with .txt and many types of source files too!</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>⚠️ Common Issues</h2>
+        <ul>
+          <li>❌ If you see “No file selected,” try running the tool again and choose a valid file.</li>
+          <li>❌ Make sure the file is not open in another program while cleaning.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>🧽 Use this tool to tidy up your files and remove distractions from comments.</p>
+    </footer>
+  </div>
+</body>
+</html>

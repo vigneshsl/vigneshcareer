@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📋 Customization Tools User Manual</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f8;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #searchBar {
+      width: 60%;
+      max-width: 400px;
+      padding: 10px;
+      margin-bottom: 30px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 25px 20px;
+      width: 250px;
+      transition: transform 0.2s ease-in-out;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background-color: #e9f5ff;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #0078d7;
+    }
+
+    .card p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    @media (max-width: 600px) {
+      #searchBar {
+        width: 90%;
+      }
+      .card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>📖 Customization Tools - User Manual</h1>
+
+  <input type="text" id="searchBar" onkeyup="filterCards()" placeholder="🔍 Search for a tool...">
+
+  <div class="menu" id="toolMenu">
+    <a class="card" href="C++ Include Analyzer Tool.html">
+      <h2>C++ Include Analyzer</h2>
+      <p>Analyzes and lists #include dependencies in C++ files.</p>
+    </a>
+    <a class="card" href="Case_convert.html">
+      <h2>Case Convert</h2>
+      <p>Convert text between UPPERCASE, lowercase, and Title Case.</p>
+    </a>
+    <a class="card" href="Close.html">
+      <h2>Close Tool</h2>
+      <p>Closes selected files or sessions safely.</p>
+    </a>
+    <a class="card" href="CodeLine Counter.html">
+      <h2>Code Line Counter</h2>
+      <p>Counts the number of lines in source code files.</p>
+    </a>
+    <a class="card" href="Comment Remover Tool.html">
+      <h2>Comment Remover</h2>
+      <p>Strips comments from source code files.</p>
+    </a>
+    <a class="card" href="content replacement tool.html">
+      <h2>Content Replacement Tool</h2>
+      <p>Find and replace text in files or folders.</p>
+    </a>
+    <a class="card" href="CopyMoveZap.html">
+      <h2>Copy/Move/Zap</h2>
+      <p>Fast utility for file operations like copy, move, delete.</p>
+    </a>
+    <a class="card" href="Dump file to string file .html">
+      <h2>Dump to String File</h2>
+      <p>Converts binary dump files to readable string formats.</p>
+    </a>
+    <a class="card" href="file rename.html">
+      <h2>File Rename</h2>
+      <p>Batch rename files using patterns or conditions.</p>
+    </a>
+    <a class="card" href="Search.html">
+      <h2>Search Tool</h2>
+      <p>Search for keywords across files or folders.</p>
+    </a>
+    <a class="card" href="SmartFolder Backup.html">
+      <h2>Smart Folder Backup</h2>
+      <p>Backup selected folders with advanced filters.</p>
+    </a>
+    <a class="card" href="xml manger.html">
+      <h2>XML Manager</h2>
+      <p>Edit, validate, and format XML files easily.</p>
+    </a>
+  </div>
+
+  <script>
+    function filterCards() {
+      const input = document.getElementById('searchBar').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
