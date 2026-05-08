@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vignesh S - Software Engineer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <title>Vignesh S | Software Engineer - C++ • Industrial Automation • Embedded Systems</title>
+    <meta name="description" content="Vignesh S - Software Engineer specializing in C++, Win32 API, MFC, Industrial Automation, Embedded Systems, Honeywell UOC, and Process Control Systems. 3+ years of experience.">
+    <meta name="keywords" content="Vignesh S, Software Engineer, C++, Win32 API, MFC, Industrial Automation, Embedded Systems, Honeywell UOC, Process Control Systems, Portfolio">
+    <meta name="author" content="Vignesh S">
+    <meta property="og:title" content="Vignesh S - Software Engineer Portfolio">
+    <meta property="og:description" content="Results-driven Software Engineer with 3+ years in industrial automation and embedded systems.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+    </script>
 
+    <style>
         :root {
-            --primary-color: #3b82f6;
+            --primary: #3b82f6;
             --primary-dark: #1d4ed8;
             --primary-light: #60a5fa;
-            --accent-color: #8b5cf6;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --cyan: #22d3ee;
+            --success: #10b981;
+            --warning: #f59e0b;
             --text-primary: #1a202c;
             --text-secondary: #4a5568;
             --text-light: #718096;
@@ -31,296 +41,516 @@
             --bg-card: #ffffff;
             --border-color: #e2e8f0;
             --border-light: #f1f5f9;
-            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            --border-radius-sm: 6px;
-            --border-radius: 12px;
-            --border-radius-lg: 16px;
-            --border-radius-xl: 24px;
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-bg-strong: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-blur: 20px;
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.12);
+            --shadow-glow-blue: 0 0 40px rgba(59, 130, 246, 0.3);
+            --shadow-glow-purple: 0 0 40px rgba(139, 92, 246, 0.3);
+            --shadow-glow-cyan: 0 0 40px rgba(34, 211, 238, 0.25);
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
+            --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --gradient-hero: linear-gradient(160deg, #eff6ff 0%, #faf5ff 30%, #ecfeff 60%, #f0f9ff 100%);
+            --border-radius-sm: 8px;
+            --border-radius: 14px;
+            --border-radius-lg: 20px;
+            --border-radius-xl: 28px;
+            --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
 
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.7;
             color: var(--text-primary);
             background: var(--bg-primary);
             font-size: 16px;
             font-weight: 400;
-            scroll-behavior: smooth;
             overflow-x: hidden;
+            cursor: default;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Mouse Glow */
+        .mouse-glow {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, rgba(139, 92, 246, 0.03) 30%, transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: opacity 0.4s ease;
+            opacity: 0;
+            will-change: left, top;
+        }
+        body:hover .mouse-glow {
+            opacity: 1;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+        /* Three.js Canvas */
+        #three-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.55;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 10px;
+        /* Floating Particles Overlay */
+        .particles-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .particle-dot {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0;
+            animation: floatUp 6s infinite;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) scale(1.5);
+            }
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loading-text {
+            margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        /* Enhanced Navigation */
+        /* Navbar */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
             z-index: 1000;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.3);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all var(--transition-smooth);
+            padding: 0;
         }
-
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.95);
             box-shadow: var(--shadow-lg);
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.92);
         }
-
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 2rem;
+            padding: 1rem 2rem;
         }
-
         .logo {
-            font-size: 1.75rem;
+            font-size: 1.6rem;
             font-weight: 800;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -0.02em;
-            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            transition: transform var(--transition-fast);
         }
-
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
-
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
+            align-items: center;
         }
-
         .nav-links a {
             text-decoration: none;
             color: var(--text-secondary);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             letter-spacing: 0.02em;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all var(--transition-smooth);
             position: relative;
-            padding: 0.5rem 0;
+            padding: 0.4rem 0;
         }
-
-        .nav-links a::before {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 50%;
             width: 0;
             height: 2px;
             background: var(--gradient-primary);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all var(--transition-smooth);
             transform: translateX(-50%);
             border-radius: 2px;
         }
-
         .nav-links a:hover,
         .nav-links a.active {
-            color: var(--primary-color);
-            transform: translateY(-2px);
+            color: var(--primary);
         }
-
-        .nav-links a:hover::before,
-        .nav-links a.active::before {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
+        .nav-cta {
+            background: var(--gradient-primary);
+            color: #fff !important;
+            padding: 0.6rem 1.4rem !important;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: var(--shadow-glow-blue);
+            transition: all var(--transition-bounce) !important;
+        }
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+        }
+        .nav-cta::after {
+            display: none !important;
+        }
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 0.5rem;
+            z-index: 1001;
+            background: none;
+            border: none;
+        }
+        .mobile-menu-toggle span {
+            width: 26px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all var(--transition-smooth);
+            display: block;
+        }
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
 
-        .container {
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 7rem 2rem 2rem;
+            padding: 0 2rem;
         }
 
-        /* Enhanced Hero Section */
-        .hero {
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 6rem 0;
-            margin-bottom: 5rem;
             position: relative;
+            padding: 8rem 0 4rem;
+            background: var(--gradient-hero);
+            margin-bottom: 2rem;
+            border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
+            overflow: hidden;
         }
-
-        .hero::before {
-            content: '';
+        .hero-grid-bg {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
-            z-index: -1;
-            animation: rotate 20s linear infinite;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
         }
-
-        .hero-avatar {
-            width: 140px;
-            height: 140px;
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+        }
+        .hero-avatar-3d {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background: var(--gradient-primary);
-            margin: 0 auto 2.5rem;
+            margin: 0 auto 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3.5rem;
-            color: white;
-            box-shadow: var(--shadow-xl);
+            color: #fff;
+            box-shadow: var(--shadow-xl), var(--shadow-glow-blue);
             position: relative;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: floatAvatar 5s ease-in-out infinite;
+            transform-style: preserve-3d;
+            transition: transform var(--transition-bounce);
         }
-
-        .hero-avatar::before {
-            content: '';
+        .hero-avatar-3d:hover {
+            transform: scale(1.08) rotateY(15deg) rotateX(5deg);
+        }
+        @keyframes floatAvatar {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+        .hero-avatar-ring {
             position: absolute;
-            inset: -4px;
-            background: var(--gradient-accent);
+            inset: -6px;
             border-radius: 50%;
-            z-index: -1;
-            animation: pulse-ring 2s ease-in-out infinite;
-            opacity: 0;
+            border: 3px solid transparent;
+            border-top-color: var(--accent);
+            border-right-color: var(--cyan);
+            animation: spinRing 4s linear infinite;
         }
-
-        .hero-avatar:hover {
-            transform: scale(1.1) rotate(5deg);
+        @keyframes spinRing {
+            to {
+                transform: rotate(360deg);
+            }
         }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+        .hero-name {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
             line-height: 1.1;
-            animation: fadeInUp 0.8s ease-out;
         }
-
-        .hero .title {
-            font-size: 1.5rem;
-            color: var(--primary-color);
+        .hero-title {
+            font-size: clamp(1rem, 2.5vw, 1.35rem);
             font-weight: 600;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.05em;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            min-height: 2rem;
+            letter-spacing: 0.03em;
         }
-
-        .hero .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.8;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
+        .hero-title .cursor-blink {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: var(--primary);
+            margin-left: 2px;
+            animation: blink 0.8s step-end infinite;
+            vertical-align: text-bottom;
         }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
         }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-lg);
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-primary);
-            transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: -1;
-        }
-
-        .contact-link:hover {
-            color: white;
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            border-color: transparent;
-        }
-
-        .contact-link:hover::before {
-            left: 0;
-        }
-
-        .contact-link i {
+        .hero-subtitle {
             font-size: 1.1rem;
-            transition: transform 0.3s ease;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        .hero-ctas {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2rem;
+            background: var(--gradient-primary);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: var(--shadow-glow-blue);
+            transition: all var(--transition-bounce);
+            letter-spacing: 0.02em;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.45);
+        }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--text-primary);
+            border: 1.5px solid var(--border-color);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--transition-bounce);
+            letter-spacing: 0.02em;
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .hero-floating-code {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+            pointer-events: none;
+            animation: floatCode 8s ease-in-out infinite;
+            white-space: nowrap;
+        }
+        @keyframes floatCode {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.35;
+            }
+            25% {
+                transform: translateY(-30px) rotate(2deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-15px) rotate(-1deg);
+                opacity: 0.45;
+            }
+            75% {
+                transform: translateY(-40px) rotate(1deg);
+                opacity: 0.5;
+            }
         }
 
-        .contact-link:hover i {
-            transform: scale(1.2);
-        }
-
-        /* Enhanced Section Styles */
-        .section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--border-radius-xl);
-            padding: 3rem;
-            margin-bottom: 3rem;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        /* Section Base */
+        .section-premium {
             position: relative;
+            z-index: 2;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-xl);
+            padding: 3.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-smooth);
             overflow: hidden;
         }
-
-        .section::before {
+        .section-premium::before {
             content: '';
             position: absolute;
             top: 0;
@@ -329,505 +559,412 @@
             height: 4px;
             background: var(--gradient-primary);
             border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
         }
-
-        .section:hover {
-            transform: translateY(-6px);
+        .section-premium:hover::before {
+            opacity: 1;
+        }
+        .section-premium:hover {
             box-shadow: var(--shadow-xl);
-            border-color: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.25);
         }
-
         .section-title {
-            font-size: 2.25rem;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 2.5rem;
             color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.8rem;
             letter-spacing: -0.01em;
         }
-
         .section-title i {
-            font-size: 2rem;
+            font-size: 1.6rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        /* Enhanced Skills Section */
-        .skills-grid {
+        /* Stats Row */
+        .stats-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
-
-        .skill-category {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: var(--border-radius-lg);
+        .stat-card {
+            background: var(--bg-card);
             border: 1px solid var(--border-light);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: var(--border-radius-lg);
+            padding: 1.8rem;
+            text-align: center;
+            transition: all var(--transition-bounce);
             position: relative;
             overflow: hidden;
+            cursor: default;
         }
-
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
-            transition: all 0.4s ease;
-            opacity: 0;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-4px) scale(1.02);
+        .stat-card:hover {
+            transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(59, 130, 246, 0.3);
         }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
 
-        .skill-category:hover::before {
+        /* Skills Grid */
+        .skills-premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+        }
+        .skill-card-3d {
+            perspective: 800px;
+        }
+        .skill-card-inner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            transition: all var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            transform-style: preserve-3d;
+        }
+        .skill-card-inner:hover {
+            transform: translateY(-8px) rotateX(3deg) rotateY(3deg);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(59, 130, 246, 0.35);
+        }
+        .skill-card-inner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--border-radius-lg);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.04) 0%, rgba(139, 92, 246, 0.04) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+        }
+        .skill-card-inner:hover::after {
             opacity: 1;
         }
-
-        .skill-category h3 {
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-            font-weight: 600;
+        .skill-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--border-radius);
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-        }
-
-        .skill-category h3 i {
+            justify-content: center;
+            color: #fff;
             font-size: 1.3rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 1.2rem;
+            box-shadow: var(--shadow-glow-blue);
+            transition: transform var(--transition-bounce);
         }
-
-        .skill-tags {
+        .skill-card-inner:hover .skill-card-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+        .skill-card-inner h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .skill-tags-mini {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
+            gap: 0.5rem;
         }
-
-        .skill-tag {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            padding: 0.75rem 1.25rem;
-            border-radius: var(--border-radius-lg);
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            font-family: 'JetBrains Mono', monospace;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-tag::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-primary);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .skill-tag:hover {
-            color: white;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: var(--shadow-md);
-            border-color: transparent;
-        }
-
-        .skill-tag:hover::before {
-            left: 0;
-        }
-
-        /* Enhanced Experience Section */
-        .experience-item {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 2.5rem;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .experience-item::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        .job-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        .company-info {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-weight: 500;
-        }
-
-        .project-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 2rem 0 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            line-height: 1.7;
+        .skill-tag-pill {
             background: var(--bg-accent);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .experience-item ul {
-            margin: 1.5rem 0;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .experience-item li {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            position: relative;
-            padding-left: 2rem;
-            line-height: 1.7;
-        }
-
-        .experience-item li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-size: 0.8rem;
-            top: 0.2rem;
-        }
-
-        .tech-stack-container {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-            padding: 1.5rem;
-            border-radius: var(--border-radius-lg);
-            margin-top: 2rem;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-stack-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-        }
-
-        .tech-stack-container strong {
             color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Enhanced Projects Section */
-        .project-card {
-            background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: var(--border-radius-xl);
-            border: 1px solid var(--border-light);
-            margin-bottom: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-secondary);
-            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-xl);
-            border-color: rgba(240, 147, 251, 0.3);
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-name {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        .project-role {
-            background: var(--gradient-secondary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .project-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
             padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-        }
-
-        .project-link:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--primary-color);
-        }
-
-        .project-tech {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
             font-family: 'JetBrains Mono', monospace;
-            background: var(--bg-accent);
-            padding: 0.75rem 1rem;
-            border-radius: var(--border-radius);
-            display: inline-block;
-        }
-
-        .project-highlights {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: var(--border-radius-lg);
             border: 1px solid var(--border-color);
-            margin-top: 2rem;
+            transition: all var(--transition-fast);
+            cursor: default;
+        }
+        .skill-tag-pill:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-blue);
         }
 
-        .project-highlights h4 {
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .project-highlights h4 i {
-            color: var(--warning-color);
-        }
-
-        /* Enhanced Education Section */
-        .education-timeline {
+        /* Timeline */
+        .timeline-premium {
             position: relative;
-            padding-left: 2.5rem;
+            padding-left: 3rem;
         }
-
-        .education-timeline::before {
+        .timeline-premium::before {
             content: '';
             position: absolute;
-            left: 20px;
+            left: 18px;
             top: 0;
             bottom: 0;
             width: 3px;
             background: var(--gradient-primary);
             border-radius: 2px;
         }
-
-        .education-item {
+        .timeline-item {
             position: relative;
-            margin-bottom: 2.5rem;
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: var(--border-radius-lg);
-            margin-left: 1.5rem;
+            margin-bottom: 3rem;
+            background: var(--bg-card);
             border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin-left: 1.5rem;
+            transition: all var(--transition-bounce);
+            cursor: default;
         }
-
-        .education-item::before {
+        .timeline-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: -2.75rem;
-            top: 2rem;
-            width: 16px;
-            height: 16px;
+            left: -2.65rem;
+            top: 2.2rem;
+            width: 14px;
+            height: 14px;
             background: var(--gradient-primary);
             border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 0 0 2px var(--primary-color);
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%,
+            100% {
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.08);
+            }
         }
 
-        .education-item:hover {
-            transform: translateX(8px);
-            box-shadow: var(--shadow-md);
+        /* Project Cards */
+        .project-card-premium {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-xl);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            transform-style: preserve-3d;
         }
-
-        .education-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
+        .project-card-premium:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .project-card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+        }
+        .project-header-row {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
         }
-
-        .education-title i {
-            background: var(--gradient-primary);
+        .project-name-lg {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+        .project-role-badge {
+            display: inline-block;
+            background: var(--gradient-accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
-
-        .education-details {
+        .project-links-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .project-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all var(--transition-bounce);
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        .project-link-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow-blue);
+        }
+        .tech-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .tech-pill {
+            background: var(--bg-accent);
             color: var(--text-secondary);
-            line-height: 1.7;
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
         }
 
-        /* Enhanced Achievements Section */
-        .achievements-grid {
+        /* Achievement Cards */
+        .achievements-premium-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
         }
-
-        .achievement-card {
+        .achievement-card-3d {
+            perspective: 600px;
+        }
+        .achievement-inner {
             background: var(--bg-card);
-            padding: 2rem;
-            border-radius: var(--border-radius-xl);
             border: 1px solid var(--border-light);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: var(--border-radius-xl);
+            padding: 2rem;
+            transition: all var(--transition-bounce);
+            cursor: default;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
         }
-
-        .achievement-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: scale(0);
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-8px) scale(1.02);
+        .achievement-inner:hover {
+            transform: translateY(-10px) rotateX(4deg) rotateY(4deg);
             box-shadow: var(--shadow-xl);
             border-color: rgba(59, 130, 246, 0.3);
         }
-
-        .achievement-card:hover::before {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .achievement-icon {
-            width: 60px;
-            height: 60px;
+        .achievement-icon-glow {
+            width: 55px;
+            height: 55px;
+            border-radius: var(--border-radius);
             background: var(--gradient-primary);
-            border-radius: var(--border-radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-md);
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            box-shadow: var(--shadow-glow-blue);
+            transition: all var(--transition-bounce);
+        }
+        .achievement-inner:hover .achievement-icon-glow {
+            transform: scale(1.2);
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.5);
         }
 
-        .achievement-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
+        /* Contact Cards */
+        .contact-cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+        }
+        .contact-card-floating {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.8rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            text-decoration: none;
             color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
+            font-weight: 500;
+            transition: all var(--transition-bounce);
+            box-shadow: var(--shadow-sm);
+        }
+        .contact-card-floating:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg), var(--shadow-glow-blue);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .contact-card-floating i {
+            font-size: 1.1rem;
+            color: var(--primary);
+            transition: transform var(--transition-bounce);
+        }
+        .contact-card-floating:hover i {
+            transform: scale(1.3);
         }
 
-        .achievement-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
+        /* Education */
+        .education-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all var(--transition-bounce);
+            cursor: default;
+            position: relative;
+        }
+        .education-card:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(59, 130, 246, 0.3);
         }
 
-        /* Enhanced Additional Info */
-        .info-grid {
+        /* Info Grid */
+        .info-premium-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
         }
-
-        .info-item {
+        .info-card-mini {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
@@ -835,383 +972,192 @@
             background: var(--bg-secondary);
             border-radius: var(--border-radius-lg);
             border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
+            transition: all var(--transition-bounce);
+            cursor: default;
         }
-
-        .info-item:hover {
+        .info-card-mini:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
-
-        .info-item i {
-            font-size: 1.5rem;
+        .info-card-mini i {
+            font-size: 1.4rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-top: 0.25rem;
+            margin-top: 0.2rem;
         }
 
-        .info-content strong {
-            color: var(--text-primary);
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .info-content span {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Enhanced Floating Action Button */
-        .floating-action {
+        /* Floating Action */
+        .floating-action-btn {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            width: 64px;
-            height: 64px;
+            width: 58px;
+            height: 58px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: var(--shadow-xl);
+            color: #fff;
+            font-size: 1.3rem;
+            box-shadow: var(--shadow-xl), var(--shadow-glow-blue);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 1000;
+            transition: all var(--transition-bounce);
+            z-index: 999;
             border: none;
-            overflow: hidden;
+            text-decoration: none;
+        }
+        .floating-action-btn:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.5);
         }
 
-        .floating-action::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--gradient-accent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 50%;
-        }
-
-        .floating-action:hover {
-            transform: scale(1.15) rotate(15deg);
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.4);
-        }
-
-        .floating-action:hover::before {
-            opacity: 1;
-        }
-
-        .floating-action i {
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .floating-action:hover i {
-            transform: scale(1.1);
-        }
-
-        /* Enhanced Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .section-premium {
+                padding: 2.5rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .skills-premium-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1.4);
-                opacity: 0;
-            }
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        /* Intersection Observer Animation Classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .fade-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .fade-in-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .fade-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Mobile Menu Toggle */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 0.5rem;
-            gap: 4px;
-        }
-
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-primary);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* Enhanced Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
-                top: 100%;
+                top: 0;
                 left: 0;
                 width: 100%;
-                background: rgba(255, 255, 255, 0.95);
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.97);
                 backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
                 flex-direction: column;
                 gap: 0;
-                padding: 2rem;
-                box-shadow: var(--shadow-lg);
-                border-top: 1px solid var(--border-color);
+                padding: 6rem 2rem 2rem;
+                box-shadow: var(--shadow-xl);
                 transform: translateY(-100%);
                 opacity: 0;
                 visibility: hidden;
-                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                align-items: center;
             }
-
             .nav-links.active {
                 transform: translateY(0);
                 opacity: 1;
                 visibility: visible;
             }
-
             .nav-links li {
-                margin: 0.5rem 0;
+                margin: 0.8rem 0;
             }
-
+            .nav-links a {
+                font-size: 1.1rem;
+            }
             .mobile-menu-toggle {
                 display: flex;
             }
-            
-            .container {
-                padding: 6rem 1.5rem 2rem;
+            .hero-section {
+                padding: 6rem 0 3rem;
+                min-height: auto;
+                border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
             }
-
-            .hero {
-                padding: 4rem 0;
-                margin-bottom: 3rem;
+            .hero-name {
+                font-size: 2.4rem;
             }
-            
-            .hero h1 {
-                font-size: 2.5rem;
+            .section-premium {
+                padding: 1.8rem;
+                margin-bottom: 1.5rem;
+                border-radius: var(--border-radius-lg);
             }
-
-            .hero .title {
-                font-size: 1.25rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .section {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-
             .section-title {
-                font-size: 1.75rem;
+                font-size: 1.5rem;
             }
-            
-            .skills-grid,
-            .achievements-grid,
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
                 gap: 1rem;
             }
-
-            .contact-link {
-                width: 100%;
-                justify-content: center;
-                max-width: 300px;
-            }
-
-            .project-header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .project-links {
-                align-self: flex-start;
-            }
-
-            .floating-action {
-                width: 56px;
-                height: 56px;
-                bottom: 1.5rem;
-                right: 1.5rem;
-                font-size: 1.25rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 5rem 1rem 2rem;
-            }
-
-            .hero h1 {
+            .stat-number {
                 font-size: 2rem;
             }
-
-            .section {
+            .timeline-premium {
+                padding-left: 2rem;
+            }
+            .timeline-item {
+                margin-left: 1rem;
                 padding: 1.5rem;
             }
-
-            .section-title {
-                font-size: 1.5rem;
+            .timeline-item::before {
+                left: -2.1rem;
+                width: 12px;
+                height: 12px;
             }
-
-            .hero-avatar {
-                width: 100px;
-                height: 100px;
-                font-size: 2.5rem;
+            .project-header-row {
+                flex-direction: column;
             }
-
-            .nav-container {
-                padding: 1rem;
+            .floating-action-btn {
+                width: 48px;
+                height: 48px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                font-size: 1.1rem;
             }
-
-            .logo {
-                font-size: 1.5rem;
+            .contact-cards-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .contact-card-floating {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
             }
         }
-
-        /* High contrast and accessibility improvements */
-        @media (prefers-contrast: high) {
-            :root {
-                --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-                --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.3);
-                --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.3);
-                --shadow-xl: 0 20px 30px -5px rgba(0, 0, 0, 0.3);
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.8rem 1rem;
+            }
+            .hero-name {
+                font-size: 2rem;
+            }
+            .hero-avatar-3d {
+                width: 110px;
+                height: 110px;
+                font-size: 2.5rem;
+            }
+            .section-premium {
+                padding: 1.3rem;
+            }
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+            .skills-premium-grid {
+                grid-template-columns: 1fr;
+            }
+            .achievements-premium-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-premium-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-primary,
+            .btn-outline {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.85rem;
+            }
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        @media (min-width: 1600px) {
+            .main-container {
+                max-width: 1500px;
+            }
+            .hero-name {
+                font-size: 5rem;
             }
         }
 
@@ -1224,96 +1170,48 @@
                 transition-duration: 0.01ms !important;
             }
         }
-
-        /* Focus states for accessibility */
-        .keyboard-nav .contact-link:focus,
-        .keyboard-nav .nav-links a:focus,
-        .keyboard-nav .floating-action:focus,
-        .keyboard-nav .project-link:focus,
-        .keyboard-nav .skill-tag:focus {
-            outline: 3px solid var(--primary-color);
-            outline-offset: 2px;
-        }
-
-        /* Print optimizations */
         @media print {
-            body {
-                background: white;
-                font-size: 12pt;
-                line-height: 1.4;
-            }
-            
             .navbar,
-            .floating-action {
-                display: none;
+            .floating-action-btn,
+            #three-bg,
+            .particles-overlay,
+            .mouse-glow,
+            .loading-screen {
+                display: none !important;
             }
-            
-            .section {
-                background: white;
+            body {
+                background: #fff;
+            }
+            .section-premium {
                 box-shadow: none;
                 border: 1px solid #ddd;
                 break-inside: avoid;
-                margin-bottom: 1rem;
-                padding: 1.5rem;
-            }
-
-            .container {
-                padding-top: 1rem;
-                max-width: none;
-            }
-
-            .hero {
-                padding: 2rem 0;
-                margin-bottom: 2rem;
-            }
-
-            .section-title {
-                font-size: 18pt;
-            }
-
-            .hero h1 {
-                font-size: 24pt;
-                color: #333;
-            }
-
-            .contact-links {
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .contact-link {
-                padding: 0.5rem 1rem;
-                font-size: 10pt;
             }
         }
 
-        /* Custom selection colors */
         ::selection {
             background: rgba(59, 130, 246, 0.2);
             color: var(--text-primary);
         }
-
-        ::-moz-selection {
-            background: rgba(59, 130, 246, 0.2);
-            color: var(--text-primary);
-        }
-
-        /* Loading animation for performance */
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">INITIALIZING<span class="cursor-blink">_</span></div>
+    </div>
+
+    <!-- Mouse Glow -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <!-- Three.js Background -->
+    <div id="three-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles-overlay" id="particlesOverlay"></div>
+
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">Vignesh S</div>
@@ -1324,785 +1222,650 @@
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#education" class="nav-link">Education</a></li>
-                <!--<li><a href="#contact" class="nav-link">Contact</a></li>-->
+                <li><a href="#contact-sec" class="nav-link">Contact</a></li>
+                <li><a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank" class="nav-cta" download><i class="fas fa-download"></i> Resume</a></li>
             </ul>
-            <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero loading" id="about">
-            <div class="hero-avatar">
-                <i class="fas fa-code"></i>
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Hero -->
+        <section class="hero-section" id="about">
+            <div class="hero-grid-bg"></div>
+            <div class="hero-content">
+                <div class="hero-avatar-3d">
+                    <div class="hero-avatar-ring"></div>
+                    <i class="fas fa-code"></i>
+                </div>
+                <h1 class="hero-name">Vignesh S</h1>
+                <p class="hero-title" id="heroTitle">
+                    <span id="typingText"></span><span class="cursor-blink">|</span>
+                </p>
+                <p class="hero-subtitle">
+                    Results-driven <strong>Software Engineer</strong> with <strong>3+ years</strong> of specialized experience in <strong>industrial automation</strong> and <strong>embedded systems</strong> development. Expert in C++, Win32 API, MFC, and process control systems.
+                </p>
+                <div class="hero-ctas">
+                    <a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank" class="btn-primary" download>
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                    <a href="#projects" class="btn-outline">
+                        <i class="fas fa-laptop-code"></i> View Projects
+                    </a>
+                    <a href="#contact-sec" class="btn-outline">
+                        <i class="fas fa-paper-plane"></i> Contact Me
+                    </a>
+                </div>
             </div>
-            <h1>Vignesh S</h1>
-            <p class="title">Software Engineer</p>
-            <p class="subtitle">
-                Results-driven Software Engineer with 3.0 years of specialized experience in industrial automation and embedded systems development. Passionate about creating efficient solutions and enhancing developer productivity through innovative technology.
-            </p>
-            <div class="contact-links">
-                <a href="tel:+919677362774" class="contact-link">
-                    <i class="fas fa-phone"></i>
-                    +91-9677362774
-                </a>
-                <a href="mailto:vigneshsl.career@gmail.com" class="contact-link">
-                    <i class="fas fa-envelope"></i>
-                    vigneshsl.career@gmail.com
-                </a>
-                <a href="https://www.linkedin.com/in/vignesh-softwaredev" target="_blank" class="contact-link">
-                    <i class="fab fa-linkedin"></i>
-                    LinkedIn
-                </a>
-                <a href="https://github.com/vigneshsl" target="_blank" class="contact-link">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a>
-            </div>
+            <span class="hero-floating-code" style="top:15%;left:8%;">class ControlBlock {</span>
+            <span class="hero-floating-code" style="top:25%;right:10%;animation-delay:2s;">HINSTANCE hInst;</span>
+            <span class="hero-floating-code" style="bottom:20%;left:12%;animation-delay:4s;">WINAPI WinMain(...)</span>
+            <span class="hero-floating-code" style="bottom:30%;right:8%;animation-delay:6s;">MFC CWinApp</span>
         </section>
 
         <!-- Professional Summary -->
-        <section class="section fade-in">
-            <h2 class="section-title">
-                <i class="fas fa-user-tie"></i>
-                Professional Summary
-            </h2>
-           <div class="summary-text">
-    Results-driven Software Engineer with 3.0 years of experience in industrial automation and embedded systems development. Skilled in C++, MFC, Win32 API, and control systems, with a proven ability to deliver mission-critical industrial software solutions. Improved developer productivity by 50% through automation tools and scripting. Experienced in the full software development lifecycle (SDLC), including requirements analysis, system design, implementation, testing, and documentation. Strong domain knowledge in process control systems, UI development, and real-time industrial-grade software, including integration with advanced controllers and simulation platforms.
-</div>
-
-        </section>
-
-        <!-- Technical Skills -->
-        <section class="section fade-in-left" id="skills">
-            <h2 class="section-title">
-                <i class="fas fa-cogs"></i>
-                Technical Skills
-            </h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">WIN32API</span>
-                        <span class="skill-tag">Batch Script</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">VBA</span>
-                    </div>
+        <section class="section-premium" id="summary">
+            <h2 class="section-title"><i class="fas fa-user-tie"></i> Professional Summary</h2>
+            <p style="color:var(--text-secondary);line-height:1.9;font-size:1.05rem;">
+                Results-driven Software Engineer with <strong>3.0 years</strong> of experience in industrial automation and embedded systems development. Skilled in <strong>C++, MFC, Win32 API</strong>, and control systems, with a proven ability to deliver mission-critical industrial software solutions. Improved developer productivity by <strong>50%</strong> through automation tools and scripting. Experienced in the full <strong>SDLC</strong>, including requirements analysis, system design, implementation, testing, and documentation. Strong domain knowledge in process control systems, UI development, and real-time industrial-grade software.
+            </p>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="3">0</div>
+                    <div class="stat-label">Years Experience</div>
                 </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Development Tools</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Visual Studio</span>
-                        <span class="skill-tag">ClearCase</span>
-                        <span class="skill-tag">Coverity Static Analysis</span>
-                        <span class="skill-tag">Inno Setup Compiler</span>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">% Productivity Improvement</div>
                 </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-layer-group"></i> Frameworks & Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Microsoft Foundation Classes(MFC)</span>
-                        <span class="skill-tag">QT/QML</span>
-                        <span class="skill-tag">Industrial Process Control Systems</span>
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">XML</span>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="13">0</div>
+                    <div class="stat-label">Automation Tools Developed</div>
                 </div>
-				<div class="skill-category">
-                    <h3><i class="fas fa-microchip"></i> Controllers & Systems</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Physical Industrial Controller</span>
-                        <span class="skill-tag">Virtual Controller</span>
-                        <span class="skill-tag">Simulation Environment</span>
-                        <span class="skill-tag">Windows Development</span>
-                    </div>
-                </div>
-				    <div class="skill-category">
-                    <h3><i class="fas fa-sync-alt"></i> Agile Development</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Unit Testing</span>
-                        <span class="skill-tag">Integration Testing</span>
-                        <span class="skill-tag">Code Review</span>
-                        <span class="skill-tag">Quality Assurance</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-       <!-- Key Achievements -->
-        <section class="section fade-in-right" id="achievements">
-            <h2 class="section-title">
-                <i class="fas fa-trophy"></i>
-                Key Achievements
-            </h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Process Automation Excellence</h3>
-                    <p>Developed comprehensive internal workflow automation solutions, reducing manual workload by 50% using custom batch scripting, Python programming, and C++ development.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <h3>UI Development Mastery</h3>
-                    <p>Designed and implemented a dynamic control block interface using the MFC framework, significantly improving usability and configuration efficiency.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>System Recovery & Reliability</h3>
-                    <p>Recovered and restored automation controllers during critical development cycles, ensuring continuous availability and minimizing downtime.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <h3>Configuration Expertise</h3>
-                    <p>Configured and optimized industrial automation platforms across multiple models, ensuring consistent performance, stability, and reliability.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <h3>Legacy System Migration</h3>
-                    <p>Converted legacy GUI tools into efficient, lightweight CUI applications, improving performance, maintainability, and system resource utilization.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Deployment Optimization</h3>
-                    <p>Streamlined and automated software deployment processes using Inno Setup Compiler, enabling faster, more reliable, and error-free releases</p>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="5">0</div>
+                    <div class="stat-label">Industrial Controllers Configured</div>
                 </div>
             </div>
         </section>
 
-        <!-- Professional Experience -->
-        <section class="section fade-in-right" id="experience">
-            <h2 class="section-title">
-                <i class="fas fa-briefcase"></i>
-                Professional Experience
-            </h2>
-            <div class="experience-item">
-                <div class="job-title">Software Engineer</div>
-                <div class="company-info">
-                    <i class="fas fa-building"></i> Uthhunga Technologies | 2022 - Present (3.0 years)
+        <!-- Skills -->
+        <section class="section-premium" id="skills">
+            <h2 class="section-title"><i class="fas fa-cogs"></i> Technical Skills</h2>
+            <div class="skills-premium-grid">
+                <div class="skill-card-3d">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-icon"><i class="fas fa-code"></i></div>
+                        <h3>Programming Languages</h3>
+                        <div class="skill-tags-mini">
+                            <span class="skill-tag-pill">C++</span><span class="skill-tag-pill">WIN32API</span>
+                            <span class="skill-tag-pill">Batch Script</span><span class="skill-tag-pill">Python</span>
+                            <span class="skill-tag-pill">VBA</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="project-title">
-                    <i class="fas fa-project-diagram"></i> Industrial Process Control System
+                <div class="skill-card-3d">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-icon"><i class="fas fa-tools"></i></div>
+                        <h3>Development Tools</h3>
+                        <div class="skill-tags-mini">
+                            <span class="skill-tag-pill">Visual Studio</span><span class="skill-tag-pill">ClearCase</span>
+                            <span class="skill-tag-pill">Coverity</span><span class="skill-tag-pill">Inno Setup</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-description">
-                    Software development and implementation of industrial control system blocks for process automation, enhancing functionality and efficiency through specialized control modules.
+                <div class="skill-card-3d">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>Frameworks & Technologies</h3>
+                        <div class="skill-tags-mini">
+                            <span class="skill-tag-pill">MFC</span><span class="skill-tag-pill">QT/QML</span>
+                            <span class="skill-tag-pill">MySQL</span><span class="skill-tag-pill">XML</span>
+                            <span class="skill-tag-pill">Process Control</span>
+                        </div>
+                    </div>
                 </div>
-                
-		<ul>
-            <li>Collaborated with cross-functional teams to perform requirements analysis for functional and technical specifications of industrial control blocks.</li>
-            <li>Designed and developed software blocks following industry coding standards and best practices.</li>
-            <li>Conducted comprehensive unit testing, integration testing, and bug resolution.</li>
-            <li><strong>Enhanced developer productivity by 50%</strong> through custom automation tools for XML generation, code templates, and workflow optimization.</li>
-            <li>Implemented user interface solutions using Microsoft Foundation Classes (MFC) framework for block configuration and system management.</li>
-            <li>Developed custom error handling systems and description management functionality within industrial control stations.</li>
-            <li>Automated repetitive tasks writing scripts to handle operations like controller restarts.</li>
-            <li>Configured industrial control environments and managed <strong>controller recovery processes</strong> for continuous system availability.</li>
-        </ul>
-
-                <div class="tech-stack-container">
-                    <strong><i class="fas fa-layer-group"></i> Tech Stack:</strong> C++, XML, Microsoft Foundation Classes (MFC), Batch Scripting, Industrial Process Control System, ClearCase Version Control, Visual Basic for Applications (VBA), Python, WIN32 Application Programming Interface (API), Inno Setup Compiler, Firmware Management Tools
+                <div class="skill-card-3d">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-icon"><i class="fas fa-microchip"></i></div>
+                        <h3>Controllers & Systems</h3>
+                        <div class="skill-tags-mini">
+                            <span class="skill-tag-pill">Physical Controller</span><span class="skill-tag-pill">Virtual Controller</span>
+                            <span class="skill-tag-pill">Simulation</span><span class="skill-tag-pill">Windows Dev</span>
+                        </div>
+                    </div>
                 </div>
-				<div class="tech-stack-container">
-                    <strong><i class="fas fa-layer-group"></i> Controllers:</strong> Physical Controller, Virtual Controller, Simulation Environment
-                </div>
-
-                <div class="project-title">
-                    <i class="fas fa-project-diagram"></i> Device Configuration Management
-                </div>
-                <div class="project-description">
-                   Worked on next-generation Device Configuration Management  software, designed to support protection modules and streamline configuration workflows through modern UI/UX and direct device interaction.
-                </div>
-                
-                <ul>
-                    <li>Bug fixing and system optimization for enhanced performance and reliability</li>
-                    <li>Successfully migrated legacy Graphical User Interface (GUI) applications to Command Line Interface (CLI) solutions.</li>
-                </ul>
-
-                <div class="tech-stack-container">
-                    <strong><i class="fas fa-layer-group"></i> Technology  Stack:</strong> QT/QML
+                <div class="skill-card-3d">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-icon"><i class="fas fa-sync-alt"></i></div>
+                        <h3>Agile Development</h3>
+                        <div class="skill-tags-mini">
+                            <span class="skill-tag-pill">Unit Testing</span><span class="skill-tag-pill">Integration Testing</span>
+                            <span class="skill-tag-pill">Code Review</span><span class="skill-tag-pill">QA</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section class="section fade-in" id="projects">
-            <h2 class="section-title">
-                <i class="fas fa-laptop-code"></i>
-                Key Projects
-            </h2>
-            
-            <div class="project-card scale-in">
-                <div class="project-header">
+        <!-- Achievements -->
+        <section class="section-premium" id="achievements">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Key Achievements</h2>
+            <div class="achievements-premium-grid">
+                <div class="achievement-card-3d">
+                    <div class="achievement-inner">
+                        <div class="achievement-icon-glow"><i class="fas fa-robot"></i></div>
+                        <h3>Process Automation Excellence</h3>
+                        <p style="color:var(--text-secondary);">Reduced manual workload by <strong>50%</strong> using custom batch scripting, Python, and C++ development.</p>
+                    </div>
+                </div>
+                <div class="achievement-card-3d">
+                    <div class="achievement-inner">
+                        <div class="achievement-icon-glow"><i class="fas fa-desktop"></i></div>
+                        <h3>UI Development Mastery</h3>
+                        <p style="color:var(--text-secondary);">Designed dynamic control block interface using <strong>MFC framework</strong>, improving usability and configuration efficiency.</p>
+                    </div>
+                </div>
+                <div class="achievement-card-3d">
+                    <div class="achievement-inner">
+                        <div class="achievement-icon-glow"><i class="fas fa-shield-alt"></i></div>
+                        <h3>System Recovery & Reliability</h3>
+                        <p style="color:var(--text-secondary);">Recovered and restored automation controllers during critical cycles, ensuring <strong>continuous availability</strong>.</p>
+                    </div>
+                </div>
+                <div class="achievement-card-3d">
+                    <div class="achievement-inner">
+                        <div class="achievement-icon-glow"><i class="fas fa-cog"></i></div>
+                        <h3>Configuration Expertise</h3>
+                        <p style="color:var(--text-secondary);">Configured and optimized industrial automation platforms across <strong>multiple models</strong> for consistent performance.</p>
+                    </div>
+                </div>
+                <div class="achievement-card-3d">
+                    <div class="achievement-inner">
+                        <div class="achievement-icon-glow"><i class="fas fa-exchange-alt"></i></div>
+                        <h3>Legacy System Migration</h3>
+                        <p style="color:var(--text-secondary);">Converted legacy GUI tools into efficient <strong>CUI applications</strong>, improving performance and maintainability.</p>
+                    </div>
+                </div>
+                <div class="achievement-card-3d">
+                    <div class="achievement-inner">
+                        <div class="achievement-icon-glow"><i class="fas fa-rocket"></i></div>
+                        <h3>Deployment Optimization</h3>
+                        <p style="color:var(--text-secondary);">Streamlined deployment using <strong>Inno Setup Compiler</strong>, enabling faster, error-free releases.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section-premium" id="experience">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            <div class="timeline-premium">
+                <div class="timeline-item">
+                    <div style="font-size:1.5rem;font-weight:700;color:var(--text-primary);">Software Engineer</div>
+                    <div style="color:var(--text-secondary);margin-bottom:1rem;font-weight:500;">
+                        <i class="fas fa-building" style="color:var(--primary);"></i> Uthhunga Technologies | 2022 – Present (3.0 years)
+                    </div>
+                    <div style="font-size:1.2rem;font-weight:600;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:1.5rem 0 0.8rem;">
+                        <i class="fas fa-project-diagram"></i> Industrial Process Control System
+                    </div>
+                    <p style="color:var(--text-secondary);font-style:italic;background:var(--bg-accent);padding:1rem;border-radius:var(--border-radius);border-left:3px solid var(--primary);margin-bottom:1rem;">
+                        Software development and implementation of industrial control system blocks for process automation.
+                    </p>
+                    <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
+                        <li>Collaborated with cross-functional teams for requirements analysis of industrial control blocks</li>
+                        <li>Designed and developed software blocks following industry coding standards</li>
+                        <li>Conducted comprehensive <strong>unit testing, integration testing</strong>, and bug resolution</li>
+                        <li><strong>Enhanced developer productivity by 50%</strong> through custom automation tools</li>
+                        <li>Implemented UI solutions using <strong>MFC framework</strong> for block configuration</li>
+                        <li>Developed custom error handling systems within industrial control stations</li>
+                        <li>Automated repetitive tasks with scripts for operations like controller restarts</li>
+                        <li>Managed <strong>controller recovery processes</strong> for continuous system availability</li>
+                    </ul>
+                    <div style="background:linear-gradient(135deg,rgba(59,130,246,0.06),rgba(139,92,246,0.06));padding:1rem;border-radius:var(--border-radius);margin-top:1rem;border:1px solid rgba(59,130,246,0.2);">
+                        <strong>Tech Stack:</strong> C++, XML, MFC, Batch Scripting, ClearCase, VBA, Python, WIN32 API, Inno Setup Compiler
+                    </div>
+                    <div style="font-size:1.2rem;font-weight:600;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:2rem 0 0.8rem;">
+                        <i class="fas fa-project-diagram"></i> Device Configuration Management
+                    </div>
+                    <p style="color:var(--text-secondary);font-style:italic;background:var(--bg-accent);padding:1rem;border-radius:var(--border-radius);border-left:3px solid var(--accent);margin-bottom:1rem;">
+                        Next-generation Device Configuration Management software with modern UI/UX and direct device interaction.
+                    </p>
+                    <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
+                        <li>Bug fixing and system optimization for enhanced performance</li>
+                        <li>Successfully migrated legacy <strong>GUI applications to CLI</strong> solutions</li>
+                    </ul>
+                    <div style="background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(34,211,238,0.06));padding:1rem;border-radius:var(--border-radius);margin-top:1rem;border:1px solid rgba(139,92,246,0.2);">
+                        <strong>Technology Stack:</strong> QT/QML
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section-premium" id="projects">
+            <h2 class="section-title"><i class="fas fa-laptop-code"></i> Key Projects</h2>
+            <div class="project-card-premium">
+                <div class="project-header-row">
                     <div>
-                        <div class="project-name">Customization Tools – Developer Utility Suite</div>
-                        <div class="project-role">Full-Stack Developer (UI/UX + Backend Integration)</div>
-                        <div class="project-tech">C++, Win32 API, Python, Batch Script</div>
+                        <div class="project-name-lg">Customization Tools – Developer Utility Suite</div>
+                        <div class="project-role-badge">Full-Stack Developer (UI/UX + Backend)</div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://vigneshsl.github.io/vigneshcareer/Usermanual.html" target="_blank" class="project-link">
+                    <div class="project-links-row">
+                        <a href="https://vigneshsl.github.io/vigneshcareer/Usermanual.html" target="_blank" class="project-link-btn">
                             <i class="fas fa-book"></i> User Manual
                         </a>
-                        <a href="https://github.com/vigneshsl/Customization-Tools" target="_blank" class="project-link">
+                        <a href="https://github.com/vigneshsl/Customization-Tools" target="_blank" class="project-link-btn">
                             <i class="fab fa-github"></i> GitHub
                         </a>
                     </div>
                 </div>
-                
-                <p>Built a comprehensive Windows desktop GUI application that serves as a centralized launcher for developer and system utility tools. Features a modern Windows 11-style interface with responsive layout, hover effects, smooth animations, and real-time tool filtering capabilities.</p>
-
-                <div class="project-highlights">
-                    <h4><i class="fas fa-star"></i> Key Contributions:</h4>
-                    <ul>
-                        <li>Designed and implemented core UI architecture using raw Win32 API and GDI+ for optimal performance</li>
-                        <li>Developed 13+ specialized utility tools for file management, code analysis, system operations, and content manipulation</li>
-                        <li>Implemented intelligent tool auto-discovery with custom icons and multi-format support for <code>.exe</code>, <code>.bat</code>, <code>.py</code> files</li>
-                        <li>Created custom developer tools including Code Line Counter, File Renamer, Case Converter, XML Manager, and C++ Include Analyzer</li>
-                        <li>Enhanced user experience with contextual help system, comprehensive logging, robust error handling, and accessibility features</li>
+                <div class="tech-pill-row">
+                    <span class="tech-pill">C++</span><span class="tech-pill">Win32 API</span>
+                    <span class="tech-pill">Python</span><span class="tech-pill">Batch Script</span>
+                    <span class="tech-pill">GDI+</span>
+                </div>
+                <p style="color:var(--text-secondary);">Built a comprehensive <strong>Windows desktop GUI application</strong> serving as a centralized launcher for developer and system utility tools. Features a modern Windows 11-style interface with responsive layout, hover effects, smooth animations, and real-time tool filtering.</p>
+                <div style="background:var(--bg-secondary);padding:1.5rem;border-radius:var(--border-radius-lg);margin-top:1.5rem;border:1px solid var(--border-color);">
+                    <h4 style="margin-bottom:0.8rem;"><i class="fas fa-star" style="color:var(--warning);"></i> Key Contributions:</h4>
+                    <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
+                        <li>Designed core UI architecture using <strong>raw Win32 API and GDI+</strong> for optimal performance</li>
+                        <li>Developed <strong>13+ specialized utility tools</strong> for file management, code analysis, and system operations</li>
+                        <li>Implemented intelligent tool auto-discovery with custom icons for <code>.exe</code>, <code>.bat</code>, <code>.py</code> files</li>
+                        <li>Created custom tools: Code Line Counter, File Renamer, Case Converter, XML Manager, C++ Include Analyzer</li>
+                        <li>Enhanced UX with contextual help, comprehensive logging, and accessibility features</li>
                     </ul>
-                    
-                    <div class="section-divider"></div>
-                    
-                    <h4><i class="fas fa-chart-line"></i> Impact & Results:</h4>
-                    <ul>
-                        <li>Significantly boosted developer productivity by eliminating command memorization and reducing task-switching overhead</li>
-                        <li>Successfully bridged the gap between CUI and GUI usability, enabling non-technical users to access advanced technical functions</li>
-                        <li>Achieved substantial improvements in application speed and overall user experience through optimized architecture</li>
-                        <li>Streamlined daily development workflows for multiple team members across different projects</li>
+                    <h4 style="margin:1.2rem 0 0.8rem;"><i class="fas fa-chart-line" style="color:var(--success);"></i> Impact:</h4>
+                    <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
+                        <li><strong>Significantly boosted developer productivity</strong> by eliminating command memorization</li>
+                        <li>Bridged the gap between CUI and GUI usability for non-technical users</li>
+                        <li>Achieved substantial improvements in application speed and user experience</li>
+                        <li>Streamlined daily development workflows across multiple projects</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <!-- Education -->
-        <section class="section fade-in-left" id="education">
-            <h2 class="section-title">
-                <i class="fas fa-graduation-cap"></i>
-                Educational Qualifications
-            </h2>
-            <div class="education-timeline">
-                <div class="education-item">
-                    <div class="education-title">
-                        <i class="fas fa-university"></i> Bachelor of Computer Applications (BCA)
-                    </div>
-                    <div class="education-details">
-                        <strong>Bharathidasan University</strong> | 2024 - 2026 (Expected)<br>
-                        <strong>Status:</strong> Currently pursuing (2nd years completed)                        
-                    </div>
+        <section class="section-premium" id="education">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+            <div class="education-card">
+                <div style="font-size:1.3rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem;">
+                    <i class="fas fa-university" style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></i>
+                    Bachelor of Computer Applications (BCA)
                 </div>
-                <div class="education-item">
-                    <div class="education-title">
-                        <i class="fas fa-certificate"></i> Diploma in Computer Engineering (DCE)
-                    </div>
-                    <div class="education-details">
-                        <strong>DOTE - Ramakrishna Mission Polytechnic College</strong> | 2022<br>
-                        <strong>Achievement:</strong> 92% (Distinction) | <strong>Specialization:</strong> Computer Systems and Programming                        
-                    </div>
+                <div style="color:var(--text-secondary);margin-top:0.5rem;">
+                    <strong>Bharathidasan University</strong> | 2024 – 2026 (Expected)<br>
+                    <strong>Status:</strong> Currently pursuing (2nd year completed)
+                </div>
+            </div>
+            <div class="education-card">
+                <div style="font-size:1.3rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem;">
+                    <i class="fas fa-certificate" style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></i>
+                    Diploma in Computer Engineering (DCE)
+                </div>
+                <div style="color:var(--text-secondary);margin-top:0.5rem;">
+                    <strong>DOTE – Ramakrishna Mission Polytechnic College</strong> | 2022<br>
+                    <strong>Achievement:</strong> 92% (Distinction) | <strong>Specialization:</strong> Computer Systems and Programming
                 </div>
             </div>
         </section>
 
- 
-        <!-- Additional Information -->
-        <section class="section fade-in" id="contact">
-            <h2 class="section-title">
-                <i class="fas fa-info-circle"></i>
-                Additional Information
-            </h2>
-            <div class="info-grid">
-                <div class="info-item">
+        <!-- Additional Info & Contact -->
+        <section class="section-premium" id="contact-sec">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Additional Information & Contact</h2>
+            <div class="info-premium-grid" style="margin-bottom:2rem;">
+                <div class="info-card-mini">
                     <i class="fas fa-briefcase"></i>
-                    <div class="info-content">
-                        <strong>Professional Experience</strong>
-                        <span>3.0 Years in Industrial Software Development with focus on automation and embedded systems</span>
-                    </div>
+                    <div><strong>Experience</strong><br><span style="color:var(--text-secondary);">3.0 Years – Industrial Software Development</span></div>
                 </div>
-                <div class="info-item">
+                <div class="info-card-mini">
                     <i class="fas fa-industry"></i>
-                    <div class="info-content">
-                        <strong>Domain Expertise</strong>
-                        <span>Industrial Automation, Control Systems, Embedded Systems, Process Automation, Real-time Systems</span>
-                    </div>
+                    <div><strong>Domain</strong><br><span style="color:var(--text-secondary);">Industrial Automation, Control Systems, Embedded Systems</span></div>
                 </div>
-                <div class="info-item">
+                <div class="info-card-mini">
                     <i class="fas fa-star"></i>
-                    <div class="info-content">
-                        <strong>Core Competencies</strong>
-                        <span>Rapid Learning and Adaptation, Automation-driven Development Approach, User Interface Design, Productivity Enhancement through Custom Scripting, Problem-solving, Team Collaboration, Project Managementg</span>
-                    </div>
+                    <div><strong>Core Competencies</strong><br><span style="color:var(--text-secondary);">Automation, UI Design, Scripting, Problem-solving</span></div>
                 </div>
-                <div class="info-item">
+                <div class="info-card-mini">
                     <i class="fas fa-language"></i>
-                    <div class="info-content">
-                        <strong>Languages</strong>
-                        <span>Tamil (Native), English (Professional Working Proficiency)</span>
-                    </div>
+                    <div><strong>Languages</strong><br><span style="color:var(--text-secondary);">Tamil (Native), English (Professional)</span></div>
                 </div>
+            </div>
+            <div class="contact-cards-row">
+                <a href="tel:+919677362774" class="contact-card-floating">
+                    <i class="fas fa-phone"></i> +91-9677362774
+                </a>
+                <a href="mailto:vigneshsl.career@gmail.com" class="contact-card-floating">
+                    <i class="fas fa-envelope"></i> vigneshsl.career@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/vignesh-softwaredev" target="_blank" class="contact-card-floating">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/vigneshsl" target="_blank" class="contact-card-floating">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
             </div>
         </section>
     </div>
 
-    <!-- Floating Action Button -->
-	
-<!-- Download Resume -->
-<a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank" download>
-    <button class="floating-action">
+    <!-- Floating Download Button -->
+    <a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank" class="floating-action-btn" download title="Download Resume">
         <i class="fas fa-download"></i>
-    </button>
-</a>
-
+    </a>
 
     <script>
-        // Enhanced DOM content loaded handler
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeWebsite();
-        });
+        (function() {
+            // Loading Screen
+            const loadingScreen = document.getElementById('loadingScreen');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 800);
+            });
+            setTimeout(() => {
+                if (!loadingScreen.classList.contains('hidden')) {
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 3000);
 
-        function initializeWebsite() {
-            setupNavigation();
-            setupAnimations();
-            setupInteractivity();
-            setupAccessibility();
-        }
+            // Mouse Glow
+            const mouseGlow = document.getElementById('mouseGlow');
+            let mouseX = -200,
+                mouseY = -200;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            function updateGlow() {
+                mouseGlow.style.left = mouseX + 'px';
+                mouseGlow.style.top = mouseY + 'px';
+                requestAnimationFrame(updateGlow);
+            }
+            updateGlow();
 
-        // Enhanced Navigation System
-        function setupNavigation() {
+            // Three.js Background
+            const threeContainer = document.getElementById('three-bg');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.z = 30;
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            threeContainer.appendChild(renderer.domElement);
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 200;
+            const posArray = new Float32Array(particlesCount * 3);
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 60;
+            }
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.08,
+                color: 0x3b82f6,
+                transparent: true,
+                opacity: 0.6,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+            });
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            // Wireframe shapes
+            const shapesGroup = new THREE.Group();
+            const icosahedronGeo = new THREE.IcosahedronGeometry(3, 0);
+            const icosahedronWire = new THREE.LineSegments(
+                new THREE.EdgesGeometry(icosahedronGeo),
+                new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.3,
+                    depthWrite: false })
+            );
+            icosahedronWire.position.set(-10, 5, -8);
+            shapesGroup.add(icosahedronWire);
+
+            const torusGeo = new THREE.TorusGeometry(2.5, 0.6, 16, 50);
+            const torusWire = new THREE.LineSegments(
+                new THREE.EdgesGeometry(torusGeo),
+                new THREE.LineBasicMaterial({ color: 0x60a5fa, transparent: true, opacity: 0.25,
+                    depthWrite: false })
+            );
+            torusWire.position.set(9, -4, -6);
+            shapesGroup.add(torusWire);
+
+            const sphereGeo = new THREE.SphereGeometry(2, 16, 16);
+            const sphereWire = new THREE.LineSegments(
+                new THREE.EdgesGeometry(sphereGeo),
+                new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.3,
+                depthWrite: false })
+            );
+            sphereWire.position.set(7, 6, -10);
+            shapesGroup.add(sphereWire);
+            scene.add(shapesGroup);
+
+            // Lighting (ambient for the wireframes)
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            function animateThree() {
+                requestAnimationFrame(animateThree);
+                particlesMesh.rotation.y += 0.0003;
+                particlesMesh.rotation.x += 0.0002;
+                shapesGroup.rotation.y += 0.001;
+                shapesGroup.rotation.x += 0.0005;
+                icosahedronWire.rotation.z += 0.003;
+                torusWire.rotation.y += 0.004;
+                sphereWire.rotation.x += 0.003;
+                renderer.render(scene, camera);
+            }
+            animateThree();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // Floating Particles Overlay
+            const particlesOverlay = document.getElementById('particlesOverlay');
+            for (let i = 0; i < 30; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('particle-dot');
+                const size = Math.random() * 4 + 2;
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.left = Math.random() * 100 + '%';
+                dot.style.animationDelay = Math.random() * 7 + 's';
+                dot.style.animationDuration = Math.random() * 6 + 5 + 's';
+                dot.style.background = Math.random() > 0.5 ? 'var(--primary)' : 'var(--accent)';
+                particlesOverlay.appendChild(dot);
+            }
+
+            // Navbar
             const navbar = document.getElementById('navbar');
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const navLinks = document.getElementById('navLinks');
-            const navLinksItems = document.querySelectorAll('.nav-link');
-
-            // Navbar scroll effects
+            const navLinkItems = document.querySelectorAll('.nav-link');
             let lastScrollY = window.scrollY;
+
             window.addEventListener('scroll', () => {
                 const currentScrollY = window.scrollY;
-                
-                if (currentScrollY > 100) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-
-                // Auto-hide navbar on scroll down, show on scroll up
-                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                if (currentScrollY > 80) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+                if (currentScrollY > lastScrollY && currentScrollY > 150) {
                     navbar.style.transform = 'translateY(-100%)';
                 } else {
                     navbar.style.transform = 'translateY(0)';
                 }
-                
                 lastScrollY = currentScrollY;
             });
 
-            // Mobile menu toggle
             mobileMenuToggle.addEventListener('click', () => {
                 mobileMenuToggle.classList.toggle('active');
                 navLinks.classList.toggle('active');
             });
-
-            // Close mobile menu when clicking outside
             document.addEventListener('click', (e) => {
                 if (!navbar.contains(e.target)) {
                     mobileMenuToggle.classList.remove('active');
                     navLinks.classList.remove('active');
                 }
             });
-
-            // Smooth scrolling and active link highlighting
-            navLinksItems.forEach(link => {
+            navLinkItems.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        
-                        // Close mobile menu after clicking
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         mobileMenuToggle.classList.remove('active');
                         navLinks.classList.remove('active');
                     }
                 });
             });
 
-            // Active section highlighting
-            const observerOptions = {
-                rootMargin: '-50% 0px -50% 0px',
-                threshold: 0
-            };
-
-            const activeObserver = new IntersectionObserver((entries) => {
+            // Active nav link
+            const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
-                        navLinksItems.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active');
-                            }
-                        });
+                        navLinkItems.forEach(l => l.classList.remove('active'));
+                        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                        if (activeLink) activeLink.classList.add('active');
                     }
                 });
-            }, observerOptions);
+            }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+            document.querySelectorAll('section[id], .section-premium[id]').forEach(s => sectionObserver.observe(s));
 
-            document.querySelectorAll('section[id]').forEach(section => {
-                activeObserver.observe(section);
+            // Typing Effect
+            const typingText = document.getElementById('typingText');
+            const titles = [
+                'Software Engineer',
+                'C++ Developer',
+                'Industrial Automation Engineer',
+                'MFC',
+                'Win32 API',
+                'UOC ACE',
+				'EPKS DCS',
+				'QT/QML'
+            ];
+            let titleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typeSpeed = 80;
+
+            function typeEffect() {
+                const current = titles[titleIndex];
+                if (isDeleting) {
+                    typingText.textContent = current.substring(0, charIndex - 1);
+                    charIndex--;
+                    typeSpeed = 40;
+                } else {
+                    typingText.textContent = current.substring(0, charIndex + 1);
+                    charIndex++;
+                    typeSpeed = 80;
+                }
+                if (!isDeleting && charIndex === current.length) {
+                    typeSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    titleIndex = (titleIndex + 1) % titles.length;
+                    typeSpeed = 400;
+                }
+                setTimeout(typeEffect, typeSpeed);
+            }
+            typeEffect();
+
+            // GSAP Animations
+            gsap.registerPlugin(ScrollTrigger);
+            const fadeEls = document.querySelectorAll(
+                '.section-premium, .project-card-premium, .timeline-item, .education-card, .stat-card, .skill-card-3d, .achievement-card-3d, .info-card-mini'
+                );
+            fadeEls.forEach((el, i) => {
+                gsap.fromTo(el, { opacity: 0, y: 50 }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 88%',
+                        toggleActions: 'play none none none',
+                    },
+                    delay: i % 3 * 0.1,
+                });
             });
-        }
 
-        // Enhanced Animation System
-        function setupAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const animationObserver = new IntersectionObserver((entries) => {
+            // Stat counter animation
+            const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+            const statObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        // Add staggered animation for child elements
-                        const children = entry.target.querySelectorAll('.skill-tag, .achievement-card, .info-item');
-                        children.forEach((child, index) => {
-                            setTimeout(() => {
-                                child.style.opacity = '1';
-                                child.style.transform = 'translateY(0) scale(1)';
-                            }, index * 100);
-                        });
+                        const el = entry.target;
+                        const target = parseInt(el.getAttribute('data-count'));
+                        const suffix = el.textContent.includes('%') ? '%' : el.textContent.includes(
+                            '+') ? '+' : '';
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            el.textContent = Math.floor(current) + suffix;
+                        }, 30);
+                        statObserver.unobserve(el);
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.5 });
+            statNumbers.forEach(n => statObserver.observe(n));
 
-            // Observe all animation elements
-            document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in').forEach(element => {
-                animationObserver.observe(element);
-            });
-
-            // Initialize child elements for staggered animation
-            document.querySelectorAll('.skill-tag, .achievement-card, .info-item').forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px) scale(0.9)';
-                element.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            });
-        }
-
-        // Enhanced Interactivity
-        function setupInteractivity() {
-            // Enhanced skill tag interactions
-            document.querySelectorAll('.skill-tag').forEach(tag => {
-                tag.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-4px) scale(1.08) rotate(2deg)';
+            // Tilt effect on cards
+            const tiltCards = document.querySelectorAll(
+                '.skill-card-inner, .achievement-inner, .project-card-premium, .stat-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -8;
+                    const rotateY = ((x - centerX) / centerX) * 8;
+                    card.style.transform =
+                        `translateY(-6px) perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 });
-                
-                tag.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
-                });
-
-                tag.addEventListener('click', function() {
-                    // Add click ripple effect
-                    const ripple = document.createElement('span');
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.6);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        pointer-events: none;
-                    `;
-                    
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    ripple.style.width = ripple.style.height = size + 'px';
-                    ripple.style.left = (rect.width / 2 - size / 2) + 'px';
-                    ripple.style.top = (rect.height / 2 - size / 2) + 'px';
-                    
-                    this.style.position = 'relative';
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => ripple.remove(), 600);
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) perspective(800px) rotateX(0) rotateY(0)';
                 });
             });
 
-            // Enhanced achievement card interactions
-            document.querySelectorAll('.achievement-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    const icon = this.querySelector('.achievement-icon');
-                    icon.style.transform = 'scale(1.2) rotate(10deg)';
-                    icon.style.boxShadow = '0 15px 30px rgba(59, 130, 246, 0.4)';
-                });
-
-                card.addEventListener('mouseleave', function() {
-                    const icon = this.querySelector('.achievement-icon');
-                    icon.style.transform = 'scale(1) rotate(0deg)';
-                    icon.style.boxShadow = 'var(--shadow-md)';
-                });
-
-                card.addEventListener('click', function() {
-                    this.style.transform = 'translateY(-8px) scale(0.98)';
-                    setTimeout(() => {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                    }, 150);
-                });
+            // GSAP hero parallax
+            gsap.to('.hero-avatar-3d', {
+                y: -20,
+                duration: 1.5,
+                ease: 'power1.inOut',
+                yoyo: true,
+                repeat: -1,
+            });
+            gsap.to('.hero-floating-code', {
+                y: -30,
+                duration: 6,
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1,
+                stagger: 0.5,
             });
 
-            // Enhanced contact link interactions
-            document.querySelectorAll('.contact-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const icon = this.querySelector('i');
-                    icon.style.transform = 'scale(1.3) rotate(15deg)';
-                    setTimeout(() => {
-                        icon.style.transform = 'scale(1.2)';
-                    }, 200);
-                });
-            });
-
-            // Project card hover effects
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.borderColor = 'rgba(240, 147, 251, 0.5)';
-                    const links = this.querySelectorAll('.project-link');
-                    links.forEach((link, index) => {
-                        setTimeout(() => {
-                            link.style.transform = 'translateY(-2px) scale(1.05)';
-                        }, index * 100);
-                    });
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.borderColor = 'var(--border-light)';
-                    const links = this.querySelectorAll('.project-link');
-                    links.forEach(link => {
-                        link.style.transform = 'translateY(0) scale(1)';
-                    });
-                });
-            });
-
-
-
-            // Parallax effect for hero section
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const hero = document.querySelector('.hero');
-                const heroAvatar = document.querySelector('.hero-avatar');
-                
-                if (hero && scrolled < window.innerHeight) {
-                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                    heroAvatar.style.transform = `translateY(${scrolled * 0.3}px) scale(${1 + scrolled * 0.0005})`;
-                }
-            });
-
-            // Typing effect for hero title (enhanced)
-            const heroTitle = document.querySelector('.hero h1');
-            const originalText = heroTitle.textContent;
-            
-            function typeWriter() {
-                heroTitle.textContent = '';
-                let i = 0;
-                const typing = setInterval(() => {
-                    if (i < originalText.length) {
-                        heroTitle.textContent += originalText.charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(typing);
-                    }
-                }, 100);
-            }
-
-            // Initialize typing effect after page load
-            setTimeout(typeWriter, 1000);
-        }
-
-        // Enhanced Accessibility
-        function setupAccessibility() {
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    document.body.classList.add('keyboard-nav');
-                }
-                
-                // ESC key to close mobile menu
-                if (e.key === 'Escape') {
-                    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-                    const navLinks = document.getElementById('navLinks');
-                    mobileMenuToggle.classList.remove('active');
-                    navLinks.classList.remove('active');
-                }
-            });
-
-            document.addEventListener('mousedown', () => {
-                document.body.classList.remove('keyboard-nav');
-            });
-
-            // Reduce motion for users who prefer it
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelectorAll('*').forEach(element => {
-                    element.style.animationDuration = '0.01ms';
-                    element.style.transitionDuration = '0.01ms';
-                });
-            }
-
-            // High contrast mode detection
-            if (window.matchMedia('(prefers-contrast: high)').matches) {
-                document.body.classList.add('high-contrast');
-            }
-
-            // Focus trap for mobile menu
-            const navLinks = document.getElementById('navLinks');
-            const focusableElements = navLinks.querySelectorAll('a');
-            const firstFocusable = focusableElements[0];
-            const lastFocusable = focusableElements[focusableElements.length - 1];
-
-            navLinks.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstFocusable) {
-                            lastFocusable.focus();
-                            e.preventDefault();
-                        }
-                    } else {
-                        if (document.activeElement === lastFocusable) {
-                            firstFocusable.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-            });
-        }
-
-        // Enhanced Performance Optimizations
-        function optimizePerformance() {
-            // Lazy loading for images (if any are added)
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.classList.remove('lazy');
-                            observer.unobserve(img);
-                        }
-                    });
-                });
-
-                document.querySelectorAll('img[data-src]').forEach(img => {
-                    imageObserver.observe(img);
-                });
-            }
-
-            // Throttle scroll events
-            let ticking = false;
-            function updateOnScroll() {
-                // Scroll-based animations here
-                ticking = false;
-            }
-
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    requestAnimationFrame(updateOnScroll);
-                    ticking = true;
-                }
-            });
-
-            // Preload critical resources
-            const criticalResources = [
-                'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap'
-            ];
-
-            criticalResources.forEach(resource => {
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.as = 'style';
-                link.href = resource;
-                document.head.appendChild(link);
-            });
-        }
-
-        // Initialize performance optimizations
-        optimizePerformance();
-
-        // Add ripple animation styles
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-            
-            .high-contrast {
-                --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-                --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5);
-                --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.5);
-                --shadow-xl: 0 20px 30px -5px rgba(0, 0, 0, 0.5);
-            }
-            
-            .loading-skeleton {
-                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-                background-size: 200% 100%;
-                animation: loading 1.5s infinite;
-            }
-            
-            @keyframes loading {
-                0% { background-position: 200% 0; }
-                100% { background-position: -200% 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Enhanced print functionality
-        function enhancedPrint() {
-            // Optimize for printing
-            const printStyles = `
-                @media print {
-                    .section { page-break-inside: avoid; }
-                    .achievement-card { break-inside: avoid; }
-                    .project-card { break-inside: avoid; }
-                    .education-item { break-inside: avoid; }
-                    .experience-item { break-inside: avoid; }
-                }
-            `;
-            
-            const printStyleSheet = document.createElement('style');
-            printStyleSheet.textContent = printStyles;
-            document.head.appendChild(printStyleSheet);
-            
-            window.print();
-        }
-
-        // Update floating action button
-       // document.querySelector('.floating-action').onclick = enhancedPrint;
-
-        // Error handling and fallbacks
-        window.addEventListener('error', (e) => {
-            console.error('Website error:', e.error);
-            // Graceful degradation for older browsers
-        });
-
-        // Service worker registration for caching (if needed)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                // navigator.serviceWorker.register('/sw.js');
-            });
-        }
+            console.log('%c🚀 Vignesh S Portfolio %cLoaded Successfully',
+                'font-size:1.2em;color:#3b82f6;font-weight:bold;',
+                'color:#8b5cf6;');
+            console.log('%c💡 Built with Three.js + GSAP + Premium Glassmorphism',
+            'color:#22d3ee;font-style:italic;');
+        })();
     </script>
 </body>
 </html>
