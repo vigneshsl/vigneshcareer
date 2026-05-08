@@ -10,16 +10,17 @@
     <meta property="og:title" content="Vignesh S - Software Engineer Portfolio">
     <meta property="og:description" content="Results-driven Software Engineer with 3+ years in industrial automation and embedded systems.">
     <meta property="og:type" content="website">
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <style>
         :root {
@@ -115,10 +116,11 @@
             height: 500px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, rgba(139, 92, 246, 0.03) 30%, transparent 70%);
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) translateZ(0);
             transition: opacity 0.4s ease;
             opacity: 0;
-            will-change: left, top;
+            will-change: transform;
+            contain: layout style;
         }
         body:hover .mouse-glow {
             opacity: 1;
@@ -549,6 +551,8 @@
             box-shadow: var(--shadow-sm);
             transition: all var(--transition-smooth);
             overflow: hidden;
+            content-visibility: auto;
+            contain-intrinsic-size: auto 500px;
         }
         .section-premium::before {
             content: '';
@@ -1559,149 +1563,155 @@
 
     <script>
         (function() {
-            // Loading Screen
+            // --- Utility: throttle ---
+            function throttle(fn, ms) {
+                let last = 0, raf;
+                return function() {
+                    const now = performance.now();
+                    const args = arguments;
+                    if (now - last >= ms) { last = now; fn.apply(this, args); }
+                };
+            }
+            const isMobile = window.innerWidth < 768;
+            let pageVisible = true;
+
+            // Loading Screen — dismiss as soon as ready
             const loadingScreen = document.getElementById('loadingScreen');
             window.addEventListener('load', () => {
-                setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
-                }, 800);
+                requestAnimationFrame(() => loadingScreen.classList.add('hidden'));
             });
-            setTimeout(() => {
-                if (!loadingScreen.classList.contains('hidden')) {
-                    loadingScreen.classList.add('hidden');
-                }
-            }, 3000);
+            setTimeout(() => { loadingScreen.classList.add('hidden'); }, 2500);
 
-            // Mouse Glow
+            // Pause heavy work when tab hidden
+            document.addEventListener('visibilitychange', () => {
+                pageVisible = !document.hidden;
+            });
+
+            // Mouse Glow — GPU transform, throttled
             const mouseGlow = document.getElementById('mouseGlow');
-            let mouseX = -200,
-                mouseY = -200;
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            function updateGlow() {
-                mouseGlow.style.left = mouseX + 'px';
-                mouseGlow.style.top = mouseY + 'px';
-                requestAnimationFrame(updateGlow);
+            let glowX = -500, glowY = -500, glowRaf = 0;
+            if (!isMobile) {
+                document.addEventListener('mousemove', (e) => {
+                    glowX = e.clientX; glowY = e.clientY;
+                    if (!glowRaf) {
+                        glowRaf = requestAnimationFrame(() => {
+                            mouseGlow.style.transform = `translate(${glowX - 250}px, ${glowY - 250}px) translateZ(0)`;
+                            glowRaf = 0;
+                        });
+                    }
+                }, { passive: true });
             }
-            updateGlow();
 
-            // Three.js Background
-            const threeContainer = document.getElementById('three-bg');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-            camera.position.z = 30;
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            threeContainer.appendChild(renderer.domElement);
-
-            // Particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 200;
-            const posArray = new Float32Array(particlesCount * 3);
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 60;
-            }
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.08,
-                color: 0x3b82f6,
-                transparent: true,
-                opacity: 0.6,
-                blending: THREE.AdditiveBlending,
-                depthWrite: false,
-            });
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-
-            // Wireframe shapes
-            const shapesGroup = new THREE.Group();
-            const icosahedronGeo = new THREE.IcosahedronGeometry(3, 0);
-            const icosahedronWire = new THREE.LineSegments(
-                new THREE.EdgesGeometry(icosahedronGeo),
-                new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.3,
-                    depthWrite: false })
-            );
-            icosahedronWire.position.set(-10, 5, -8);
-            shapesGroup.add(icosahedronWire);
-
-            const torusGeo = new THREE.TorusGeometry(2.5, 0.6, 16, 50);
-            const torusWire = new THREE.LineSegments(
-                new THREE.EdgesGeometry(torusGeo),
-                new THREE.LineBasicMaterial({ color: 0x60a5fa, transparent: true, opacity: 0.25,
-                    depthWrite: false })
-            );
-            torusWire.position.set(9, -4, -6);
-            shapesGroup.add(torusWire);
-
-            const sphereGeo = new THREE.SphereGeometry(2, 16, 16);
-            const sphereWire = new THREE.LineSegments(
-                new THREE.EdgesGeometry(sphereGeo),
-                new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.3,
-                depthWrite: false })
-            );
-            sphereWire.position.set(7, 6, -10);
-            shapesGroup.add(sphereWire);
-            scene.add(shapesGroup);
-
-            // Lighting (ambient for the wireframes)
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-
-            function animateThree() {
-                requestAnimationFrame(animateThree);
-                particlesMesh.rotation.y += 0.0003;
-                particlesMesh.rotation.x += 0.0002;
-                shapesGroup.rotation.y += 0.001;
-                shapesGroup.rotation.x += 0.0005;
-                icosahedronWire.rotation.z += 0.003;
-                torusWire.rotation.y += 0.004;
-                sphereWire.rotation.x += 0.003;
-                renderer.render(scene, camera);
-            }
-            animateThree();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
+            // Three.js — deferred init, visibility-aware loop
+            let threeInited = false;
+            function initThree() {
+                if (threeInited || typeof THREE === 'undefined') return;
+                threeInited = true;
+                const threeContainer = document.getElementById('three-bg');
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+                camera.position.z = 30;
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: 'low-power' });
                 renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+                threeContainer.appendChild(renderer.domElement);
 
-            // Floating Particles Overlay
-            const particlesOverlay = document.getElementById('particlesOverlay');
-            for (let i = 0; i < 30; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('particle-dot');
-                const size = Math.random() * 4 + 2;
-                dot.style.width = size + 'px';
-                dot.style.height = size + 'px';
-                dot.style.left = Math.random() * 100 + '%';
-                dot.style.animationDelay = Math.random() * 7 + 's';
-                dot.style.animationDuration = Math.random() * 6 + 5 + 's';
-                dot.style.background = Math.random() > 0.5 ? 'var(--primary)' : 'var(--accent)';
-                particlesOverlay.appendChild(dot);
+                const pCount = isMobile ? 80 : 200;
+                const particlesGeometry = new THREE.BufferGeometry();
+                const posArray = new Float32Array(pCount * 3);
+                for (let i = 0; i < pCount * 3; i++) posArray[i] = (Math.random() - 0.5) * 60;
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                const particlesMesh = new THREE.Points(particlesGeometry, new THREE.PointsMaterial({
+                    size: 0.08, color: 0x3b82f6, transparent: true, opacity: 0.6,
+                    blending: THREE.AdditiveBlending, depthWrite: false,
+                }));
+                scene.add(particlesMesh);
+
+                const shapesGroup = new THREE.Group();
+                const icoWire = new THREE.LineSegments(
+                    new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3, 0)),
+                    new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.3, depthWrite: false })
+                );
+                icoWire.position.set(-10, 5, -8);
+                shapesGroup.add(icoWire);
+
+                const torusWire = new THREE.LineSegments(
+                    new THREE.EdgesGeometry(new THREE.TorusGeometry(2.5, 0.6, 16, 50)),
+                    new THREE.LineBasicMaterial({ color: 0x60a5fa, transparent: true, opacity: 0.25, depthWrite: false })
+                );
+                torusWire.position.set(9, -4, -6);
+                shapesGroup.add(torusWire);
+
+                const sphereWire = new THREE.LineSegments(
+                    new THREE.EdgesGeometry(new THREE.SphereGeometry(2, 16, 16)),
+                    new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.3, depthWrite: false })
+                );
+                sphereWire.position.set(7, 6, -10);
+                shapesGroup.add(sphereWire);
+                scene.add(shapesGroup);
+                scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    if (!pageVisible) return;
+                    particlesMesh.rotation.y += 0.0003;
+                    particlesMesh.rotation.x += 0.0002;
+                    shapesGroup.rotation.y += 0.001;
+                    shapesGroup.rotation.x += 0.0005;
+                    icoWire.rotation.z += 0.003;
+                    torusWire.rotation.y += 0.004;
+                    sphereWire.rotation.x += 0.003;
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        camera.aspect = window.innerWidth / window.innerHeight;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                    }, 150);
+                }, { passive: true });
             }
+            // Defer Three.js init until after first paint
+            if (typeof THREE !== 'undefined') { requestAnimationFrame(initThree); }
+            else { window.addEventListener('load', () => requestAnimationFrame(initThree)); }
 
-            // Navbar
+            // Floating Particles Overlay — fewer on mobile
+            const particlesOverlay = document.getElementById('particlesOverlay');
+            const dotCount = isMobile ? 12 : 30;
+            const frag = document.createDocumentFragment();
+            for (let i = 0; i < dotCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'particle-dot';
+                const size = Math.random() * 4 + 2;
+                dot.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-delay:${Math.random()*7}s;animation-duration:${Math.random()*6+5}s;background:var(--${Math.random()>0.5?'primary':'accent'})`;
+                frag.appendChild(dot);
+            }
+            particlesOverlay.appendChild(frag);
+
+            // Navbar — passive scroll
             const navbar = document.getElementById('navbar');
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const navLinks = document.getElementById('navLinks');
             const navLinkItems = document.querySelectorAll('.nav-link');
             let lastScrollY = window.scrollY;
+            let scrollTicking = false;
 
             window.addEventListener('scroll', () => {
-                const currentScrollY = window.scrollY;
-                if (currentScrollY > 80) navbar.classList.add('scrolled');
-                else navbar.classList.remove('scrolled');
-                if (currentScrollY > lastScrollY && currentScrollY > 150) {
-                    navbar.style.transform = 'translateY(-100%)';
-                } else {
-                    navbar.style.transform = 'translateY(0)';
+                if (!scrollTicking) {
+                    scrollTicking = true;
+                    requestAnimationFrame(() => {
+                        const y = window.scrollY;
+                        navbar.classList.toggle('scrolled', y > 80);
+                        navbar.style.transform = (y > lastScrollY && y > 150) ? 'translateY(-100%)' : 'translateY(0)';
+                        lastScrollY = y;
+                        scrollTicking = false;
+                    });
                 }
-                lastScrollY = currentScrollY;
-            });
+            }, { passive: true });
 
             mobileMenuToggle.addEventListener('click', () => {
                 mobileMenuToggle.classList.toggle('active');
@@ -1750,53 +1760,37 @@
 				'EPKS DCS',
 				'QT/QML'
             ];
-            let titleIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let typeSpeed = 80;
-
+            let titleIndex = 0, charIndex = 0, isDeleting = false, typeSpeed = 80;
             function typeEffect() {
+                if (!pageVisible) { setTimeout(typeEffect, 500); return; }
                 const current = titles[titleIndex];
-                if (isDeleting) {
-                    typingText.textContent = current.substring(0, charIndex - 1);
-                    charIndex--;
-                    typeSpeed = 40;
-                } else {
-                    typingText.textContent = current.substring(0, charIndex + 1);
-                    charIndex++;
-                    typeSpeed = 80;
-                }
-                if (!isDeleting && charIndex === current.length) {
-                    typeSpeed = 2000;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    titleIndex = (titleIndex + 1) % titles.length;
-                    typeSpeed = 400;
-                }
+                if (isDeleting) { typingText.textContent = current.substring(0, --charIndex); typeSpeed = 40; }
+                else { typingText.textContent = current.substring(0, ++charIndex); typeSpeed = 80; }
+                if (!isDeleting && charIndex === current.length) { typeSpeed = 2000; isDeleting = true; }
+                else if (isDeleting && charIndex === 0) { isDeleting = false; titleIndex = (titleIndex + 1) % titles.length; typeSpeed = 400; }
                 setTimeout(typeEffect, typeSpeed);
             }
             typeEffect();
 
-            // GSAP Animations
-            gsap.registerPlugin(ScrollTrigger);
-            const fadeEls = document.querySelectorAll(
-                '.section-premium, .project-card-premium, .timeline-item, .education-card, .stat-card, .skill-card-3d, .achievement-card-3d, .info-card-mini'
-                );
-            fadeEls.forEach((el, i) => {
-                gsap.fromTo(el, { opacity: 0, y: 50 }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 88%',
-                        toggleActions: 'play none none none',
-                    },
-                    delay: i % 3 * 0.1,
+            // GSAP Animations — wait for library
+            function initGSAP() {
+                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                    setTimeout(initGSAP, 100); return;
+                }
+                gsap.registerPlugin(ScrollTrigger);
+                document.querySelectorAll(
+                    '.section-premium, .project-card-premium, .timeline-item, .education-card, .stat-card, .skill-card-3d, .achievement-card-3d, .info-card-mini'
+                ).forEach((el, i) => {
+                    gsap.fromTo(el, { opacity: 0, y: 50 }, {
+                        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+                        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+                        delay: i % 3 * 0.1,
+                    });
                 });
-            });
+                gsap.to('.hero-avatar-3d', { y: -20, duration: 1.5, ease: 'power1.inOut', yoyo: true, repeat: -1 });
+                gsap.to('.hero-floating-code', { y: -30, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.5 });
+            }
+            initGSAP();
 
             // Stat counter animation
             const statNumbers = document.querySelectorAll('.stat-number[data-count]');
@@ -1805,16 +1799,12 @@
                     if (entry.isIntersecting) {
                         const el = entry.target;
                         const target = parseInt(el.getAttribute('data-count'));
-                        const suffix = el.textContent.includes('%') ? '%' : el.textContent.includes(
-                            '+') ? '+' : '';
+                        const suffix = el.textContent.includes('%') ? '%' : el.textContent.includes('+') ? '+' : '';
                         let current = 0;
                         const increment = target / 50;
                         const timer = setInterval(() => {
                             current += increment;
-                            if (current >= target) {
-                                current = target;
-                                clearInterval(timer);
-                            }
+                            if (current >= target) { current = target; clearInterval(timer); }
                             el.textContent = Math.floor(current) + suffix;
                         }, 30);
                         statObserver.unobserve(el);
@@ -1823,48 +1813,21 @@
             }, { threshold: 0.5 });
             statNumbers.forEach(n => statObserver.observe(n));
 
-            // Tilt effect on cards
-            const tiltCards = document.querySelectorAll(
-                '.skill-card-inner, .achievement-inner, .project-card-premium, .stat-card');
-            tiltCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
+            // Tilt effect — throttled, disabled on mobile
+            if (!isMobile) {
+                const tiltThrottled = throttle(function(card, e) {
                     const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -8;
-                    const rotateY = ((x - centerX) / centerX) * 8;
-                    card.style.transform =
-                        `translateY(-6px) perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    const rotateX = (((e.clientY - rect.top) - rect.height / 2) / (rect.height / 2)) * -8;
+                    const rotateY = (((e.clientX - rect.left) - rect.width / 2) / (rect.width / 2)) * 8;
+                    card.style.transform = `translateY(-6px) perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                }, 32);
+                document.querySelectorAll('.skill-card-inner, .achievement-inner, .project-card-premium, .stat-card').forEach(card => {
+                    card.addEventListener('mousemove', (e) => tiltThrottled(card, e), { passive: true });
+                    card.addEventListener('mouseleave', () => { card.style.transform = ''; }, { passive: true });
                 });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(0) perspective(800px) rotateX(0) rotateY(0)';
-                });
-            });
+            }
 
-            // GSAP hero parallax
-            gsap.to('.hero-avatar-3d', {
-                y: -20,
-                duration: 1.5,
-                ease: 'power1.inOut',
-                yoyo: true,
-                repeat: -1,
-            });
-            gsap.to('.hero-floating-code', {
-                y: -30,
-                duration: 6,
-                ease: 'sine.inOut',
-                yoyo: true,
-                repeat: -1,
-                stagger: 0.5,
-            });
-
-            console.log('%c🚀 Vignesh S Portfolio %cLoaded Successfully',
-                'font-size:1.2em;color:#3b82f6;font-weight:bold;',
-                'color:#8b5cf6;');
-            console.log('%c💡 Built with Three.js + GSAP + Premium Glassmorphism',
-            'color:#22d3ee;font-style:italic;');
+            console.log('%c🚀 Vignesh S Portfolio %cLoaded Successfully', 'font-size:1.2em;color:#3b82f6;font-weight:bold;', 'color:#8b5cf6;');
         })();
     </script>
 </body>
