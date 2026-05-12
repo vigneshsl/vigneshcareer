@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vignesh S | Software Engineer - C++ • Industrial Automation • Embedded Systems</title>
-    <meta name="description" content="Vignesh S - Software Engineer specializing in C++, Win32 API, MFC, Industrial Automation, Embedded Systems, Honeywell UOC, and Process Control Systems. 3+ years of experience.">
-    <meta name="keywords" content="Vignesh S, Software Engineer, C++, Win32 API, MFC, Industrial Automation, Embedded Systems, Honeywell UOC, Process Control Systems, Portfolio">
+    <meta name="description"
+        content="Vignesh S - Software Engineer specializing in C++, Win32 API, MFC, Industrial Automation, Embedded Systems, Honeywell UOC, and Process Control Systems. 3+ years of experience.">
+    <meta name="keywords"
+        content="Vignesh S, Software Engineer, C++, Win32 API, MFC, Industrial Automation, Embedded Systems, Honeywell UOC, Process Control Systems, Portfolio">
     <meta name="author" content="Vignesh S">
     <meta property="og:title" content="Vignesh S - Software Engineer Portfolio">
-    <meta property="og:description" content="Results-driven Software Engineer with 3+ years in industrial automation and embedded systems.">
+    <meta property="og:description"
+        content="Results-driven Software Engineer with 3+ years in industrial automation and embedded systems.">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#3b82f6">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -83,13 +92,16 @@
         ::-webkit-scrollbar {
             width: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--primary);
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-dark);
         }
@@ -122,6 +134,7 @@
             will-change: transform;
             contain: layout style;
         }
+
         body:hover .mouse-glow {
             opacity: 1;
         }
@@ -148,6 +161,7 @@
             pointer-events: none;
             z-index: 1;
         }
+
         .particle-dot {
             position: absolute;
             border-radius: 50%;
@@ -156,17 +170,21 @@
             animation: floatUp 6s infinite;
             pointer-events: none;
         }
+
         @keyframes floatUp {
             0% {
                 opacity: 0;
                 transform: translateY(100vh) scale(0);
             }
+
             10% {
                 opacity: 0.7;
             }
+
             90% {
                 opacity: 0.2;
             }
+
             100% {
                 opacity: 0;
                 transform: translateY(-10vh) scale(1.5);
@@ -188,11 +206,13 @@
             flex-direction: column;
             transition: opacity 0.6s ease, visibility 0.6s ease;
         }
+
         .loading-screen.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
+
         .loading-spinner {
             width: 50px;
             height: 50px;
@@ -201,6 +221,7 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
+
         .loading-text {
             margin-top: 1rem;
             font-family: 'JetBrains Mono', monospace;
@@ -208,6 +229,7 @@
             color: var(--text-secondary);
             letter-spacing: 0.05em;
         }
+
         @keyframes spin {
             to {
                 transform: rotate(360deg);
@@ -227,10 +249,12 @@
             transition: all var(--transition-smooth);
             padding: 0;
         }
+
         .navbar.scrolled {
             box-shadow: var(--shadow-lg);
             background: rgba(255, 255, 255, 0.92);
         }
+
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -239,6 +263,7 @@
             align-items: center;
             padding: 1rem 2rem;
         }
+
         .logo {
             font-size: 1.6rem;
             font-weight: 800;
@@ -251,15 +276,18 @@
             z-index: 1;
             transition: transform var(--transition-fast);
         }
+
         .logo:hover {
             transform: scale(1.04);
         }
+
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
             align-items: center;
         }
+
         .nav-links a {
             text-decoration: none;
             color: var(--text-secondary);
@@ -270,6 +298,7 @@
             position: relative;
             padding: 0.4rem 0;
         }
+
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -282,14 +311,17 @@
             transform: translateX(-50%);
             border-radius: 2px;
         }
+
         .nav-links a:hover,
         .nav-links a.active {
             color: var(--primary);
         }
+
         .nav-links a:hover::after,
         .nav-links a.active::after {
             width: 100%;
         }
+
         .nav-cta {
             background: var(--gradient-primary);
             color: #fff !important;
@@ -299,13 +331,16 @@
             box-shadow: var(--shadow-glow-blue);
             transition: all var(--transition-bounce) !important;
         }
+
         .nav-cta:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
         }
+
         .nav-cta::after {
             display: none !important;
         }
+
         .mobile-menu-toggle {
             display: none;
             flex-direction: column;
@@ -316,6 +351,7 @@
             background: none;
             border: none;
         }
+
         .mobile-menu-toggle span {
             width: 26px;
             height: 2.5px;
@@ -324,12 +360,15 @@
             transition: all var(--transition-smooth);
             display: block;
         }
+
         .mobile-menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
+
         .mobile-menu-toggle.active span:nth-child(2) {
             opacity: 0;
         }
+
         .mobile-menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg) translate(5px, -5px);
         }
@@ -357,6 +396,7 @@
             border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
             overflow: hidden;
         }
+
         .hero-grid-bg {
             position: absolute;
             inset: 0;
@@ -367,11 +407,13 @@
             mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
             -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
         }
+
         .hero-content {
             position: relative;
             z-index: 3;
             max-width: 900px;
         }
+
         .hero-avatar-3d {
             width: 150px;
             height: 150px;
@@ -389,18 +431,23 @@
             transform-style: preserve-3d;
             transition: transform var(--transition-bounce);
         }
+
         .hero-avatar-3d:hover {
             transform: scale(1.08) rotateY(15deg) rotateX(5deg);
         }
+
         @keyframes floatAvatar {
+
             0%,
             100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-18px);
             }
         }
+
         .hero-avatar-ring {
             position: absolute;
             inset: -6px;
@@ -410,11 +457,13 @@
             border-right-color: var(--cyan);
             animation: spinRing 4s linear infinite;
         }
+
         @keyframes spinRing {
             to {
                 transform: rotate(360deg);
             }
         }
+
         .hero-name {
             font-size: clamp(2.8rem, 6vw, 4.5rem);
             font-weight: 900;
@@ -426,6 +475,7 @@
             margin-bottom: 0.5rem;
             line-height: 1.1;
         }
+
         .hero-title {
             font-size: clamp(1rem, 2.5vw, 1.35rem);
             font-weight: 600;
@@ -434,6 +484,7 @@
             min-height: 2rem;
             letter-spacing: 0.03em;
         }
+
         .hero-title .cursor-blink {
             display: inline-block;
             width: 2px;
@@ -443,11 +494,13 @@
             animation: blink 0.8s step-end infinite;
             vertical-align: text-bottom;
         }
+
         @keyframes blink {
             50% {
                 opacity: 0;
             }
         }
+
         .hero-subtitle {
             font-size: 1.1rem;
             color: var(--text-secondary);
@@ -456,12 +509,14 @@
             line-height: 1.8;
             font-weight: 400;
         }
+
         .hero-ctas {
             display: flex;
             gap: 1.2rem;
             flex-wrap: wrap;
             justify-content: center;
         }
+
         .btn-primary {
             display: inline-flex;
             align-items: center;
@@ -479,10 +534,12 @@
             transition: all var(--transition-bounce);
             letter-spacing: 0.02em;
         }
+
         .btn-primary:hover {
             transform: translateY(-4px);
             box-shadow: 0 16px 40px rgba(59, 130, 246, 0.45);
         }
+
         .btn-outline {
             display: inline-flex;
             align-items: center;
@@ -501,12 +558,14 @@
             transition: all var(--transition-bounce);
             letter-spacing: 0.02em;
         }
+
         .btn-outline:hover {
             border-color: var(--primary);
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
             background: rgba(255, 255, 255, 0.9);
         }
+
         .hero-floating-code {
             position: absolute;
             font-family: 'JetBrains Mono', monospace;
@@ -517,20 +576,25 @@
             animation: floatCode 8s ease-in-out infinite;
             white-space: nowrap;
         }
+
         @keyframes floatCode {
+
             0%,
             100% {
                 transform: translateY(0) rotate(0deg);
                 opacity: 0.35;
             }
+
             25% {
                 transform: translateY(-30px) rotate(2deg);
                 opacity: 0.6;
             }
+
             50% {
                 transform: translateY(-15px) rotate(-1deg);
                 opacity: 0.45;
             }
+
             75% {
                 transform: translateY(-40px) rotate(1deg);
                 opacity: 0.5;
@@ -554,6 +618,7 @@
             content-visibility: auto;
             contain-intrinsic-size: auto 500px;
         }
+
         .section-premium::before {
             content: '';
             position: absolute;
@@ -566,13 +631,16 @@
             opacity: 0;
             transition: opacity var(--transition-smooth);
         }
+
         .section-premium:hover::before {
             opacity: 1;
         }
+
         .section-premium:hover {
             box-shadow: var(--shadow-xl);
             border-color: rgba(59, 130, 246, 0.25);
         }
+
         .section-title {
             font-size: 2rem;
             font-weight: 700;
@@ -583,6 +651,7 @@
             gap: 0.8rem;
             letter-spacing: -0.01em;
         }
+
         .section-title i {
             font-size: 1.6rem;
             background: var(--gradient-primary);
@@ -598,6 +667,7 @@
             gap: 1.5rem;
             margin: 2rem 0;
         }
+
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
@@ -609,11 +679,13 @@
             overflow: hidden;
             cursor: default;
         }
+
         .stat-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(59, 130, 246, 0.3);
         }
+
         .stat-number {
             font-size: 2.8rem;
             font-weight: 800;
@@ -623,6 +695,7 @@
             background-clip: text;
             line-height: 1;
         }
+
         .stat-label {
             font-size: 0.9rem;
             color: var(--text-secondary);
@@ -636,9 +709,11 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.8rem;
         }
+
         .skill-card-3d {
             perspective: 800px;
         }
+
         .skill-card-inner {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
@@ -650,11 +725,13 @@
             cursor: default;
             transform-style: preserve-3d;
         }
+
         .skill-card-inner:hover {
             transform: translateY(-8px) rotateX(3deg) rotateY(3deg);
             box-shadow: var(--shadow-xl);
             border-color: rgba(59, 130, 246, 0.35);
         }
+
         .skill-card-inner::after {
             content: '';
             position: absolute;
@@ -664,9 +741,11 @@
             opacity: 0;
             transition: opacity var(--transition-smooth);
         }
+
         .skill-card-inner:hover::after {
             opacity: 1;
         }
+
         .skill-card-icon {
             width: 50px;
             height: 50px;
@@ -681,20 +760,24 @@
             box-shadow: var(--shadow-glow-blue);
             transition: transform var(--transition-bounce);
         }
+
         .skill-card-inner:hover .skill-card-icon {
             transform: scale(1.15) rotate(-5deg);
         }
+
         .skill-card-inner h3 {
             font-size: 1.15rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--text-primary);
         }
+
         .skill-tags-mini {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
+
         .skill-tag-pill {
             background: var(--bg-accent);
             color: var(--text-primary);
@@ -707,6 +790,7 @@
             transition: all var(--transition-fast);
             cursor: default;
         }
+
         .skill-tag-pill:hover {
             background: var(--primary);
             color: #fff;
@@ -720,6 +804,7 @@
             position: relative;
             padding-left: 3rem;
         }
+
         .timeline-premium::before {
             content: '';
             position: absolute;
@@ -730,6 +815,7 @@
             background: var(--gradient-primary);
             border-radius: 2px;
         }
+
         .timeline-item {
             position: relative;
             margin-bottom: 3rem;
@@ -741,11 +827,13 @@
             transition: all var(--transition-bounce);
             cursor: default;
         }
+
         .timeline-item:hover {
             transform: translateX(8px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(59, 130, 246, 0.3);
         }
+
         .timeline-item::before {
             content: '';
             position: absolute;
@@ -759,11 +847,14 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             animation: pulseDot 2s ease-in-out infinite;
         }
+
         @keyframes pulseDot {
+
             0%,
             100% {
                 box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             }
+
             50% {
                 box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.08);
             }
@@ -782,11 +873,13 @@
             cursor: default;
             transform-style: preserve-3d;
         }
+
         .project-card-premium:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
             border-color: rgba(139, 92, 246, 0.3);
         }
+
         .project-card-premium::before {
             content: '';
             position: absolute;
@@ -797,6 +890,7 @@
             background: var(--gradient-accent);
             border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
         }
+
         .project-header-row {
             display: flex;
             justify-content: space-between;
@@ -805,12 +899,14 @@
             gap: 1rem;
             margin-bottom: 1.2rem;
         }
+
         .project-name-lg {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.01em;
         }
+
         .project-role-badge {
             display: inline-block;
             background: var(--gradient-accent);
@@ -820,11 +916,13 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
+
         .project-links-row {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
+
         .project-link-btn {
             display: inline-flex;
             align-items: center;
@@ -839,6 +937,7 @@
             background: var(--bg-secondary);
             color: var(--text-primary);
         }
+
         .project-link-btn:hover {
             background: var(--primary);
             color: #fff;
@@ -846,12 +945,14 @@
             transform: translateY(-3px);
             box-shadow: var(--shadow-glow-blue);
         }
+
         .tech-pill-row {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             margin: 1rem 0;
         }
+
         .tech-pill {
             background: var(--bg-accent);
             color: var(--text-secondary);
@@ -869,9 +970,11 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.8rem;
         }
+
         .achievement-card-3d {
             perspective: 600px;
         }
+
         .achievement-inner {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
@@ -883,11 +986,13 @@
             overflow: hidden;
             transform-style: preserve-3d;
         }
+
         .achievement-inner:hover {
             transform: translateY(-10px) rotateX(4deg) rotateY(4deg);
             box-shadow: var(--shadow-xl);
             border-color: rgba(59, 130, 246, 0.3);
         }
+
         .achievement-icon-glow {
             width: 55px;
             height: 55px;
@@ -902,6 +1007,7 @@
             box-shadow: var(--shadow-glow-blue);
             transition: all var(--transition-bounce);
         }
+
         .achievement-inner:hover .achievement-icon-glow {
             transform: scale(1.2);
             box-shadow: 0 0 50px rgba(59, 130, 246, 0.5);
@@ -914,6 +1020,7 @@
             gap: 1.2rem;
             justify-content: center;
         }
+
         .contact-card-floating {
             display: flex;
             align-items: center;
@@ -930,17 +1037,20 @@
             transition: all var(--transition-bounce);
             box-shadow: var(--shadow-sm);
         }
+
         .contact-card-floating:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg), var(--shadow-glow-blue);
             border-color: var(--primary);
             background: rgba(255, 255, 255, 0.9);
         }
+
         .contact-card-floating i {
             font-size: 1.1rem;
             color: var(--primary);
             transition: transform var(--transition-bounce);
         }
+
         .contact-card-floating:hover i {
             transform: scale(1.3);
         }
@@ -956,6 +1066,7 @@
             cursor: default;
             position: relative;
         }
+
         .education-card:hover {
             transform: translateX(8px);
             box-shadow: var(--shadow-lg);
@@ -968,6 +1079,7 @@
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.5rem;
         }
+
         .info-card-mini {
             display: flex;
             align-items: flex-start;
@@ -979,10 +1091,12 @@
             transition: all var(--transition-bounce);
             cursor: default;
         }
+
         .info-card-mini:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
+
         .info-card-mini i {
             font-size: 1.4rem;
             background: var(--gradient-primary);
@@ -1013,6 +1127,7 @@
             border: none;
             text-decoration: none;
         }
+
         .floating-action-btn:hover {
             transform: scale(1.15) rotate(10deg);
             box-shadow: 0 20px 45px rgba(59, 130, 246, 0.5);
@@ -1023,13 +1138,16 @@
             .section-premium {
                 padding: 2.5rem;
             }
+
             .stats-row {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .skills-premium-grid {
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -1050,58 +1168,73 @@
                 transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 align-items: center;
             }
+
             .nav-links.active {
                 transform: translateY(0);
                 opacity: 1;
                 visibility: visible;
             }
+
             .nav-links li {
                 margin: 0.8rem 0;
             }
+
             .nav-links a {
                 font-size: 1.1rem;
             }
+
             .mobile-menu-toggle {
                 display: flex;
             }
+
             .hero-section {
                 padding: 6rem 0 3rem;
                 min-height: auto;
                 border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
             }
+
             .hero-name {
                 font-size: 2.4rem;
             }
+
             .section-premium {
                 padding: 1.8rem;
                 margin-bottom: 1.5rem;
                 border-radius: var(--border-radius-lg);
             }
+
             .section-title {
                 font-size: 1.5rem;
             }
+
             .stats-row {
                 grid-template-columns: 1fr 1fr;
                 gap: 1rem;
             }
+
             .stat-number {
                 font-size: 2rem;
             }
+
             .timeline-premium {
                 padding-left: 2rem;
             }
+
             .timeline-item {
                 margin-left: 1rem;
                 padding: 1.5rem;
             }
+
             .timeline-item::before {
                 left: -2.1rem;
                 width: 12px;
                 height: 12px;
             }
+
             .project-header-row {
                 flex-direction: column;
             }
+
             .floating-action-btn {
                 width: 48px;
                 height: 48px;
@@ -1109,63 +1242,78 @@
                 right: 1.5rem;
                 font-size: 1.1rem;
             }
+
             .contact-cards-row {
                 flex-direction: column;
                 align-items: center;
             }
+
             .contact-card-floating {
                 width: 100%;
                 max-width: 320px;
                 justify-content: center;
             }
         }
+
         @media (max-width: 480px) {
             .nav-container {
                 padding: 0.8rem 1rem;
             }
+
             .hero-name {
                 font-size: 2rem;
             }
+
             .hero-avatar-3d {
                 width: 110px;
                 height: 110px;
                 font-size: 2.5rem;
             }
+
             .section-premium {
                 padding: 1.3rem;
             }
+
             .stats-row {
                 grid-template-columns: 1fr;
             }
+
             .skills-premium-grid {
                 grid-template-columns: 1fr;
             }
+
             .achievements-premium-grid {
                 grid-template-columns: 1fr;
             }
+
             .info-premium-grid {
                 grid-template-columns: 1fr;
             }
+
             .btn-primary,
             .btn-outline {
                 padding: 0.7rem 1.4rem;
                 font-size: 0.85rem;
             }
+
             .hero-ctas {
                 flex-direction: column;
                 align-items: center;
             }
         }
+
         @media (min-width: 1600px) {
             .main-container {
                 max-width: 1500px;
             }
+
             .hero-name {
                 font-size: 5rem;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
+
             *,
             *::before,
             *::after {
@@ -1174,7 +1322,9 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
         @media print {
+
             .navbar,
             .floating-action-btn,
             #three-bg,
@@ -1183,9 +1333,11 @@
             .loading-screen {
                 display: none !important;
             }
+
             body {
                 background: #fff;
             }
+
             .section-premium {
                 box-shadow: none;
                 border: 1px solid #ddd;
@@ -1199,6 +1351,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
@@ -1227,7 +1380,8 @@
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#education" class="nav-link">Education</a></li>
                 <li><a href="#contact-sec" class="nav-link">Contact</a></li>
-                <li><a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank" class="nav-cta" download><i class="fas fa-download"></i> Resume</a></li>
+                <li><a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank"
+                        class="nav-cta" download><i class="fas fa-download"></i> Resume</a></li>
             </ul>
             <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -1250,10 +1404,13 @@
                     <span id="typingText"></span><span class="cursor-blink">|</span>
                 </p>
                 <p class="hero-subtitle">
-                    Results-driven <strong>Software Engineer</strong> with <strong>3+ years</strong> of specialized experience in <strong>industrial automation</strong> and <strong>embedded systems</strong> development. Expert in C++, Win32 API, MFC, and process control systems.
+                    Results-driven <strong>Software Engineer</strong> with <strong>3+ years</strong> of specialized
+                    experience in <strong>industrial automation</strong> and <strong>embedded systems</strong>
+                    development. Expert in C++, Win32 API, MFC, and process control systems.
                 </p>
                 <div class="hero-ctas">
-                    <a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank" class="btn-primary" download>
+                    <a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank"
+                        class="btn-primary" download>
                         <i class="fas fa-download"></i> Download Resume
                     </a>
                     <a href="#projects" class="btn-outline">
@@ -1274,7 +1431,13 @@
         <section class="section-premium" id="summary">
             <h2 class="section-title"><i class="fas fa-user-tie"></i> Professional Summary</h2>
             <p style="color:var(--text-secondary);line-height:1.9;font-size:1.05rem;">
-                Results-driven Software Engineer with <strong>3.0 years</strong> of experience in industrial automation and embedded systems development. Skilled in <strong>C++, MFC, Win32 API</strong>, and control systems, with a proven ability to deliver mission-critical industrial software solutions. Improved developer productivity by <strong>50%</strong> through automation tools and scripting. Experienced in the full <strong>SDLC</strong>, including requirements analysis, system design, implementation, testing, and documentation. Strong domain knowledge in process control systems, UI development, and real-time industrial-grade software.
+                Results-driven Software Engineer with <strong>3.0 years</strong> of experience in industrial automation
+                and embedded systems development. Skilled in <strong>C++, MFC, Win32 API</strong>, and control systems,
+                with a proven ability to deliver mission-critical industrial software solutions. Improved developer
+                productivity by <strong>75%</strong> through automation tools and scripting. Experienced in the full
+                <strong>SDLC</strong>, including requirements analysis, system design, implementation, testing, and
+                documentation. Strong domain knowledge in process control systems, UI development, and real-time
+                industrial-grade software.
             </p>
             <div class="stats-row">
                 <div class="stat-card">
@@ -1282,7 +1445,7 @@
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-number" data-count="75">0</div>
                     <div class="stat-label">% Productivity Improvement</div>
                 </div>
                 <div class="stat-card">
@@ -1290,7 +1453,7 @@
                     <div class="stat-label">Automation Tools Developed</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" data-count="5">0</div>
+                    <div class="stat-number" data-count="2">0</div>
                     <div class="stat-label">Industrial Controllers Configured</div>
                 </div>
             </div>
@@ -1305,7 +1468,8 @@
                         <div class="skill-card-icon"><i class="fas fa-code"></i></div>
                         <h3>Programming Languages</h3>
                         <div class="skill-tags-mini">
-                            <span class="skill-tag-pill">C++</span><span class="skill-tag-pill">WIN32API</span>
+                            <span class="skill-tag-pill">C++</span><span class="skill-tag-pill">MFC</span><span
+                                class="skill-tag-pill">WIN32API</span>
                             <span class="skill-tag-pill">Batch Script</span><span class="skill-tag-pill">Python</span>
                             <span class="skill-tag-pill">VBA</span>
                         </div>
@@ -1316,7 +1480,8 @@
                         <div class="skill-card-icon"><i class="fas fa-tools"></i></div>
                         <h3>Development Tools</h3>
                         <div class="skill-tags-mini">
-                            <span class="skill-tag-pill">Visual Studio</span><span class="skill-tag-pill">ClearCase</span>
+                            <span class="skill-tag-pill">Visual Studio</span><span
+                                class="skill-tag-pill">ClearCase</span>
                             <span class="skill-tag-pill">Coverity</span><span class="skill-tag-pill">Inno Setup</span>
                         </div>
                     </div>
@@ -1337,8 +1502,10 @@
                         <div class="skill-card-icon"><i class="fas fa-microchip"></i></div>
                         <h3>Controllers & Systems</h3>
                         <div class="skill-tags-mini">
-                            <span class="skill-tag-pill">Physical Controller</span><span class="skill-tag-pill">Virtual Controller</span>
-                            <span class="skill-tag-pill">Simulation</span><span class="skill-tag-pill">Windows Dev</span>
+                            <span class="skill-tag-pill">UOC Controller</span><span class="skill-tag-pill">VUOC
+                                Controller</span>
+                            <span class="skill-tag-pill">ACE Simulation</span><span class="skill-tag-pill">Windows
+                                Dev</span>
                         </div>
                     </div>
                 </div>
@@ -1347,7 +1514,8 @@
                         <div class="skill-card-icon"><i class="fas fa-sync-alt"></i></div>
                         <h3>Agile Development</h3>
                         <div class="skill-tags-mini">
-                            <span class="skill-tag-pill">Unit Testing</span><span class="skill-tag-pill">Integration Testing</span>
+                            <span class="skill-tag-pill">Unit Testing</span><span class="skill-tag-pill">Integration
+                                Testing</span>
                             <span class="skill-tag-pill">Code Review</span><span class="skill-tag-pill">QA</span>
                         </div>
                     </div>
@@ -1363,42 +1531,49 @@
                     <div class="achievement-inner">
                         <div class="achievement-icon-glow"><i class="fas fa-robot"></i></div>
                         <h3>Process Automation Excellence</h3>
-                        <p style="color:var(--text-secondary);">Reduced manual workload by <strong>50%</strong> using custom batch scripting, Python, and C++ development.</p>
+                        <p style="color:var(--text-secondary);">Reduced manual workload by <strong>75%</strong> using
+                            custom batch scripting, Python, and C++ development.</p>
                     </div>
                 </div>
                 <div class="achievement-card-3d">
                     <div class="achievement-inner">
                         <div class="achievement-icon-glow"><i class="fas fa-desktop"></i></div>
                         <h3>UI Development Mastery</h3>
-                        <p style="color:var(--text-secondary);">Designed dynamic control block interface using <strong>MFC framework</strong>, improving usability and configuration efficiency.</p>
+                        <p style="color:var(--text-secondary);">Designed dynamic control block interface using
+                            <strong>MFC framework</strong>, improving usability and configuration efficiency.
+                        </p>
                     </div>
                 </div>
                 <div class="achievement-card-3d">
                     <div class="achievement-inner">
                         <div class="achievement-icon-glow"><i class="fas fa-shield-alt"></i></div>
                         <h3>System Recovery & Reliability</h3>
-                        <p style="color:var(--text-secondary);">Recovered and restored automation controllers during critical cycles, ensuring <strong>continuous availability</strong>.</p>
+                        <p style="color:var(--text-secondary);">Recovered and restored automation controllers during
+                            critical cycles, ensuring <strong>continuous availability</strong>.</p>
                     </div>
                 </div>
                 <div class="achievement-card-3d">
                     <div class="achievement-inner">
                         <div class="achievement-icon-glow"><i class="fas fa-cog"></i></div>
                         <h3>Configuration Expertise</h3>
-                        <p style="color:var(--text-secondary);">Configured and optimized industrial automation platforms across <strong>multiple models</strong> for consistent performance.</p>
+                        <p style="color:var(--text-secondary);">Configured and optimized industrial automation platforms
+                            across <strong>multiple models</strong> for consistent performance.</p>
                     </div>
                 </div>
                 <div class="achievement-card-3d">
                     <div class="achievement-inner">
                         <div class="achievement-icon-glow"><i class="fas fa-exchange-alt"></i></div>
                         <h3>Legacy System Migration</h3>
-                        <p style="color:var(--text-secondary);">Converted legacy GUI tools into efficient <strong>CUI applications</strong>, improving performance and maintainability.</p>
+                        <p style="color:var(--text-secondary);">Converted legacy GUI tools into efficient <strong>CUI
+                                applications</strong>, improving performance and maintainability.</p>
                     </div>
                 </div>
                 <div class="achievement-card-3d">
                     <div class="achievement-inner">
                         <div class="achievement-icon-glow"><i class="fas fa-rocket"></i></div>
                         <h3>Deployment Optimization</h3>
-                        <p style="color:var(--text-secondary);">Streamlined deployment using <strong>Inno Setup Compiler</strong>, enabling faster, error-free releases.</p>
+                        <p style="color:var(--text-secondary);">Streamlined deployment using <strong>Inno Setup
+                                Compiler</strong>, enabling faster, error-free releases.</p>
                     </div>
                 </div>
             </div>
@@ -1411,38 +1586,51 @@
                 <div class="timeline-item">
                     <div style="font-size:1.5rem;font-weight:700;color:var(--text-primary);">Software Engineer</div>
                     <div style="color:var(--text-secondary);margin-bottom:1rem;font-weight:500;">
-                        <i class="fas fa-building" style="color:var(--primary);"></i> Uthhunga Technologies | 2022 – Present (3.0 years)
+                        <i class="fas fa-building" style="color:var(--primary);"></i> Uthhunga Technologies | 2022 –
+                        Present (3.0 years)
                     </div>
-                    <div style="font-size:1.2rem;font-weight:600;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:1.5rem 0 0.8rem;">
+                    <div
+                        style="font-size:1.2rem;font-weight:600;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:1.5rem 0 0.8rem;">
                         <i class="fas fa-project-diagram"></i> Industrial Process Control System
                     </div>
-                    <p style="color:var(--text-secondary);font-style:italic;background:var(--bg-accent);padding:1rem;border-radius:var(--border-radius);border-left:3px solid var(--primary);margin-bottom:1rem;">
-                        Software development and implementation of industrial control system blocks for process automation.
+                    <p
+                        style="color:var(--text-secondary);font-style:italic;background:var(--bg-accent);padding:1rem;border-radius:var(--border-radius);border-left:3px solid var(--primary);margin-bottom:1rem;">
+                        Software development and implementation of industrial control system blocks for process
+                        automation.
                     </p>
                     <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
-                        <li>Collaborated with cross-functional teams for requirements analysis of industrial control blocks</li>
+                        <li>Collaborated with cross-functional teams for requirements analysis of industrial control
+                            blocks</li>
                         <li>Designed and developed software blocks following industry coding standards</li>
-                        <li>Conducted comprehensive <strong>unit testing, integration testing</strong>, and bug resolution</li>
-                        <li><strong>Enhanced developer productivity by 50%</strong> through custom automation tools</li>
+                        <li>Conducted comprehensive <strong>unit testing, integration testing</strong>, and bug
+                            resolution</li>
+                        <li><strong>Enhanced developer productivity by 75%</strong> through custom automation tools</li>
                         <li>Implemented UI solutions using <strong>MFC framework</strong> for block configuration</li>
                         <li>Developed custom error handling systems within industrial control stations</li>
                         <li>Automated repetitive tasks with scripts for operations like controller restarts</li>
-                        <li>Managed <strong>controller recovery processes</strong> for continuous system availability</li>
+                        <li>Managed <strong>controller recovery processes</strong> for continuous system availability
+                        </li>
                     </ul>
-                    <div style="background:linear-gradient(135deg,rgba(59,130,246,0.06),rgba(139,92,246,0.06));padding:1rem;border-radius:var(--border-radius);margin-top:1rem;border:1px solid rgba(59,130,246,0.2);">
-                        <strong>Tech Stack:</strong> C++, XML, MFC, Batch Scripting, ClearCase, VBA, Python, WIN32 API, Inno Setup Compiler
+                    <div
+                        style="background:linear-gradient(135deg,rgba(59,130,246,0.06),rgba(139,92,246,0.06));padding:1rem;border-radius:var(--border-radius);margin-top:1rem;border:1px solid rgba(59,130,246,0.2);">
+                        <strong>Tech Stack:</strong> C++, XML, MFC, Batch Scripting, ClearCase, VBA, Python, WIN32 API,
+                        Inno Setup Compiler
                     </div>
-                    <div style="font-size:1.2rem;font-weight:600;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:2rem 0 0.8rem;">
+                    <div
+                        style="font-size:1.2rem;font-weight:600;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:2rem 0 0.8rem;">
                         <i class="fas fa-project-diagram"></i> Device Configuration Management
                     </div>
-                    <p style="color:var(--text-secondary);font-style:italic;background:var(--bg-accent);padding:1rem;border-radius:var(--border-radius);border-left:3px solid var(--accent);margin-bottom:1rem;">
-                        Next-generation Device Configuration Management software with modern UI/UX and direct device interaction.
+                    <p
+                        style="color:var(--text-secondary);font-style:italic;background:var(--bg-accent);padding:1rem;border-radius:var(--border-radius);border-left:3px solid var(--accent);margin-bottom:1rem;">
+                        Next-generation Device Configuration Management software with modern UI/UX and direct device
+                        interaction.
                     </p>
                     <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
                         <li>Bug fixing and system optimization for enhanced performance</li>
                         <li>Successfully migrated legacy <strong>GUI applications to CLI</strong> solutions</li>
                     </ul>
-                    <div style="background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(34,211,238,0.06));padding:1rem;border-radius:var(--border-radius);margin-top:1rem;border:1px solid rgba(139,92,246,0.2);">
+                    <div
+                        style="background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(34,211,238,0.06));padding:1rem;border-radius:var(--border-radius);margin-top:1rem;border:1px solid rgba(139,92,246,0.2);">
                         <strong>Technology Stack:</strong> QT/QML
                     </div>
                 </div>
@@ -1459,10 +1647,12 @@
                         <div class="project-role-badge">Full-Stack Developer (UI/UX + Backend)</div>
                     </div>
                     <div class="project-links-row">
-                        <a href="https://vigneshsl.github.io/vigneshcareer/Usermanual.html" target="_blank" class="project-link-btn">
+                        <a href="https://vigneshsl.github.io/vigneshcareer/Usermanual.html" target="_blank"
+                            class="project-link-btn">
                             <i class="fas fa-book"></i> User Manual
                         </a>
-                        <a href="https://github.com/vigneshsl/Customization-Tools" target="_blank" class="project-link-btn">
+                        <a href="https://github.com/vigneshsl/Customization-Tools" target="_blank"
+                            class="project-link-btn">
                             <i class="fab fa-github"></i> GitHub
                         </a>
                     </div>
@@ -1472,19 +1662,31 @@
                     <span class="tech-pill">Python</span><span class="tech-pill">Batch Script</span>
                     <span class="tech-pill">GDI+</span>
                 </div>
-                <p style="color:var(--text-secondary);">Built a comprehensive <strong>Windows desktop GUI application</strong> serving as a centralized launcher for developer and system utility tools. Features a modern Windows 11-style interface with responsive layout, hover effects, smooth animations, and real-time tool filtering.</p>
-                <div style="background:var(--bg-secondary);padding:1.5rem;border-radius:var(--border-radius-lg);margin-top:1.5rem;border:1px solid var(--border-color);">
-                    <h4 style="margin-bottom:0.8rem;"><i class="fas fa-star" style="color:var(--warning);"></i> Key Contributions:</h4>
+                <p style="color:var(--text-secondary);">Built a comprehensive <strong>Windows desktop GUI
+                        application</strong> serving as a centralized launcher for developer and system utility tools.
+                    Features a modern Windows 11-style interface with responsive layout, hover effects, smooth
+                    animations, and real-time tool filtering.</p>
+                <div
+                    style="background:var(--bg-secondary);padding:1.5rem;border-radius:var(--border-radius-lg);margin-top:1.5rem;border:1px solid var(--border-color);">
+                    <h4 style="margin-bottom:0.8rem;"><i class="fas fa-star" style="color:var(--warning);"></i> Key
+                        Contributions:</h4>
                     <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
-                        <li>Designed core UI architecture using <strong>raw Win32 API and GDI+</strong> for optimal performance</li>
-                        <li>Developed <strong>13+ specialized utility tools</strong> for file management, code analysis, and system operations</li>
-                        <li>Implemented intelligent tool auto-discovery with custom icons for <code>.exe</code>, <code>.bat</code>, <code>.py</code> files</li>
-                        <li>Created custom tools: Code Line Counter, File Renamer, Case Converter, XML Manager, C++ Include Analyzer</li>
+                        <li>Designed core UI architecture using <strong>raw Win32 API and GDI+</strong> for optimal
+                            performance</li>
+                        <li>Developed <strong>13+ specialized utility tools</strong> for file management, code analysis,
+                            and system operations</li>
+                        <li>Implemented intelligent tool auto-discovery with custom icons for <code>.exe</code>,
+                            <code>.bat</code>, <code>.py</code> files
+                        </li>
+                        <li>Created custom tools: Code Line Counter, File Renamer, Case Converter, XML Manager, C++
+                            Include Analyzer</li>
                         <li>Enhanced UX with contextual help, comprehensive logging, and accessibility features</li>
                     </ul>
-                    <h4 style="margin:1.2rem 0 0.8rem;"><i class="fas fa-chart-line" style="color:var(--success);"></i> Impact:</h4>
+                    <h4 style="margin:1.2rem 0 0.8rem;"><i class="fas fa-chart-line" style="color:var(--success);"></i>
+                        Impact:</h4>
                     <ul style="color:var(--text-secondary);padding-left:1.5rem;line-height:2;">
-                        <li><strong>Significantly boosted developer productivity</strong> by eliminating command memorization</li>
+                        <li><strong>Significantly boosted developer productivity</strong> by eliminating command
+                            memorization</li>
                         <li>Bridged the gap between CUI and GUI usability for non-technical users</li>
                         <li>Achieved substantial improvements in application speed and user experience</li>
                         <li>Streamlined daily development workflows across multiple projects</li>
@@ -1497,8 +1699,10 @@
         <section class="section-premium" id="education">
             <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
             <div class="education-card">
-                <div style="font-size:1.3rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem;">
-                    <i class="fas fa-university" style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></i>
+                <div
+                    style="font-size:1.3rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem;">
+                    <i class="fas fa-university"
+                        style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></i>
                     Bachelor of Computer Applications (BCA)
                 </div>
                 <div style="color:var(--text-secondary);margin-top:0.5rem;">
@@ -1507,13 +1711,16 @@
                 </div>
             </div>
             <div class="education-card">
-                <div style="font-size:1.3rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem;">
-                    <i class="fas fa-certificate" style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></i>
+                <div
+                    style="font-size:1.3rem;font-weight:600;color:var(--text-primary);display:flex;align-items:center;gap:0.6rem;">
+                    <i class="fas fa-certificate"
+                        style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"></i>
                     Diploma in Computer Engineering (DCE)
                 </div>
                 <div style="color:var(--text-secondary);margin-top:0.5rem;">
                     <strong>DOTE – Ramakrishna Mission Polytechnic College</strong> | 2022<br>
-                    <strong>Achievement:</strong> 92% (Distinction) | <strong>Specialization:</strong> Computer Systems and Programming
+                    <strong>Achievement:</strong> 92% (Distinction) | <strong>Specialization:</strong> Computer Systems
+                    and Programming
                 </div>
             </div>
         </section>
@@ -1524,19 +1731,23 @@
             <div class="info-premium-grid" style="margin-bottom:2rem;">
                 <div class="info-card-mini">
                     <i class="fas fa-briefcase"></i>
-                    <div><strong>Experience</strong><br><span style="color:var(--text-secondary);">3.0 Years – Industrial Software Development</span></div>
+                    <div><strong>Experience</strong><br><span style="color:var(--text-secondary);">3.0 Years –
+                            Industrial Software Development</span></div>
                 </div>
                 <div class="info-card-mini">
                     <i class="fas fa-industry"></i>
-                    <div><strong>Domain</strong><br><span style="color:var(--text-secondary);">Industrial Automation, Control Systems, Embedded Systems</span></div>
+                    <div><strong>Domain</strong><br><span style="color:var(--text-secondary);">Industrial Automation,
+                            Control Systems, Embedded Systems</span></div>
                 </div>
                 <div class="info-card-mini">
                     <i class="fas fa-star"></i>
-                    <div><strong>Core Competencies</strong><br><span style="color:var(--text-secondary);">Automation, UI Design, Scripting, Problem-solving</span></div>
+                    <div><strong>Core Competencies</strong><br><span style="color:var(--text-secondary);">Automation, UI
+                            Design, Scripting, Problem-solving</span></div>
                 </div>
                 <div class="info-card-mini">
                     <i class="fas fa-language"></i>
-                    <div><strong>Languages</strong><br><span style="color:var(--text-secondary);">Tamil (Native), English (Professional)</span></div>
+                    <div><strong>Languages</strong><br><span style="color:var(--text-secondary);">Tamil (Native),
+                            English (Professional)</span></div>
                 </div>
             </div>
             <div class="contact-cards-row">
@@ -1557,16 +1768,17 @@
     </div>
 
     <!-- Floating Download Button -->
-    <a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank" class="floating-action-btn" download title="Download Resume">
+    <a href="https://vigneshsl.github.io/vigneshcareer/Vignesh_S_Resume_2025.pdf" target="_blank"
+        class="floating-action-btn" download title="Download Resume">
         <i class="fas fa-download"></i>
     </a>
 
     <script>
-        (function() {
+        (function () {
             // --- Utility: throttle ---
             function throttle(fn, ms) {
                 let last = 0, raf;
-                return function() {
+                return function () {
                     const now = performance.now();
                     const args = arguments;
                     if (now - last >= ms) { last = now; fn.apply(this, args); }
@@ -1687,7 +1899,7 @@
                 const dot = document.createElement('div');
                 dot.className = 'particle-dot';
                 const size = Math.random() * 4 + 2;
-                dot.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-delay:${Math.random()*7}s;animation-duration:${Math.random()*6+5}s;background:var(--${Math.random()>0.5?'primary':'accent'})`;
+                dot.style.cssText = `width:${size}px;height:${size}px;left:${Math.random() * 100}%;animation-delay:${Math.random() * 7}s;animation-duration:${Math.random() * 6 + 5}s;background:var(--${Math.random() > 0.5 ? 'primary' : 'accent'})`;
                 frag.appendChild(dot);
             }
             particlesOverlay.appendChild(frag);
@@ -1757,8 +1969,8 @@
                 'MFC',
                 'Win32 API',
                 'UOC ACE',
-				'EPKS DCS',
-				'QT/QML'
+                'EPKS DCS',
+                'QT/QML'
             ];
             let titleIndex = 0, charIndex = 0, isDeleting = false, typeSpeed = 80;
             function typeEffect() {
@@ -1815,7 +2027,7 @@
 
             // Tilt effect — throttled, disabled on mobile
             if (!isMobile) {
-                const tiltThrottled = throttle(function(card, e) {
+                const tiltThrottled = throttle(function (card, e) {
                     const rect = card.getBoundingClientRect();
                     const rotateX = (((e.clientY - rect.top) - rect.height / 2) / (rect.height / 2)) * -8;
                     const rotateY = (((e.clientX - rect.left) - rect.width / 2) / (rect.width / 2)) * 8;
@@ -1831,4 +2043,5 @@
         })();
     </script>
 </body>
+
 </html>
