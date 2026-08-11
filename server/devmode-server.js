@@ -25,8 +25,14 @@ const auth = require('./lib/auth');
 const store = require('./lib/certificates');
 
 const ROOT = path.join(__dirname, '..');
-const PORT = Number(process.env.DEVMODE_PORT) || 4321;
-const HOST = '127.0.0.1';
+const PORT = Number(process.env.PORT || process.env.DEVMODE_PORT) || 4321;
+
+// Set PUBLIC_ORIGIN to the deployed URL to run this on a real host. Without it
+// the server stays on loopback, which is the safer default.
+const PUBLIC_ORIGIN = (process.env.PUBLIC_ORIGIN || '').replace(/\/+$/, '');
+const IS_PUBLIC = PUBLIC_ORIGIN !== '';
+const HOST = IS_PUBLIC ? '0.0.0.0' : '127.0.0.1';
+
 const COOKIE_NAME = 'vs_devmode';
 const MAX_BODY_BYTES = 12 * 1024 * 1024;
 
@@ -104,6 +110,9 @@ function sessionCookie(value, maxAgeSeconds) {
         'Path=/',
         'HttpOnly',
         'SameSite=Strict',
+        // Without TLS the browser refuses a Secure cookie, so it is only set
+        // when the deployment actually serves https.
+        ...(PUBLIC_ORIGIN.startsWith('https://') ? ['Secure'] : []),
         `Max-Age=${maxAgeSeconds}`
     ].join('; ');
 }
@@ -123,8 +132,13 @@ function assertSameOrigin(req) {
     if (req.headers['x-dev-mode'] !== '1') {
         throw new store.HttpError(403, 'Missing Dev Mode request header.');
     }
+
+    const allowed = IS_PUBLIC
+        ? [PUBLIC_ORIGIN]
+        : [`http://127.0.0.1:${PORT}`, `http://localhost:${PORT}`];
+
     const origin = req.headers.origin;
-    if (origin && origin !== `http://${HOST}:${PORT}` && origin !== `http://localhost:${PORT}`) {
+    if (origin && !allowed.includes(origin)) {
         throw new store.HttpError(403, 'Cross-origin request rejected.');
     }
 }
@@ -191,13 +205,13 @@ async function handleApi(req, res, url) {
 
     if (route === 'GET /api/certificates') {
         requireSession(req);
-        return sendJson(res, 200, { certificates: store.readAll() });
+        return sendJson(res, 200, { certificates: await store.readAll() });
     }
 
     if (route === 'POST /api/certificates') {
         assertSameOrigin(req);
         requireSession(req);
-        return sendJson(res, 201, { certificate: store.create(await readJsonBody(req)) });
+        return sendJson(res, 201, { certificate: await store.create(await readJsonBody(req)) });
     }
 
     const itemMatch = /^\/api\/certificates\/([A-Za-z0-9._-]{1,120})$/.exec(url.pathname);
@@ -207,10 +221,10 @@ async function handleApi(req, res, url) {
         const id = itemMatch[1];
 
         if (req.method === 'PUT') {
-            return sendJson(res, 200, { certificate: store.update(id, await readJsonBody(req)) });
+            return sendJson(res, 200, { certificate: await store.update(id, await readJsonBody(req)) });
         }
         if (req.method === 'DELETE') {
-            return sendJson(res, 200, { certificate: store.remove(id) });
+            return sendJson(res, 200, { certificate: await store.remove(id) });
         }
         throw new store.HttpError(405, 'Method not allowed.');
     }
@@ -240,6 +254,12 @@ function git(args) {
  * token is stored by, or passes through, this server.
  */
 async function publish() {
+    // With the GitHub backend every save is already a commit, so there is
+    // nothing left to push.
+    if (store.isRemote) {
+        return { published: true, message: 'Saved straight to GitHub. Pages will redeploy shortly.' };
+    }
+
     const staged = await git(['add', 'assets/data/certificates.json', 'certificates']);
     if (!staged.ok) return { published: false, message: `git add failed: ${staged.out}` };
 
@@ -304,13 +324,36 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
+// A public deployment must never fall back to the generated config file: the
+// default password would be reachable from the internet, and an ephemeral disk
+// would silently reset it on every restart.
+if (IS_PUBLIC && !auth.hasEnvCredentials()) {
+    console.error('');
+    console.error('  Refusing to start: PUBLIC_ORIGIN is set but the credentials are not.');
+    console.error('  Set DEVMODE_PASSWORD_HASH, DEVMODE_PASSWORD_SALT and DEVMODE_SESSION_SECRET.');
+    console.error('  Generate them with: node scripts/hash-password.js');
+    console.error('');
+    process.exit(1);
+}
+
+if (IS_PUBLIC && !store.isRemote) {
+    console.error('');
+    console.error('  Refusing to start: PUBLIC_ORIGIN is set but GITHUB_TOKEN/GITHUB_REPO are not.');
+    console.error('  Without them every upload would be lost on the next restart.');
+    console.error('');
+    process.exit(1);
+}
+
 server.listen(PORT, HOST, () => {
     const cfg = auth.loadConfig();
     console.log('');
     console.log('  Dev Mode server running');
-    console.log(`  →  http://${HOST}:${PORT}`);
+    console.log(`  →  ${IS_PUBLIC ? PUBLIC_ORIGIN : `http://127.0.0.1:${PORT}`}`);
+    console.log(`  Storage: ${store.isRemote ? 'GitHub API' : 'local files'}`);
     console.log('');
-    console.log(`  Credentials file: ${path.relative(ROOT, auth.CONFIG_PATH)} (gitignored)`);
+    if (!cfg.fromEnv) {
+        console.log(`  Credentials file: ${path.relative(ROOT, auth.CONFIG_PATH)} (gitignored)`);
+    }
     if (cfg.usingDefaultPassword) {
         console.log('  !  Still using the default development password.');
         console.log('     Change it from the Dev Mode panel before using this anywhere but localhost.');

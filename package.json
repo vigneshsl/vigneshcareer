@@ -1,0 +1,12 @@
+{
+    "name": "vigneshcareer",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Portfolio site with a self-hosted certification manager. No runtime dependencies.",
+    "scripts": {
+        "start": "node server/devmode-server.js"
+    },
+    "engines": {
+        "node": ">=18"
+    }
+}

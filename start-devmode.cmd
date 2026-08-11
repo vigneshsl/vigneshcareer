@@ -4,6 +4,17 @@ setlocal
 
 cd /d "%~dp0"
 
+rem Starting a second copy would only fail with EADDRINUSE.
+netstat -ano | findstr /c:"127.0.0.1:4321" | findstr /i "LISTENING" >nul 2>&1
+if not errorlevel 1 (
+    echo.
+    echo   Dev Mode is already running. Opening it now.
+    echo.
+    start "" "http://127.0.0.1:4321"
+    timeout /t 3 >nul
+    exit /b 0
+)
+
 set "NODE_EXE="
 where node >nul 2>&1 && set "NODE_EXE=node"
 
