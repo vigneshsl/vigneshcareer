@@ -268,16 +268,24 @@ it never overwrites a field you filled in.
 
 ## 7. What the public site sees
 
-On GitHub Pages there is no server on `127.0.0.1`, so the `api/health` probe
-simply 404s. The consequence:
+The authoring service only ever listens on loopback, so on any origin that is
+not `localhost` or `127.0.0.1` the Dev Mode button is **removed from the page
+entirely** — before the health probe is even attempted.
 
-- The Dev Mode button stays inert and shows no live dot.
+- Visitors never see the button, and cannot open a login form.
+- The probe is skipped, so no `404` appears in the console.
+- Nothing names the internal tooling to a visitor.
 - Every API path is relative, so nothing points at your machine.
 - No credential, hash or token is present in any published file.
 - Visitors get exactly what they got before: a static JSON file and images.
 
 The manager cannot be "hacked into" from the public site, because on the public
 site **it does not exist**.
+
+> An earlier build let the login panel open on GitHub Pages and explain that
+> the service was not running. It could not be logged into, but it looked
+> broken and it disclosed the server's start command, so the button is now
+> removed instead.
 
 ---
 
