@@ -1,0 +1,11 @@
+# Dev Mode server secrets — password hash + session signing key. Never commit.
+server/devmode.config.json
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+.tmp-*

@@ -1,0 +1,202 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{fontawesome5}
+
+% Set Times New Roman as main font - ATS friendly
+\usepackage{newtxtext,newtxmath}
+
+% Page margins - optimized for ATS
+\geometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+% Professional Colors - Navy Blue Theme
+\definecolor{headerblue}{RGB}{0,51,102}
+\definecolor{accentblue}{RGB}{41,98,255}
+\definecolor{textgray}{RGB}{51,51,51}
+
+% Section titles - simple and ATS friendly
+\titleformat{\section}{\large\bfseries\color{headerblue}}{}{0em}{}[\vspace{0.2em}\titlerule\vspace{0.3em}]
+
+% Subsection titles
+\titleformat{\subsection}{\normalsize\bfseries\color{headerblue}}{}{0em}{}[\vspace{0.2em}]
+
+% Subsubsection for project titles
+\titleformat{\subsubsection}{\normalsize\bfseries\color{headerblue}}{}{0em}{}[\vspace{0.1em}]
+
+% Itemize with optimized spacing
+\setlist[itemize]{leftmargin=*,label={$\bullet$},itemsep=0.2em,parsep=0pt,topsep=0.2em}
+\setlist[description]{leftmargin=0em,labelwidth=0pt,itemsep=0.3em,font=\normalfont\bfseries}
+
+% Hyperlink setup - ATS compatible
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accentblue,
+    urlcolor=accentblue,
+    pdfborder={0 0 0}
+}
+
+% Remove page numbers
+\pagestyle{empty}
+
+% Custom commands
+\newcommand{\experienceheader}[2]{%
+    \subsection{#1 \hfill #2}
+}
+
+\newcommand{\companyname}[1]{%
+    \textbf{#1}
+}
+
+\begin{document}
+
+% Header - With icons and hyperlinks (as requested)
+\begin{center}
+    {\huge\bfseries\color{headerblue} VIGNESH S}\\[0.3em]
+    {\large\color{headerblue} Software Engineer}\\[0.6em]
+    \begin{tabular}{c c c c c}
+        \faPhone\ \href{tel:+919677362774}{+91-9677362774} & 
+        \faEnvelope\ \href{mailto:vigneshsl.career@gmail.com}{vigneshsl.career@gmail.com} & 
+        \faLinkedin\ \href{https://linkedin.com/in/vignesh-softwaredev}{LinkedIn} & 
+        \faGithub\ \href{https://github.com/vigneshsl}{GitHub} & 
+        \faGlobe\ \href{https://tinyurl.com/vigneshcareers}{Portfolio}
+    \end{tabular}
+\end{center}
+
+\vspace{0.3em}
+{\color{headerblue}\hrule height 1.5pt}
+\vspace{0.5em}
+
+% Professional Summary
+\section{PROFESSIONAL SUMMARY}
+Results-driven Software Engineer with 3 years of experience in industrial automation and embedded systems development. Skilled in \textbf{C++, MFC, WIN32API, and EPKS (Experion Process Knowledge System)} with a proven ability to deliver mission-critical control system solutions. Improved developer productivity by \textbf{50 percent} through automation tools and scripting. Experienced in the full \textbf{Software Development Life Cycle (SDLC)}, including requirements analysis, system design, implementation, testing, and documentation. Strong domain knowledge in process control systems, UI development, and real-time industrial-grade software, including \textbf{UOC and ACE controller} integration.
+
+
+% Technical Skills
+\section{TECHNICAL SKILLS}
+
+\textbf{Programming Languages and Technologies:} C++, WIN32API, Batch Script, MFC, QT, QML
+
+\textbf{Development Tools and Frameworks:} Visual Studio, ClearCase, Coverity, Inno Setup Compiler, MFC, QT Framework  
+
+\textbf{Platforms and Systems:} Windows Development, Experion Process Knowledge System, Physical and Virtual UOC, ACE Simulation  
+
+\textbf{Agile Practices:} Unit Testing, Integration Testing, System Testing, Code Review, Quality Assurance, Debugging  
+
+
+% Key Achievements
+\section{KEY ACHIEVEMENTS}
+\begin{itemize}
+    \item \textbf{Process Automation Excellence:} Developed comprehensive internal workflow automation solutions, reducing manual workload by 50 percent using custom batch scripting, Python programming, and C++ development.
+    
+    \item \textbf{UI Development:} Designed a dynamic Motor block user interface using the MFC framework, significantly improving configuration usability and user experience.
+    
+    \item \textbf{System Recovery and Maintenance:} Successfully recovered Unit Operations Controller (UOC) from failure states during development cycles, ensuring continuous system availability and minimizing downtime.
+
+    \item \textbf{System Configuration Management:} Configured and optimized Experion Process Knowledge System (EPKS) environments for multiple controller models including Model 530 and Model 520, ensuring optimal functionality, performance, and reliability.
+    
+    \item \textbf{Legacy System Migration:} Successfully converted legacy Graphical User Interface (GUI) tools to lightweight Command Line Interface (CLI) applications, improving system performance, maintainability, and resource efficiency.
+    
+    \item \textbf{Deployment Optimization:} Streamlined software deployment processes using Inno Setup Compiler for faster and error-free releases, reducing deployment time and improving reliability.
+\end{itemize}
+
+% Professional Experience
+\section{PROFESSIONAL EXPERIENCE}
+
+\experienceheader{Software Engineer}{January 2023 - Present}
+\companyname{Utthunga Technologies}
+
+\vspace{0.4em}
+\subsubsection{EPKS Control Builder Block Development}
+
+\textit{Project Focus:} Software development and implementation of control system blocks for process automation, enhancing functionality and efficiency of the Experion Process Knowledge System (EPKS) through specialized industrial control blocks.
+
+\vspace{0.2em}
+\textbf{Responsibilities and Achievements:}
+\begin{itemize}
+    \item Collaborated with cross-functional teams to perform requirements analysis for functional and technical specifications of industrial control blocks.
+    
+    \item Designed and developed software blocks following industry coding standards, best practices, and Software Development Life Cycle (SDLC) methodologies.
+    
+    \item Executed comprehensive unit testing, integration testing, system testing, and bug resolution using debugging tools and quality assurance protocols.
+    
+    \item Authored technical documentation and software documentation, and participated in peer code reviews for quality control and knowledge sharing.
+    
+    \item \textbf{Enhanced developer productivity by 50 percent} through custom automation tools for XML generation, code templates, and workflow optimization.
+    
+    \item Implemented user interface solutions using Microsoft Foundation Classes (MFC) framework for Motor block configuration and system management.
+    
+    \item Developed custom error handling systems and description management functionality within the Experion Process Knowledge System (EPKS) station.
+    
+    \item Automated repetitive block development tasks through custom scripting solutions to handle operations including ACE Controller management and system maintenance.
+    
+    \item Configured Experion Process Knowledge System (EPKS) environments and managed Unit Operations Controller (UOC) recovery processes for continuous system availability.
+    
+    \item Developed WIN32 Application Programming Interface (API) solutions for block extensions and system integration.
+    
+    \item Performed code reviews and maintained code quality standards through static analysis tools and best practices.
+    
+    \item Implemented version control workflows using ClearCase for source code management and team collaboration.
+\end{itemize}
+
+\vspace{0.2em}
+\textbf{Technology Stack:} C++, XML, Microsoft Foundation Classes (MFC), Batch Scripting, EPKS Configuration Studio, ClearCase Version Control, Visual Basic for Applications (VBA), Python, WIN32 Application Programming Interface (API), Inno Setup Compiler, Firmware Management Tools
+
+\textbf{Controllers:} Physical Unit Operations Controller (UOC), Virtual Unit Operations Controller (vUOC), Simulation ACE
+
+\vspace{0.5em}
+\subsubsection{NOJA DCM Project}
+
+\textit{Project Focus:} Worked on NOJA Power next-generation Device Configuration Management (DCM) software, designed to support Relay 4 protection modules and streamline configuration workflows through modern user interface and user experience design and direct device interaction.
+
+\vspace{0.2em}
+\textbf{Responsibilities and Achievements:}
+\begin{itemize}
+    \item Identified and resolved critical bugs and defects, improving system performance and reliability.
+    \item Migrated legacy Graphical User Interface (GUI) tools to Command Line Interface (CLI) applications for improved maintainability and resource efficiency.
+    \item Enhanced application performance through code optimization and refactoring.
+    \item Collaborated with quality assurance team to ensure comprehensive testing coverage.
+\end{itemize}
+
+\vspace{0.2em}
+\textbf{Technology Stack:} QT Framework, QML
+
+% Education
+\section{EDUCATION}
+
+\textbf{Bachelor of Computer Applications (BCA)} \hfill \textbf{Expected Graduation: 2026}\\
+Bharathidasan University \hfill 2024 - Present\\
+Status: Currently pursuing (Second year completed)
+
+\vspace{0.2em}
+\textbf{Diploma in Computer Engineering (DCE)} \hfill \textbf{Graduated: 2022}\\
+DOTE - Ramakrishna Mission Polytechnic College \hfill \textbf{Achievement:} 92 percent\\
+
+
+% Certifications
+\section{CERTIFICATIONS}
+\begin{itemize}
+    \item Programming Foundations: Conducting Code Reviews - LinkedIn Learning - September 2025
+    \item C++ Essential Training - LinkedIn Learning - September 2025
+    \item Windows Programming using Visual C++ and MFC - Udemy - August 2025
+    \item Agile Software Development - LinkedIn Learning and CompTIA - September 2025
+    \item Agile Software Development - LinkedIn Learning and PMI REP - September 2025
+\end{itemize}
+
+% Additional Information
+\section{ADDITIONAL INFORMATION}
+
+\textbf{Professional Experience:} 3 years in Industrial Software Development
+
+\textbf{Domain Expertise:} Industrial Automation, Control Systems, Embedded Systems, Process Automation, Real-Time Systems, Process Control
+
+\textbf{Core Competencies:} Rapid Learning, Automation-Driven Development, User Interface Design, Productivity Enhancement, Problem-Solving, Team Collaboration, Project Management, Technical Documentation, Code Review
+
+\textbf{Languages:} Tamil (Native), English (Professional Working Proficiency)
+
+\end{document}

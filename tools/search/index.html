@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi-Term File Search Tool – User Manual</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🔍 Multi-Term File Search Tool</h1>
+      <p class="subtitle">Simple Guide for Beginners</p>
+    </header>
+
+    <nav class="nav">
+      <ul>
+        <li><a href="#what-is-it">What Is It?</a></li>
+        <li><a href="#why-use">Why Use It?</a></li>
+        <li><a href="#features">What It Does</a></li>
+        <li><a href="#how-to-use">How To Use</a></li>
+        <li><a href="#output">Where Files Are Saved</a></li>
+        <li><a href="#problems">Common Problems</a></li>
+        <li><a href="#tips">Helpful Tips</a></li>
+      </ul>
+    </nav>
+
+    <main class="content">
+      <section id="what-is-it" class="section">
+        <h2>🔎 What Is It?</h2>
+        <p>This tool helps you search for multiple terms in all files inside a folder.</p>
+        <ul class="simple-list">
+          <li>✅ Search for file names</li>
+          <li>✅ Search by file extension</li>
+          <li>✅ Search inside the file content</li>
+        </ul>
+      </section>
+
+      <section id="why-use" class="section">
+        <h2>🎯 Why Use It?</h2>
+        <div class="purpose-cards">
+          <div class="purpose-card">
+            <h3>🧠 Search Smarter</h3>
+            <p>Find files and content based on multiple terms</p>
+          </div>
+          <div class="purpose-card">
+            <h3>📂 Save Time</h3>
+            <p>Quickly search through folders and subfolders</p>
+          </div>
+          <div class="purpose-card">
+            <h3>📋 Organized Output</h3>
+            <p>Automatically saves a result file for easy access</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <h2>✨ What Can It Do?</h2>
+        <ul class="feature-list">
+          <li><span class="feature-icon">✅</span> Search by filename</li>
+          <li><span class="feature-icon">✅</span> Search by extension (like .txt, .cpp)</li>
+          <li><span class="feature-icon">✅</span> Search inside the file content</li>
+          <li><span class="feature-icon">📁</span> Shows full file path for matches</li>
+          <li><span class="feature-icon">📊</span> Saves results in a CSV format</li>
+        </ul>
+      </section>
+
+      <section id="how-to-use" class="section">
+        <h2>👣 How To Use?</h2>
+        <div class="step-container">
+          <div class="simple-step">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h3>Run the Tool</h3>
+              <p>Open the script using Python or double-click the `.py` file if it's executable.</p>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h3>Enter Search Terms</h3>
+              <p>When the tool asks for input, type your search words separated by commas.</p>
+
+              <div class="info-box">
+                <strong>📥 What Can You Type?</strong><br/>
+                You can enter:
+                <ul>
+                  <li>📄 <strong>File names</strong> (e.g., <code>report</code>, <code>main</code>)</li>
+                  <li>🧩 <strong>Extensions</strong> (e.g., <code>.cpp</code>, <code>.txt</code>)</li>
+                  <li>🔍 <strong>Words inside files</strong> (e.g., <code>error</code>, <code>port=</code>)</li>
+                </ul>
+              </div>
+
+              <p><strong>Example Input:</strong></p>
+              <code>error, .cpp, config</code>
+
+              <p>This will search for:</p>
+              <ul>
+                <li>Files with “error” or “config” in their name</li>
+                <li>Files that end in <code>.cpp</code></li>
+                <li>Any file that contains the word “error” or “config” inside</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h3>Select Folder</h3>
+              <p>A folder dialog will appear – just select the folder you want to search through.</p>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h3>View the Results</h3>
+              <p>After the search, results will be saved and the folder will open automatically.</p>
+              <p>You’ll get a file like:</p>
+              <code>multi_search_results_20250726.csv</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="output" class="section">
+        <h2>📁 Where Are the Results Saved?</h2>
+        <p>The tool automatically creates a folder like:</p>
+        <div class="path-display">C:\Customization tool\search Exetion\</div>
+        <p>Inside that folder, you will find the `.csv` file with all the results.</p>
+      </section>
+
+      <section id="problems" class="section">
+        <h2>🧩 Common Problems & Fixes</h2>
+        <div class="problem-table">
+          <div class="problem-row">
+            <div class="problem-cell problem-title"><span class="problem-icon">❌</span> No input provided</div>
+            <div class="problem-cell problem-solution">Make sure to type at least one search term.</div>
+          </div>
+          <div class="problem-row">
+            <div class="problem-cell problem-title"><span class="problem-icon">❌</span> Folder not selected</div>
+            <div class="problem-cell problem-solution">You must choose a folder to search.</div>
+          </div>
+          <div class="problem-row">
+            <div class="problem-cell problem-title"><span class="problem-icon">⚠️</span> No matches found</div>
+            <div class="problem-cell problem-solution">Check your search terms – they might not exist in files.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tips" class="section">
+        <h2>💡 Helpful Tips</h2>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <div class="tip-icon">🧼</div>
+            <h3>Keep It Simple</h3>
+            <p>Use common terms you expect to find in the files</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">💾</div>
+            <h3>Back It Up</h3>
+            <p>Always keep a backup of your original files</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📂</div>
+            <h3>Use Full Folder</h3>
+            <p>The tool searches subfolders automatically</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📈</div>
+            <h3>Open CSV in Excel</h3>
+            <p>You can easily view the results in Excel or Notepad</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>🎉 That’s it! This tool makes multi-term searching easy and fast.</p>
+      <p>Happy searching! 🔍📁</p>
+    </footer>
+  </div>
+</body>
+</html>

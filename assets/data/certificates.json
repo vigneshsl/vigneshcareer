@@ -1,0 +1,62 @@
+[
+    {
+        "id": "cpp-essential-training-0",
+        "image": "certificates/cpp-essential-training.jpg",
+        "title": "C++ Essential Training",
+        "issuer": "LinkedIn Learning",
+        "date": "September 2025",
+        "issueDate": "September 2025",
+        "expirationDate": "",
+        "credentialId": "",
+        "credentialUrl": "",
+        "description": ""
+    },
+    {
+        "id": "code-reviews-1",
+        "image": "certificates/code-reviews.jpg",
+        "title": "Programming Foundations: Conducting Code Reviews",
+        "issuer": "LinkedIn Learning",
+        "date": "September 2025",
+        "issueDate": "September 2025",
+        "expirationDate": "",
+        "credentialId": "",
+        "credentialUrl": "",
+        "description": ""
+    },
+    {
+        "id": "mfc-visual-cpp-2",
+        "image": "certificates/mfc-visual-cpp.jpg",
+        "title": "Windows Programming using Visual C++ and MFC",
+        "issuer": "Udemy",
+        "date": "August 2025",
+        "issueDate": "August 2025",
+        "expirationDate": "",
+        "credentialId": "",
+        "credentialUrl": "",
+        "description": ""
+    },
+    {
+        "id": "secure-coding-cpp-3",
+        "image": "certificates/secure-coding-cpp.jpg",
+        "title": "Secure Coding in C++",
+        "issuer": "LinkedIn Learning",
+        "date": "September 2025",
+        "issueDate": "September 2025",
+        "expirationDate": "",
+        "credentialId": "",
+        "credentialUrl": "",
+        "description": ""
+    },
+    {
+        "id": "agile-software-development-4",
+        "image": "certificates/agile-software-development.jpg",
+        "title": "Agile Software Development",
+        "issuer": "LinkedIn Learning",
+        "date": "September 2025",
+        "issueDate": "September 2025",
+        "expirationDate": "",
+        "credentialId": "",
+        "credentialUrl": "",
+        "description": ""
+    }
+]

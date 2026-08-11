@@ -1,0 +1,67 @@
+<!-- CONTACT SECTION -->
+<section class="section section--tint" id="contact">
+    <div class="wrap">
+        <header class="section__head reveal">
+            <span class="section__eyebrow">10 — Say hello</span>
+            <h2 class="section__title">Get In Touch</h2>
+            <p class="section__sub">Open to Software Engineer roles in C++, Windows desktop and industrial automation.</p>
+        </header>
+
+        <div class="contact">
+            <div class="contact__side reveal">
+                <a href="tel:+919677362774" class="tile">
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <span><b>Phone</b>+91-9677362774</span>
+                </a>
+                <a href="mailto:vigneshsl.career@gmail.com" class="tile">
+                    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                    <span><b>Email</b>vigneshsl.career@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/vignesh-softwaredev" target="_blank"
+                    rel="noopener noreferrer" class="tile">
+                    <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                    <span><b>LinkedIn</b>vignesh-softwaredev</span>
+                </a>
+                <a href="https://github.com/vigneshsl" target="_blank" rel="noopener noreferrer" class="tile">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                    <span><b>GitHub</b>vigneshsl</span>
+                </a>
+            </div>
+
+            <form class="card contact__form reveal" data-delay="1" id="contactForm" novalidate>
+                <div class="field-row">
+                    <p class="field">
+                        <label for="cName">Your Name</label>
+                        <input type="text" id="cName" name="name" maxlength="80" required
+                            autocomplete="name" placeholder="Vignesh SL">
+                        <span class="field__error" data-for="cName"></span>
+                    </p>
+                    <p class="field">
+                        <label for="cEmail">Your Email</label>
+                        <input type="email" id="cEmail" name="email" maxlength="120" required
+                            autocomplete="email" placeholder="vigneshsl@company.com">
+                        <span class="field__error" data-for="cEmail"></span>
+                    </p>
+                </div>
+                <p class="field">
+                    <label for="cSubject">Subject</label>
+                    <input type="text" id="cSubject" name="subject" maxlength="140" required
+                        placeholder="Opportunity / collaboration">
+                    <span class="field__error" data-for="cSubject"></span>
+                </p>
+                <p class="field">
+                    <label for="cMessage">Message</label>
+                    <textarea id="cMessage" name="message" rows="6" maxlength="2000" required
+                        placeholder="Tell me about the role or project…"></textarea>
+                    <span class="field__error" data-for="cMessage"></span>
+                </p>
+                <div class="form-foot">
+                    <button type="submit" class="btn btn--solid">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Message
+                    </button>
+                    <span class="form-note" id="formNote" role="status" aria-live="polite"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
