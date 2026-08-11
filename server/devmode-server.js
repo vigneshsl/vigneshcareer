@@ -29,7 +29,8 @@ const PORT = Number(process.env.PORT || process.env.DEVMODE_PORT) || 4321;
 
 // Set PUBLIC_ORIGIN to the deployed URL to run this on a real host. Without it
 // the server stays on loopback, which is the safer default.
-const PUBLIC_ORIGIN = (process.env.PUBLIC_ORIGIN || '').replace(/\/+$/, '');
+// Render injects RENDER_EXTERNAL_URL, so a first deploy works before the URL is known.
+const PUBLIC_ORIGIN = (process.env.PUBLIC_ORIGIN || process.env.RENDER_EXTERNAL_URL || '').replace(/\/+$/, '');
 const IS_PUBLIC = PUBLIC_ORIGIN !== '';
 const HOST = IS_PUBLIC ? '0.0.0.0' : '127.0.0.1';
 
