@@ -46,7 +46,30 @@ function createConfig() {
     };
 }
 
+/**
+ * A hosted deploy has no durable disk, so the credentials come from the
+ * environment instead. Generate the values with `node scripts/hash-password.js`.
+ */
+function envConfig() {
+    const passwordHash = process.env.DEVMODE_PASSWORD_HASH;
+    const passwordSalt = process.env.DEVMODE_PASSWORD_SALT;
+    const sessionSecret = process.env.DEVMODE_SESSION_SECRET;
+    if (!passwordHash || !passwordSalt || !sessionSecret) return null;
+
+    return {
+        username: process.env.DEVMODE_USERNAME || DEFAULT_USERNAME,
+        passwordSalt,
+        passwordHash,
+        sessionSecret,
+        usingDefaultPassword: false,
+        fromEnv: true
+    };
+}
+
 function loadConfig() {
+    if (config) return config;
+
+    config = envConfig();
     if (config) return config;
 
     if (fs.existsSync(CONFIG_PATH)) {
@@ -57,6 +80,10 @@ function loadConfig() {
     config = createConfig();
     fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2) + '\n', { mode: 0o600 });
     return config;
+}
+
+function hasEnvCredentials() {
+    return envConfig() !== null;
 }
 
 function saveConfig() {
@@ -84,6 +111,12 @@ function verifyCredentials(username, password) {
 
 function changePassword(currentPassword, nextPassword) {
     const cfg = loadConfig();
+    if (cfg.fromEnv) {
+        return {
+            ok: false,
+            error: 'This deployment reads its password from the host configuration. Change it there.'
+        };
+    }
     if (!safeEqual(scryptHash(String(currentPassword ?? ''), cfg.passwordSalt), cfg.passwordHash)) {
         return { ok: false, error: 'Current password is incorrect.' };
     }
@@ -163,6 +196,7 @@ module.exports = {
     CONFIG_PATH,
     SESSION_TTL_MS,
     loadConfig,
+    hasEnvCredentials,
     verifyCredentials,
     changePassword,
     createSession,

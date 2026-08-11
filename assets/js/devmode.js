@@ -622,28 +622,21 @@ function openPasswordChange() {
 
 /* --------------------------------------------------------------------- init */
 
-const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]', '::1']);
-
 export function initDevMode({ onRefresh } = {}) {
     const trigger = document.getElementById('devModeToggle');
     if (!trigger) return;
 
-    // The authoring service only ever listens on loopback, so on any public
-    // origin the button can do nothing useful. Remove it rather than offer a
-    // login that cannot succeed and that names internal tooling to visitors.
-    if (!LOCAL_HOSTS.has(location.hostname)) {
-        trigger.remove();
-        return;
-    }
-
     state.onRefresh = onRefresh;
 
-    // A 404 here means the page is being served by something other than the
-    // Dev Mode server — a plain local static server, for instance.
+    // Hidden until the API answers. On static hosting nothing answers, so the
+    // button never appears and no login is offered that could not succeed.
+    trigger.hidden = true;
+
     fetch(API.health, { headers: { 'X-Dev-Mode': '1' } })
         .then(response => (response.ok ? response.json() : null))
         .then(payload => {
             state.available = Boolean(payload?.devMode);
+            trigger.hidden = !state.available;
             trigger.classList.toggle('is-live', state.available);
         })
         .catch(() => {

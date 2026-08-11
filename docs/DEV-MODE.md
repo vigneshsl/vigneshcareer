@@ -319,7 +319,162 @@ Stop it with <kbd>Ctrl</kbd>+<kbd>C</kbd>.
 
 ---
 
-## 9. Design rules
+## 9. Editing from another computer or a phone
+
+Dev Mode needs the project files, so it only runs where they are. To add a
+certificate from anywhere else, use GitHub's own web editor. It is free, it
+works in a phone browser, and it is protected by your GitHub login rather than
+by a second password of your own.
+
+### Add a certificate
+
+1. Go to <https://github.com/vigneshsl/vigneshcareer/tree/main/certificates>
+2. **Add file → Upload files**, and pick the image.
+3. **Name the file carefully — it becomes the title on the site.** Use lowercase
+   words separated by hyphens:
+
+   | Filename | Title shown |
+   | --- | --- |
+   | `advanced-cpp-programming.jpg` | Advanced Cpp Programming |
+   | `docker-foundations.jpg` | Docker Foundations |
+
+4. **Commit changes.**
+
+That is the whole process. A push to `certificates/` triggers the
+**Update Certificates** workflow, which runs `scripts/generate-certificates.js`
+and appends the entry to the manifest. Wait two or three minutes, then reload
+the site.
+
+### Fill in issuer and date
+
+The automatic entry has a title and an image but no issuer or date. To add
+them, open `assets/data/certificates.json`, press the pencil icon, and complete
+the block that was created for your image:
+
+```json
+{
+    "id": "docker-foundations-5",
+    "image": "certificates/docker-foundations.jpg",
+    "title": "Docker Foundations",
+    "issuer": "LinkedIn Learning",
+    "date": "March 2026",
+    "issueDate": "March 2026",
+    "expirationDate": "",
+    "credentialId": "",
+    "credentialUrl": "",
+    "description": ""
+}
+```
+
+Only edit the text between the quotation marks. Leave the commas, braces and
+brackets exactly as they are — a single missing comma stops the whole gallery
+from loading. GitHub marks the line red if you break it, so commit only when
+there is no red mark.
+
+### Remove a certificate
+
+Delete the image from `certificates/`. The workflow drops the matching entry
+automatically, because it reconciles the manifest against the folder.
+
+### Which method to use
+
+| | Dev Mode | GitHub web editor |
+| --- | --- | --- |
+| Where | Your own computer | Any browser, including a phone |
+| Input | A form, with image preview | Raw text and file upload |
+| Issuer and date | Typed into fields | Typed into JSON by hand |
+| Speed | Instant, then Publish | Two or three minutes for the workflow |
+
+Both write to the same two places, so you can freely alternate between them.
+
+---
+
+## 10. Running Dev Mode on a public host
+
+GitHub Pages cannot do this: it serves files and runs nothing. To reach Dev
+Mode from any browser you need a host that executes code. The server supports
+it, and switches itself into hosted mode when `PUBLIC_ORIGIN` is set.
+
+### What changes in hosted mode
+
+| | Local | Hosted |
+| --- | --- | --- |
+| Binds to | `127.0.0.1` | `0.0.0.0` |
+| Credentials | generated config file | environment variables |
+| Storage | your disk | committed through the GitHub API |
+| Publish | `git push` | already committed on save |
+| Cookie | `HttpOnly` | `HttpOnly` **and** `Secure` |
+
+Storage has to change because a cloud host gives every restart a fresh, empty
+disk. Anything written locally would vanish. Writing through the API instead
+makes the server stateless, so uploads survive restarts and redeploys.
+
+### Steps
+
+**1. Generate the credentials.** Run this on your own machine and keep the
+output private:
+
+```powershell
+node scripts/hash-password.js
+```
+
+It asks for a username and password, hashes the password locally, and prints
+four values. The password itself is never printed or stored.
+
+**2. Create a fine-grained personal access token** at
+<https://github.com/settings/tokens?type=beta>.
+
+- Repository access: **only** `vigneshsl/vigneshcareer`
+- Permissions: **Contents → Read and write**. Nothing else.
+- Set an expiry, and renew it when it lapses.
+
+**3. Create the service.** On <https://render.com>, choose **New → Web Service**
+and connect the repository.
+
+- Build command: leave blank — there are no dependencies
+- Start command: `node server/devmode-server.js`
+
+**4. Set the environment variables** in the service settings:
+
+| Variable | Value |
+| --- | --- |
+| `PUBLIC_ORIGIN` | the service URL, e.g. `https://vigneshcareer.onrender.com` |
+| `GITHUB_TOKEN` | the token from step 2 |
+| `GITHUB_REPO` | `vigneshsl/vigneshcareer` |
+| `GITHUB_BRANCH` | `main` |
+| `DEVMODE_USERNAME` | from step 1 |
+| `DEVMODE_PASSWORD_SALT` | from step 1 |
+| `DEVMODE_PASSWORD_HASH` | from step 1 |
+| `DEVMODE_SESSION_SECRET` | from step 1 |
+
+The server **refuses to start** if `PUBLIC_ORIGIN` is set without the
+credentials, or without the GitHub variables. Both would fail silently and
+dangerously otherwise: the first would expose the default password to the
+internet, the second would discard every upload on the next restart.
+
+**5. Open the service URL.** The Dev Mode button appears there because the API
+answers. Saving commits straight to the repository, and GitHub Pages picks the
+change up on its next build.
+
+### Understand the trade-off
+
+Two URLs now exist. `vigneshsl.github.io` stays the fast public site with no
+button. The Render URL is the same site plus the manager.
+
+That manager is a login page facing the entire internet, permanently. The
+protections are real — scrypt hashing, signed `HttpOnly` cookies, five attempts
+then a lockout — but the exposure is real too, and it is not there at all when
+Dev Mode runs only on your machine. On a free tier the service also sleeps when
+idle, so the first request after a quiet period takes the better part of a
+minute.
+
+Nothing forces the choice permanently. Removing `PUBLIC_ORIGIN` returns the
+server to loopback-only, and deleting the service removes the exposure
+entirely.
+
+---
+
+## 11. Design rules
 
 1. **The browser is never trusted.** Every check is repeated on the server.
 2. **Secrets never travel to the browser.** No password, hash or token is sent.

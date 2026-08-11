@@ -12,7 +12,11 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
+const github = require('./github-api');
+
 const ROOT = path.join(__dirname, '..', '..');
+const DATA_PATH = 'assets/data/certificates.json';
+const IMAGE_PREFIX = 'certificates/';
 const DATA_FILE = path.join(ROOT, 'assets', 'data', 'certificates.json');
 const IMAGE_DIR = path.join(ROOT, 'certificates');
 
@@ -86,10 +90,49 @@ function normalise(raw, index) {
     };
 }
 
-function readAll() {
-    if (!fs.existsSync(DATA_FILE)) return [];
+/* ---------------------------------------------------------------- backend */
+
+/**
+ * Two interchangeable persistence backends. `github` is used whenever a token
+ * is configured, because a cloud host's filesystem is wiped on every restart.
+ */
+const backend = github.isConfigured()
+    ? {
+        remote: true,
+        async readText(relPath) {
+            const file = await github.getFile(relPath);
+            return file ? file.buffer.toString('utf8') : null;
+        },
+        async write(relPath, buffer, message) {
+            await github.putFile(relPath, buffer, message);
+        },
+        async remove(relPath, message) {
+            await github.deleteFile(relPath, message);
+        }
+    }
+    : {
+        remote: false,
+        async readText(relPath) {
+            const target = path.join(ROOT, relPath);
+            return fs.existsSync(target) ? fs.readFileSync(target, 'utf8') : null;
+        },
+        async write(relPath, buffer) {
+            const target = path.join(ROOT, relPath);
+            fs.mkdirSync(path.dirname(target), { recursive: true });
+            fs.writeFileSync(target, buffer);
+        },
+        async remove(relPath) {
+            const target = path.resolve(ROOT, relPath);
+            if (!target.startsWith(path.join(ROOT, 'certificates') + path.sep)) return;
+            fs.rmSync(target, { force: true });
+        }
+    };
+
+async function readAll() {
+    const text = await backend.readText(DATA_PATH);
+    if (!text) return [];
     try {
-        const parsed = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
+        const parsed = JSON.parse(text);
         if (!Array.isArray(parsed)) return [];
         const seen = new Set();
         return parsed.map(normalise).map(cert => {
@@ -103,9 +146,9 @@ function readAll() {
     }
 }
 
-function writeAll(certificates) {
-    fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
-    fs.writeFileSync(DATA_FILE, JSON.stringify(certificates, null, 4) + '\n');
+async function writeAll(certificates, message = 'chore(certificates): update via Dev Mode') {
+    const body = Buffer.from(JSON.stringify(certificates, null, 4) + '\n');
+    await backend.write(DATA_PATH, body, message);
 }
 
 /* ------------------------------------------------------------------ images */
@@ -118,7 +161,7 @@ function matchesMagic(buffer, type) {
  * Accepts a `data:` URL, verifies the bytes really are the declared image type
  * and writes it under a freshly generated name.
  */
-function saveImage(dataUrl, titleForName) {
+async function saveImage(dataUrl, titleForName) {
     const match = /^data:([a-z]+\/[a-z0-9.+-]+);base64,([A-Za-z0-9+/=\s]+)$/i.exec(String(dataUrl || ''));
     if (!match) throw new HttpError(400, 'Image must be a base64 data URL.');
 
@@ -136,20 +179,19 @@ function saveImage(dataUrl, titleForName) {
         throw new HttpError(415, 'File contents do not match the declared image type.');
     }
 
-    fs.mkdirSync(IMAGE_DIR, { recursive: true });
     const filename = `${slugify(titleForName)}-${crypto.randomBytes(3).toString('hex')}${type.ext}`;
-    fs.writeFileSync(path.join(IMAGE_DIR, filename), buffer);
-    return `certificates/${filename}`;
+    const relPath = `${IMAGE_PREFIX}${filename}`;
+    await backend.write(relPath, buffer, `chore(certificates): add ${filename}`);
+    return relPath;
 }
 
 /** Removes an image once no certificate references it any more. */
-function removeImageIfUnused(imagePath, certificates) {
-    if (!imagePath || !imagePath.startsWith('certificates/')) return;
+async function removeImageIfUnused(imagePath, certificates) {
+    if (!imagePath || !imagePath.startsWith(IMAGE_PREFIX)) return;
+    if (imagePath.includes('..')) return;
     if (certificates.some(cert => cert.image === imagePath)) return;
 
-    const target = path.resolve(ROOT, imagePath);
-    if (!target.startsWith(IMAGE_DIR + path.sep)) return;
-    fs.rmSync(target, { force: true });
+    await backend.remove(imagePath, `chore(certificates): remove ${path.basename(imagePath)}`);
 }
 
 /* ------------------------------------------------------------------- CRUD  */
@@ -168,24 +210,24 @@ function validate(body, { requireImage }) {
     return title;
 }
 
-function create(body) {
+async function create(body) {
     const title = validate(body, { requireImage: true });
-    const certificates = readAll();
+    const certificates = await readAll();
 
     const cert = normalise({
         ...body,
         title,
         id: `${slugify(title)}-${crypto.randomBytes(3).toString('hex')}`,
-        image: saveImage(body.imageData, title)
+        image: await saveImage(body.imageData, title)
     }, certificates.length);
 
     certificates.push(cert);
-    writeAll(certificates);
+    await writeAll(certificates, `chore(certificates): add ${cert.title}`);
     return cert;
 }
 
-function update(id, body) {
-    const certificates = readAll();
+async function update(id, body) {
+    const certificates = await readAll();
     const index = certificates.findIndex(cert => cert.id === id);
     if (index === -1) throw new HttpError(404, 'Certificate not found.');
 
@@ -193,7 +235,7 @@ function update(id, body) {
     const title = validate(body, { requireImage: false });
     const previousImage = existing.image;
 
-    const image = body.imageData ? saveImage(body.imageData, title) : existing.image;
+    const image = body.imageData ? await saveImage(body.imageData, title) : existing.image;
 
     // id and image stay under server control; everything else comes from the form.
     certificates[index] = normalise({
@@ -203,19 +245,19 @@ function update(id, body) {
         image
     }, index);
 
-    writeAll(certificates);
-    if (image !== previousImage) removeImageIfUnused(previousImage, certificates);
+    await writeAll(certificates, `chore(certificates): update ${certificates[index].title}`);
+    if (image !== previousImage) await removeImageIfUnused(previousImage, certificates);
     return certificates[index];
 }
 
-function remove(id) {
-    const certificates = readAll();
+async function remove(id) {
+    const certificates = await readAll();
     const index = certificates.findIndex(cert => cert.id === id);
     if (index === -1) throw new HttpError(404, 'Certificate not found.');
 
     const [removed] = certificates.splice(index, 1);
-    writeAll(certificates);
-    removeImageIfUnused(removed.image, certificates);
+    await writeAll(certificates, `chore(certificates): remove ${removed.title}`);
+    await removeImageIfUnused(removed.image, certificates);
     return removed;
 }
 
@@ -224,6 +266,7 @@ module.exports = {
     DATA_FILE,
     IMAGE_DIR,
     MAX_IMAGE_BYTES,
+    isRemote: backend.remote,
     readAll,
     writeAll,
     normalise,
