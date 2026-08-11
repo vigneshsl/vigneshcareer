@@ -1,0 +1,48 @@
+name: Update Certificates
+
+on:
+  push:
+    paths:
+      - 'certificates/**'
+    branches:
+      - main
+      - master
+  # Lets you re-reconcile the manifest by hand if a Dev Mode publish only
+  # touched assets/data/certificates.json and not the certificates/ folder.
+  workflow_dispatch:
+
+jobs:
+  update-certificates:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Generate certificate manifest
+        run: node scripts/generate-certificates.js
+      
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet assets/data/certificates.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push if changed
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add assets/data/certificates.json
+          git commit -m "chore: update certificate manifest [skip ci]"
+          git push

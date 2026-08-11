@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattern-Based File Renamer – Simple User Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <h1>📝 Pattern-Based File Renamer</h1>
+            <p class="subtitle">Simple User Guide for Beginners</p>
+        </header>
+
+        <nav class="nav">
+            <ul>
+                <li><a href="#what-is-it">What Is It?</a></li>
+                <li><a href="#why-use">Why Use It?</a></li>
+                <li><a href="#requirements">What You Need</a></li>
+                <li><a href="#how-to-use">How To Use</a></li>
+                <li><a href="#output">Output and Logs</a></li>
+                <li><a href="#problems">Common Problems</a></li>
+                <li><a href="#tips">Helpful Tips</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <section id="what-is-it" class="section">
+                <h2>🔍 What Is It?</h2>
+                <p>This tool lets you rename multiple files automatically using patterns defined in an Excel sheet.</p>
+                <div class="simple-list">
+                    <div class="bullet-point">✅ It finds and replaces text in filenames using rules</div>
+                    <div class="bullet-point">✅ Keeps a full log of what was renamed</div>
+                    <div class="bullet-point">✅ Opens the renamed folder and log file for review</div>
+                </div>
+            </section>
+
+            <section id="why-use" class="section">
+                <h2>🎯 Why Use It?</h2>
+                <div class="purpose-cards">
+                    <div class="purpose-card">
+                        <h3>⚡ Fast Rename</h3>
+                        <p>To bulk rename files quickly</p>
+                    </div>
+                    <div class="purpose-card">
+                        <h3>🔁 Apply Rules</h3>
+                        <p>To apply consistent naming using rules</p>
+                    </div>
+                    <div class="purpose-card">
+                        <h3>📊 Use Excel</h3>
+                        <p>To use Excel for flexible search & replace patterns</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="requirements" class="section">
+                <h2>📊 What You Need Before Running</h2>
+                <p>Make sure you have:</p>
+                <ul>
+                    <li>A folder with files you want to rename</li>
+                    <li>An Excel file with two columns:</li>
+                </ul>
+                <div class="info-box">
+                    <p><strong>Column A:</strong> <code>old_name</code> — the word or pattern to search</p>
+                    <p><strong>Column B:</strong> <code>new_name</code> — what to replace it with</p>
+                </div>
+                <p>📝 <strong>Example Excel:</strong></p>
+                <pre>
+old_name      new_name
+old           new
+sample        test
+\d+           123
+                </pre>
+                <p>(Yes, it supports <strong>regex patterns</strong>!)</p>
+            </section>
+
+            <section id="how-to-use" class="section">
+                <h2>👣 How To Use It?</h2>
+                <div class="step-container">
+                    <div class="simple-step">
+                        <div class="step-number">1</div>
+                        <div class="step-text">
+                            <h3>Start the Tool</h3>
+                            <p>Run the script (open it from your Python environment or terminal).</p>
+                        </div>
+                    </div>
+
+                    <div class="simple-step">
+                        <div class="step-number">2</div>
+                        <div class="step-text">
+                            <h3>Enter Folder Path</h3>
+                            <p>When asked, enter the folder path where your files are.</p>
+                            <code>C:\Users\YourName\Documents\MyFiles</code>
+                        </div>
+                    </div>
+
+                    <div class="simple-step">
+                        <div class="step-number">3</div>
+                        <div class="step-text">
+                            <h3>Select Excel File</h3>
+                            <p>A popup will appear — choose your Excel file that has renaming rules.</p>
+                        </div>
+                    </div>
+
+                    <div class="simple-step">
+                        <div class="step-number">4</div>
+                        <div class="step-text">
+                            <h3>Let It Work</h3>
+                            <p>The tool will:</p>
+                            <ul>
+                                <li>Read the rules</li>
+                                <li>Go through all files (including subfolders)</li>
+                                <li>Rename matching files</li>
+                                <li>Save a log file</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="output" class="section">
+                <h2>📁 Output and Logs</h2>
+                <p>After renaming, the tool opens:</p>
+                <ul>
+                    <li>The folder where files were renamed</li>
+                    <li>A <code>.txt</code> log file showing the changes</li>
+                </ul>
+                <div class="info-box">
+                    <p>Example log line:</p>
+                    <code>Renamed: old_name.txt -> new_name.txt</code>
+                    <p>Logs are saved here:</p>
+                    <code>C:\Customization tool\rename files\</code>
+                    <p>Each log file includes the date and time in its name.</p>
+                </div>
+            </section>
+
+            <section id="problems" class="section">
+                <h2>🧩 Common Problems & Fixes</h2>
+                <div class="problem-table">
+                    <div class="problem-row">
+                        <div class="problem-cell problem-title">
+                            <span class="problem-icon">❌</span>
+                            Folder not found
+                        </div>
+                        <div class="problem-cell problem-solution">
+                            Check the path and try again. Use quotes if the path has spaces.
+                        </div>
+                    </div>
+                    <div class="problem-row">
+                        <div class="problem-cell problem-title">
+                            <span class="problem-icon">❌</span>
+                            Excel file not selected
+                        </div>
+                        <div class="problem-cell problem-solution">
+                            The tool needs an Excel file. Restart and select one.
+                        </div>
+                    </div>
+                    <div class="problem-row">
+                        <div class="problem-cell problem-title">
+                            <span class="problem-icon">⚠️</span>
+                            File already exists
+                        </div>
+                        <div class="problem-cell problem-solution">
+                            A file with the new name already exists. Rename skipped.
+                        </div>
+                    </div>
+                    <div class="problem-row">
+                        <div class="problem-cell problem-title">
+                            <span class="problem-icon">🧪</span>
+                            Regex rule misbehaves
+                        </div>
+                        <div class="problem-cell problem-solution">
+                            Make sure the pattern in <code>old_name</code> is written correctly.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tips" class="section">
+                <h2>💡 Helpful Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">📊</div>
+                        <h3>Excel Format</h3>
+                        <p>Use two columns: <code>old_name</code> and <code>new_name</code></p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">💾</div>
+                        <h3>Backup First</h3>
+                        <p>Make a backup of your files before renaming</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🔁</div>
+                        <h3>Regex Power</h3>
+                        <p>You can use patterns like <code>\d+</code> to match numbers</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">📂</div>
+                        <h3>Subfolder Friendly</h3>
+                        <p>It renames files in subfolders too</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🧼</div>
+                        <h3>Safe to Use</h3>
+                        <p>Empty rows or unmatched rules are skipped</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>🎉 You're ready! Let this tool take care of smart bulk renaming for you.</p>
+            <p>Happy organizing! ✨</p>
+        </footer>
+    </div>
+</body>
+</html>

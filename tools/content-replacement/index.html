@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔁 Content Replacer Tool – User Manual</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🔁 Content Replacer Tool</h1>
+      <p class="subtitle">Beginner-Friendly User Guide</p>
+    </header>
+
+    <nav class="nav">
+      <ul>
+        <li><a href="#what-is-it">What Is It?</a></li>
+        <li><a href="#why-use">Why Use It?</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-to-use">How To Use</a></li>
+        <li><a href="#rules">Replacement Rules Format</a></li>
+        <li><a href="#problems">Common Problems</a></li>
+        <li><a href="#tips">Helpful Tips</a></li>
+      </ul>
+    </nav>
+
+    <main class="content">
+      <section id="what-is-it" class="section">
+        <h2>🔎 What Is It?</h2>
+        <p>This tool helps you automatically search and replace content inside files using rules defined in an Excel or CSV file.</p>
+      </section>
+
+      <section id="why-use" class="section">
+        <h2>🎯 Why Use It?</h2>
+        <ul class="simple-list">
+          <li>✅ Replace multiple patterns across many files</li>
+          <li>✅ Use Excel or CSV for flexible rule setup</li>
+          <li>✅ Supports skipping lines by setting replacement as blank</li>
+        </ul>
+      </section>
+
+      <section id="features" class="section">
+        <h2>✨ Features</h2>
+        <ul class="feature-list">
+          <li><span class="feature-icon">✅</span> Replace text in `.cpp`, `.h`, `.txt`, or any text file</li>
+          <li><span class="feature-icon">📄</span> Uses a simple Excel or CSV file as input</li>
+          <li><span class="feature-icon">🚫</span> Skips lines if replacement value is empty</li>
+          <li><span class="feature-icon">🔍</span> Applies replacements safely with previews in console</li>
+        </ul>
+      </section>
+
+      <section id="how-to-use" class="section">
+        <h2>👣 How To Use It?</h2>
+        <div class="step-container">
+          <div class="simple-step">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h3>Run the Tool</h3>
+              <p>Open the Python file using your IDE or terminal.</p>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h3>Select the Excel or CSV File</h3>
+              <p>Use the popup window to select the file containing your replacement rules.</p>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h3>Select Target Files</h3>
+              <p>Choose the files where replacements should be made (can be `.cpp`, `.h`, `.txt`, etc.).</p>
+            </div>
+          </div>
+
+          <div class="simple-step">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h3>Replacement Done!</h3>
+              <p>After processing, the tool shows a confirmation and prints replaced lines in the console.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rules" class="section">
+        <h2>📝 Replacement Rules Format</h2>
+        <p>The Excel or CSV file must have two columns:</p>
+        <div class="path-display">old_content | new_content</div>
+        <p>Examples:</p>
+        <div class="info-box">
+          <code>
+            old_content,new_content<br>
+            temp,temperature<br>
+            foo,bar<br>
+            remove_line,
+          </code>
+        </div>
+        <p><strong>Note:</strong> If new_content is empty, that entire line will be removed from the file.</p>
+      </section>
+
+      <section id="problems" class="section">
+        <h2>🧩 Common Problems & Fixes</h2>
+        <div class="problem-table">
+          <div class="problem-row">
+            <div class="problem-cell problem-title">❌ Excel or CSV not selected</div>
+            <div class="problem-cell problem-solution">You must choose a mapping file before continuing.</div>
+          </div>
+          <div class="problem-row">
+            <div class="problem-cell problem-title">❌ Invalid columns</div>
+            <div class="problem-cell problem-solution">Check that your Excel/CSV has <code>old_content</code> and <code>new_content</code> columns.</div>
+          </div>
+          <div class="problem-row">
+            <div class="problem-cell problem-title">⚠️ File encoding error</div>
+            <div class="problem-cell problem-solution">Make sure files are UTF-8 encoded or use a plain text format.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tips" class="section">
+        <h2>💡 Helpful Tips</h2>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <div class="tip-icon">🧪</div>
+            <h3>Test First</h3>
+            <p>Try on 1-2 files first to verify your rules.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📝</div>
+            <h3>Use Clean Data</h3>
+            <p>Trim extra spaces in Excel cells to avoid mismatches.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">💾</div>
+            <h3>Backups</h3>
+            <p>Keep a copy of original files in case you want to undo changes.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📂</div>
+            <h3>Batch Files</h3>
+            <p>You can select multiple files at once for faster processing.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>🎉 You're ready! This tool helps update or clean your files efficiently.</p>
+      <p>Happy editing! 🛠️</p>
+    </footer>
+  </div>
+</body>
+</html>

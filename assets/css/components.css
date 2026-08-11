@@ -1,0 +1,17 @@
+/* ==========================================================================
+   components.css
+
+   style.css owns every shared component: buttons, cards, chips, tags, fields,
+   section scaffolding, grids and navigation. This file used to redeclare all
+   of them, and because it loads second it silently won each of those cascades
+   — which is why type sizes, spacing, radii and weights drifted away from the
+   design tokens. Only add rules here for patterns style.css does not define.
+   ========================================================================== */
+
+/* Certificate gallery grid. Card, lightbox, reveal and back-to-top visuals
+   all live in style.css. */
+.cert-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: var(--gap);
+}
