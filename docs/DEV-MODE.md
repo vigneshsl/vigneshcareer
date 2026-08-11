@@ -291,12 +291,24 @@ site **it does not exist**.
 
 ## 8. Running it
 
+Double-click **`start-devmode.cmd`** in the project folder. It starts the
+server and opens the site for you. Keep the window open; closing it stops
+Dev Mode.
+
+The equivalent by hand:
+
 ```powershell
 cd C:\Users\H553536\Documents\GitHub\vigneshcareer
 node server/devmode-server.js
 ```
 
-Then open <http://127.0.0.1:4321> and click the terminal icon in the header.
+Either way, the site to use is <http://127.0.0.1:4321> — click the terminal
+icon in the header. **Dev Mode does not work on the published GitHub Pages
+URL**, because the server runs only on your machine.
+
+The launcher prefers a system-installed Node and falls back to a portable copy
+in `%LOCALAPPDATA%\vc-node`. If neither exists it prints the install command
+rather than failing silently.
 
 The server binds to `127.0.0.1` only, so it is not reachable from your network.
 Stop it with <kbd>Ctrl</kbd>+<kbd>C</kbd>.
