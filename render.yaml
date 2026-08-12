@@ -1,0 +1,38 @@
+# render.yaml — Dev Mode service blueprint.
+#
+# Every secret is marked `sync: false`, so Render prompts for it in the
+# dashboard and it is never committed here. Generate the DEVMODE_* values with
+# make-hosting-keys.cmd (node scripts/hash-password.js).
+#
+# PUBLIC_ORIGIN is omitted on purpose: Render injects RENDER_EXTERNAL_URL, which
+# the server falls back to, so the first deploy works before the URL is known.
+
+services:
+  - type: web
+    name: vigneshcareer-devmode
+    runtime: node
+    plan: free
+    buildCommand: ''
+    startCommand: node server/devmode-server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: '20'
+      # The published GitHub Pages site, which calls this API cross-origin.
+      - key: ALLOWED_ORIGINS
+        value: https://vigneshsl.github.io
+      - key: GITHUB_REPO
+        value: vigneshsl/vigneshcareer
+      - key: GITHUB_BRANCH
+        value: main
+      # Fine-grained token, this repository only, Contents = Read and write.
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: DEVMODE_USERNAME
+        sync: false
+      - key: DEVMODE_PASSWORD_SALT
+        sync: false
+      - key: DEVMODE_PASSWORD_HASH
+        sync: false
+      - key: DEVMODE_SESSION_SECRET
+        sync: false

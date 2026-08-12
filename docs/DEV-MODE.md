@@ -133,6 +133,9 @@ vs_devmode=<payload>.<hmac>; Path=/; HttpOnly; SameSite=Strict; Max-Age=7200
 - `SameSite=Strict` means another site cannot make your browser send it.
 - It expires after **2 hours**.
 
+This is the local flow. A hosted deployment reached from a different origin
+cannot use a cookie at all; see section 10 for the bearer-token variant.
+
 ### Defences
 
 | Attack | Defence |
@@ -268,24 +271,25 @@ it never overwrites a field you filled in.
 
 ## 7. What the public site sees
 
-The authoring service only ever listens on loopback, so on any origin that is
-not `localhost` or `127.0.0.1` the Dev Mode button is **removed from the page
-entirely** — before the health probe is even attempted.
+Out of the box `assets/js/devmode.config.js` points at nothing, so the client
+calls its own origin. On GitHub Pages nothing answers, the health probe fails,
+and the Dev Mode button stays hidden.
 
 - Visitors never see the button, and cannot open a login form.
-- The probe is skipped, so no `404` appears in the console.
 - Nothing names the internal tooling to a visitor.
-- Every API path is relative, so nothing points at your machine.
 - No credential, hash or token is present in any published file.
 - Visitors get exactly what they got before: a static JSON file and images.
 
-The manager cannot be "hacked into" from the public site, because on the public
-site **it does not exist**.
+If you fill in `DEVMODE_API_BASE` (section 10), the button is revealed only
+when the page is opened at `#dev`. An ordinary visit still shows nothing and
+makes no request to the service.
 
-> An earlier build let the login panel open on GitHub Pages and explain that
-> the service was not running. It could not be logged into, but it looked
-> broken and it disclosed the server's start command, so the button is now
-> removed instead.
+> Two earlier bugs made this visibly wrong on the published site. The button
+> was hidden with the `hidden` attribute, but `.icon-btn { display: grid }` in
+> `style.css` outranks the browser's own `[hidden]` rule, so it stayed on
+> screen; clicking it then opened a login panel that announced the server's
+> start command. `devmode.css` now restates `display: none` for
+> `.icon-btn--dev[hidden]`.
 
 ---
 
@@ -304,7 +308,8 @@ node server/devmode-server.js
 
 Either way, the site to use is <http://127.0.0.1:4321> — click the terminal
 icon in the header. **Dev Mode does not work on the published GitHub Pages
-URL**, because the server runs only on your machine.
+URL** unless you also deploy the server somewhere that runs code, which
+section 10 covers.
 
 The launcher prefers a system-installed Node and falls back to a portable copy
 in `%LOCALAPPDATA%\vc-node`. If neither exists it prints the install command
@@ -403,11 +408,19 @@ it, and switches itself into hosted mode when `PUBLIC_ORIGIN` is set.
 | Credentials | generated config file | environment variables |
 | Storage | your disk | committed through the GitHub API |
 | Publish | `git push` | already committed on save |
-| Cookie | `HttpOnly` | `HttpOnly` **and** `Secure` |
+| Session | `HttpOnly` cookie | `Authorization: Bearer` header |
 
 Storage has to change because a cloud host gives every restart a fresh, empty
 disk. Anything written locally would vanish. Writing through the API instead
 makes the server stateless, so uploads survive restarts and redeploys.
+
+The session has to change when you log in from `vigneshsl.github.io` while the
+API lives on another host. The cookie is `SameSite=Strict` and is simply never
+sent across sites, and relaxing it to `SameSite=None` would not help either,
+because Safari and Firefox block third-party cookies outright. So a cross-origin
+login returns the same signed, two-hour token in the response body, the browser
+keeps it in `sessionStorage`, and every later call sends it as a bearer header.
+The local flow is untouched and still never exposes its token to script.
 
 ### Steps
 
@@ -429,7 +442,8 @@ four values. The password itself is never printed or stored.
 - Set an expiry, and renew it when it lapses.
 
 **3. Create the service.** On <https://render.com>, choose **New → Web Service**
-and connect the repository.
+and connect the repository. `render.yaml` in the project root already describes
+it, so **New → Blueprint** works too and only asks for the secrets.
 
 - Build command: leave blank — there are no dependencies
 - Start command: `node server/devmode-server.js`
@@ -439,6 +453,7 @@ and connect the repository.
 | Variable | Value |
 | --- | --- |
 | `PUBLIC_ORIGIN` | the service URL, e.g. `https://vigneshcareer.onrender.com` |
+| `ALLOWED_ORIGINS` | `https://vigneshsl.github.io` — only needed to log in from the published site |
 | `GITHUB_TOKEN` | the token from step 2 |
 | `GITHUB_REPO` | `vigneshsl/vigneshcareer` |
 | `GITHUB_BRANCH` | `main` |
@@ -447,29 +462,62 @@ and connect the repository.
 | `DEVMODE_PASSWORD_HASH` | from step 1 |
 | `DEVMODE_SESSION_SECRET` | from step 1 |
 
+`ALLOWED_ORIGINS` is a comma-separated allowlist. Any origin not on it is
+refused at the preflight, so no other site can call the API even with a stolen
+token in hand.
+
+Render injects `RENDER_EXTERNAL_URL`, which the server falls back to, so the
+first deploy succeeds before you know the URL. Set `PUBLIC_ORIGIN` explicitly
+afterwards.
+
 The server **refuses to start** if `PUBLIC_ORIGIN` is set without the
 credentials, or without the GitHub variables. Both would fail silently and
 dangerously otherwise: the first would expose the default password to the
 internet, the second would discard every upload on the next restart.
 
-**5. Open the service URL.** The Dev Mode button appears there because the API
-answers. Saving commits straight to the repository, and GitHub Pages picks the
-change up on its next build.
+**5. Point the published site at the service.** Put the URL in
+`assets/js/devmode.config.js` and commit it:
+
+```js
+export const DEVMODE_API_BASE = 'https://vigneshcareer.onrender.com';
+```
+
+This is a public URL, not a secret — the password hash, session key and GitHub
+token all stay in Render's environment.
+
+**6. Use it.** Open <https://vigneshsl.github.io/vigneshcareer/#dev>. The
+terminal icon appears, and clicking it wakes the service and offers the login.
+The service URL itself also serves the whole site with the button, if you
+prefer to work there instead.
+
+Saving commits straight to the repository, and GitHub Pages picks the change up
+on its next build — so a new certificate appears in the manager at once, but
+takes a minute or two to show on the public gallery.
 
 ### Understand the trade-off
 
-Two URLs now exist. `vigneshsl.github.io` stays the fast public site with no
-button. The Render URL is the same site plus the manager.
+Two URLs now exist. `vigneshsl.github.io` stays the fast public site, with the
+button hidden unless you ask for it with `#dev`. The Render URL is the same
+site plus the manager.
 
 That manager is a login page facing the entire internet, permanently. The
-protections are real — scrypt hashing, signed `HttpOnly` cookies, five attempts
-then a lockout — but the exposure is real too, and it is not there at all when
-Dev Mode runs only on your machine. On a free tier the service also sleeps when
-idle, so the first request after a quiet period takes the better part of a
-minute.
+protections are real — scrypt hashing, signed tokens, five attempts then a
+lockout, an origin allowlist — but the exposure is real too, and it is not
+there at all when Dev Mode runs only on your machine. On a free tier the
+service also sleeps when idle, so the first request after a quiet period takes
+the better part of a minute; the login panel says so while it waits.
 
-Nothing forces the choice permanently. Removing `PUBLIC_ORIGIN` returns the
-server to loopback-only, and deleting the service removes the exposure
+`#dev` is obscurity, not security. It keeps the login out of a visitor's way;
+it does not protect the API, which is why the password and the allowlist do.
+
+Holding the token in `sessionStorage` is the one concession the cross-origin
+flow makes: script on the page can read it, whereas the local cookie flow it
+never could. The token expires in two hours, it is cleared on logout and on any
+`401`, and the site renders no user-supplied HTML, so there is no path to read
+it — but the local flow remains the stronger of the two.
+
+Nothing forces the choice permanently. Emptying `DEVMODE_API_BASE` returns the
+site to a plain static page, and deleting the service removes the exposure
 entirely.
 
 ---

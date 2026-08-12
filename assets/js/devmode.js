@@ -1,12 +1,21 @@
 /**
  * devmode.js — Private certification manager.
  *
- * Holds no credentials and no tokens. Authentication is decided entirely by the
- * local Dev Mode server (server/devmode-server.js), which replies with an
- * HttpOnly cookie this script can neither read nor forge. Every mutating call
- * is rejected by that server unless the cookie is present and valid, so the
- * checks here are purely for UX.
+ * Holds no credentials and no tokens of its own. Authentication is decided
+ * entirely by the Dev Mode server (server/devmode-server.js), which rejects
+ * every mutating call without a valid session, so the checks here are purely
+ * for UX.
+ *
+ * Same-origin (localhost): the session lives in an HttpOnly cookie this script
+ * can neither read nor forge. Cross-origin (published site → hosted service):
+ * that cookie is SameSite=Strict and never sent, so the same signed, expiring
+ * token is held in sessionStorage and sent as an Authorization header instead.
  */
+
+import { DEVMODE_API_BASE } from './devmode.config.js';
+
+const REMOTE = String(DEVMODE_API_BASE || '').replace(/\/+$/, '');
+const TOKEN_KEY = 'vs_devmode_token';
 
 const API = {
     health: 'api/health',
@@ -18,6 +27,10 @@ const API = {
     publish: 'api/publish'
 };
 
+const OFFLINE_MESSAGE = REMOTE
+    ? `The Dev Mode service at ${REMOTE} did not answer. A sleeping free-tier service can take a minute to wake — try again shortly.`
+    : 'The Dev Mode service is not running. Start it with "node server/devmode-server.js" and open http://127.0.0.1:4321.';
+
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 
@@ -25,7 +38,8 @@ const state = {
     available: false,
     certificates: [],
     lastFocus: null,
-    onRefresh: null
+    onRefresh: null,
+    trigger: null
 };
 
 /* ------------------------------------------------------------------ helpers */
@@ -45,12 +59,37 @@ function el(tag, props = {}, children = []) {
     return node;
 }
 
+function apiUrl(path) {
+    return REMOTE ? `${REMOTE}/${path}` : path;
+}
+
+function readToken() {
+    if (!REMOTE) return '';
+    try {
+        return sessionStorage.getItem(TOKEN_KEY) || '';
+    } catch {
+        return '';
+    }
+}
+
+function writeToken(value) {
+    if (!REMOTE) return;
+    try {
+        if (value) sessionStorage.setItem(TOKEN_KEY, value);
+        else sessionStorage.removeItem(TOKEN_KEY);
+    } catch {
+        // Private browsing can refuse storage; the session simply will not persist.
+    }
+}
+
 async function api(path, { method = 'GET', body } = {}) {
-    const response = await fetch(path, {
+    const token = readToken();
+    const response = await fetch(apiUrl(path), {
         method,
-        credentials: 'same-origin',
+        credentials: REMOTE ? 'omit' : 'same-origin',
         headers: {
             'X-Dev-Mode': '1',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
             ...(body ? { 'Content-Type': 'application/json' } : {})
         },
         body: body ? JSON.stringify(body) : undefined
@@ -64,11 +103,24 @@ async function api(path, { method = 'GET', body } = {}) {
     }
 
     if (!response.ok) {
+        if (response.status === 401) writeToken('');
         const error = new Error(payload.error || `Request failed (${response.status}).`);
         error.status = response.status;
         throw error;
     }
     return payload;
+}
+
+async function probe() {
+    try {
+        const response = await fetch(apiUrl(API.health), { headers: { 'X-Dev-Mode': '1' } });
+        const payload = response.ok ? await response.json() : null;
+        state.available = Boolean(payload?.devMode);
+    } catch {
+        state.available = false;
+    }
+    state.trigger?.classList.toggle('is-live', state.available);
+    return state.available;
 }
 
 function setNote(node, message, type) {
@@ -157,7 +209,7 @@ function showOverlay(variant, panel, { label }) {
 
 /* -------------------------------------------------------------------- login */
 
-function openLogin() {
+function openLogin({ waking = false } = {}) {
     const note = el('span', { class: 'dm-note', role: 'status', 'aria-live': 'polite' });
     const username = el('input', { type: 'text', id: 'dmUser', name: 'username', autocomplete: 'username', required: true, maxlength: '80' });
     const password = el('input', { type: 'password', id: 'dmPass', name: 'password', autocomplete: 'current-password', required: true, maxlength: '200' });
@@ -186,13 +238,13 @@ function openLogin() {
 
     showOverlay('login', panel, { label: 'Dev Mode login' });
 
-    if (!state.available) {
-        username.disabled = true;
-        password.disabled = true;
-        submit.disabled = true;
-        setNote(note, 'The Dev Mode service is not running. Start it with "node server/devmode-server.js" and open http://127.0.0.1:4321.', 'warn');
-        return;
-    }
+    const setEnabled = (enabled, message, type) => {
+        username.disabled = !enabled;
+        password.disabled = !enabled;
+        submit.disabled = !enabled;
+        setNote(note, message, type);
+        if (enabled && message === '') username.focus();
+    };
 
     form.addEventListener('submit', async event => {
         event.preventDefault();
@@ -214,6 +266,7 @@ function openLogin() {
                 body: { username: username.value.trim(), password: password.value }
             });
             password.value = '';
+            writeToken(result.token || '');
             openManager(result.usingDefaultPassword);
         } catch (error) {
             // The server never reveals which field was wrong; neither does this.
@@ -225,6 +278,16 @@ function openLogin() {
             password.focus();
         }
     });
+
+    if (waking) {
+        setEnabled(false, 'Contacting the Dev Mode service…');
+        probe().then(ok => setEnabled(ok, ok ? '' : OFFLINE_MESSAGE, ok ? undefined : 'warn'));
+        return;
+    }
+
+    if (!state.available) {
+        setEnabled(false, OFFLINE_MESSAGE, 'warn');
+    }
 }
 
 /* ------------------------------------------------------------------ manager */
@@ -281,6 +344,7 @@ async function openManager(usingDefaultPassword = false) {
         } catch {
             // Cookie expiry already logs the session out.
         }
+        writeToken('');
         closeOverlay();
     });
 
@@ -611,6 +675,7 @@ function openPasswordChange() {
                 method: 'POST',
                 body: { currentPassword: current.control.value, newPassword: next.control.value }
             });
+            writeToken('');
             setNote(note, 'Password updated. Please log in again.', 'success');
             setTimeout(closeOverlay, 1400);
         } catch (error) {
@@ -627,28 +692,28 @@ export function initDevMode({ onRefresh } = {}) {
     if (!trigger) return;
 
     state.onRefresh = onRefresh;
+    state.trigger = trigger;
 
-    // Hidden until the API answers. On static hosting nothing answers, so the
-    // button never appears and no login is offered that could not succeed.
+    // Hidden until Dev Mode is known to be reachable, so a login that could
+    // never succeed is never offered.
     trigger.hidden = true;
 
-    fetch(API.health, { headers: { 'X-Dev-Mode': '1' } })
-        .then(response => (response.ok ? response.json() : null))
-        .then(payload => {
-            state.available = Boolean(payload?.devMode);
-            trigger.hidden = !state.available;
-            trigger.classList.toggle('is-live', state.available);
-        })
-        .catch(() => {
-            state.available = false;
-        });
+    if (REMOTE) {
+        // A free-tier service sleeps when idle, so it is never woken by a plain
+        // page view: the owner opens the site with #dev to ask for it.
+        const reveal = () => { trigger.hidden = window.location.hash !== '#dev'; };
+        reveal();
+        window.addEventListener('hashchange', reveal);
+    } else {
+        probe().then(() => { trigger.hidden = !state.available; });
+    }
 
     trigger.addEventListener('click', async () => {
         state.lastFocus = trigger;
         trigger.setAttribute('aria-expanded', 'true');
 
         if (!state.available) {
-            openLogin();
+            openLogin({ waking: REMOTE });
             return;
         }
 
