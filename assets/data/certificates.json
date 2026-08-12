@@ -1,17 +1,5 @@
 [
     {
-        "id": "cpp-essential-training-0",
-        "image": "certificates/cpp-essential-training.jpg",
-        "title": "C++ Essential Training",
-        "issuer": "LinkedIn Learning",
-        "date": "September 2025",
-        "issueDate": "September 2025",
-        "expirationDate": "",
-        "credentialId": "",
-        "credentialUrl": "",
-        "description": ""
-    },
-    {
         "id": "code-reviews-1",
         "image": "certificates/code-reviews.jpg",
         "title": "Programming Foundations: Conducting Code Reviews",
