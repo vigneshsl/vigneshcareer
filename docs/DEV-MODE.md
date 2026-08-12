@@ -280,20 +280,25 @@ and the Dev Mode button stays hidden.
 - No credential, hash or token is present in any published file.
 - Visitors get exactly what they got before: a static JSON file and images.
 
-If you fill in `DEVMODE_API_BASE` (section 10), the button is revealed only
-when the page is opened at `#dev`. An ordinary visit still shows nothing and
-makes no request to the service.
+If you fill in `DEVMODE_API_BASE` (section 10), the button is shown on the
+published site too. It is shown **without probing**, so an ordinary page view
+still makes no request to the service and never wakes it; the service is only
+contacted once you click.
 
-That gate applies to the **published** site only. The base is ignored when the
-page is already being served by the service itself, or from `localhost` /
-`127.0.0.1`, because there the API is same-origin: the button appears on its
-own as soon as the health probe answers, exactly as it always did.
+The base is ignored when the page is already being served by the service
+itself, or from `localhost` / `127.0.0.1`, because there the API is
+same-origin. In those cases the probe runs immediately and the button appears
+only if the server answers.
 
 | Where the page is opened | API called | Session | Button |
 | --- | --- | --- | --- |
 | `127.0.0.1:4321` | same origin | cookie | shown once the probe answers |
 | the hosted service URL | same origin | cookie | shown once the probe answers |
-| `vigneshsl.github.io` | `DEVMODE_API_BASE` | bearer token | only at `#dev` |
+| `vigneshsl.github.io` | `DEVMODE_API_BASE` | bearer token | shown always, probed on click |
+
+A visitor who clicks it gets the login panel and nothing else. There is no
+sign-up, and a wrong password is refused by the service, so the button costs
+nothing beyond naming the tooling.
 
 > Two earlier bugs made this visibly wrong on the published site. The button
 > was hidden with the `hidden` attribute, but `.icon-btn { display: grid }` in
@@ -499,8 +504,8 @@ export const DEVMODE_API_BASE = 'https://vigneshcareer.onrender.com';
 This is a public URL, not a secret — the password hash, session key and GitHub
 token all stay in Render's environment.
 
-**6. Use it.** Open <https://vigneshsl.github.io/vigneshcareer/#dev>. The
-terminal icon appears, and clicking it wakes the service and offers the login.
+**6. Use it.** Open <https://vigneshsl.github.io/vigneshcareer>. The terminal
+icon is in the header, and clicking it wakes the service and offers the login.
 The service URL itself also serves the whole site with the button, if you
 prefer to work there instead.
 
@@ -510,9 +515,8 @@ takes a minute or two to show on the public gallery.
 
 ### Understand the trade-off
 
-Two URLs now exist. `vigneshsl.github.io` stays the fast public site, with the
-button hidden unless you ask for it with `#dev`. The Render URL is the same
-site plus the manager.
+Two URLs now exist. `vigneshsl.github.io` stays the fast public site; the
+Render URL is the same site plus the manager. Both show the button.
 
 That manager is a login page facing the entire internet, permanently. The
 protections are real — scrypt hashing, signed tokens, five attempts then a
@@ -521,8 +525,10 @@ there at all when Dev Mode runs only on your machine. On a free tier the
 service also sleeps when idle, so the first request after a quiet period takes
 the better part of a minute; the login panel says so while it waits.
 
-`#dev` is obscurity, not security. It keeps the login out of a visitor's way;
-it does not protect the API, which is why the password and the allowlist do.
+An earlier version hid the button behind a `#dev` fragment. That was obscurity,
+not security: it kept the login out of a visitor's way but protected nothing,
+which is what the password and the allowlist are for. Restoring it means
+gating `trigger.hidden` on `window.location.hash` in `initDevMode`.
 
 Holding the token in `sessionStorage` is the one concession the cross-origin
 flow makes: script on the page can read it, whereas the local cookie flow it
