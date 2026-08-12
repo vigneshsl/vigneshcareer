@@ -27,10 +27,22 @@ const store = require('./lib/certificates');
 const ROOT = path.join(__dirname, '..');
 const PORT = Number(process.env.PORT || process.env.DEVMODE_PORT) || 4321;
 
+// A browser sends scheme + host and nothing else, so a configured URL carrying
+// a path or a trailing slash would never match what arrives.
+function toOrigin(value) {
+    const trimmed = String(value || '').trim();
+    if (!trimmed) return '';
+    try {
+        return new URL(trimmed).origin;
+    } catch {
+        return trimmed.replace(/\/+$/, '');
+    }
+}
+
 // Set PUBLIC_ORIGIN to the deployed URL to run this on a real host. Without it
 // the server stays on loopback, which is the safer default.
 // Render injects RENDER_EXTERNAL_URL, so a first deploy works before the URL is known.
-const PUBLIC_ORIGIN = (process.env.PUBLIC_ORIGIN || process.env.RENDER_EXTERNAL_URL || '').replace(/\/+$/, '');
+const PUBLIC_ORIGIN = toOrigin(process.env.PUBLIC_ORIGIN || process.env.RENDER_EXTERNAL_URL);
 const IS_PUBLIC = PUBLIC_ORIGIN !== '';
 const HOST = IS_PUBLIC ? '0.0.0.0' : '127.0.0.1';
 
@@ -38,7 +50,7 @@ const HOST = IS_PUBLIC ? '0.0.0.0' : '127.0.0.1';
 // site. Anything not listed here is refused outright.
 const CORS_ORIGINS = String(process.env.ALLOWED_ORIGINS || '')
     .split(',')
-    .map(value => value.trim().replace(/\/+$/, ''))
+    .map(toOrigin)
     .filter(Boolean);
 
 const SAME_SITE_ORIGINS = IS_PUBLIC
