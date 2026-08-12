@@ -34,6 +34,17 @@ const PUBLIC_ORIGIN = (process.env.PUBLIC_ORIGIN || process.env.RENDER_EXTERNAL_
 const IS_PUBLIC = PUBLIC_ORIGIN !== '';
 const HOST = IS_PUBLIC ? '0.0.0.0' : '127.0.0.1';
 
+// Origins allowed to call the API from a different host, e.g. the GitHub Pages
+// site. Anything not listed here is refused outright.
+const CORS_ORIGINS = String(process.env.ALLOWED_ORIGINS || '')
+    .split(',')
+    .map(value => value.trim().replace(/\/+$/, ''))
+    .filter(Boolean);
+
+const SAME_SITE_ORIGINS = IS_PUBLIC
+    ? [PUBLIC_ORIGIN]
+    : [`http://127.0.0.1:${PORT}`, `http://localhost:${PORT}`];
+
 const COOKIE_NAME = 'vs_devmode';
 const MAX_BODY_BYTES = 12 * 1024 * 1024;
 
@@ -118,11 +129,25 @@ function sessionCookie(value, maxAgeSeconds) {
     ].join('; ');
 }
 
+/**
+ * A SameSite=Strict cookie is never sent from another site, so a cross-origin
+ * caller presents the same signed token as an Authorization header instead.
+ */
+function sessionToken(req) {
+    const header = String(req.headers.authorization || '');
+    const bearer = /^Bearer\s+(.+)$/i.exec(header);
+    if (bearer) return bearer[1].trim();
+    return parseCookies(req.headers.cookie)[COOKIE_NAME];
+}
+
 function requireSession(req) {
-    const token = parseCookies(req.headers.cookie)[COOKIE_NAME];
-    const claims = auth.verifySession(token);
+    const claims = auth.verifySession(sessionToken(req));
     if (!claims) throw new store.HttpError(401, 'Not authenticated.');
     return claims;
+}
+
+function isAllowedOrigin(origin) {
+    return SAME_SITE_ORIGINS.includes(origin) || CORS_ORIGINS.includes(origin);
 }
 
 /**
@@ -134,12 +159,8 @@ function assertSameOrigin(req) {
         throw new store.HttpError(403, 'Missing Dev Mode request header.');
     }
 
-    const allowed = IS_PUBLIC
-        ? [PUBLIC_ORIGIN]
-        : [`http://127.0.0.1:${PORT}`, `http://localhost:${PORT}`];
-
     const origin = req.headers.origin;
-    if (origin && !allowed.includes(origin)) {
+    if (origin && !isAllowedOrigin(origin)) {
         throw new store.HttpError(403, 'Cross-origin request rejected.');
     }
 }
@@ -177,10 +198,23 @@ async function handleApi(req, res, url) {
 
         auth.clearFailures(ip);
         const cfg = auth.loadConfig();
-        return sendJson(res, 200,
-            { user: cfg.username, usingDefaultPassword: cfg.usingDefaultPassword === true },
-            { 'Set-Cookie': sessionCookie(auth.createSession(cfg.username), auth.SESSION_TTL_MS / 1000) }
-        );
+        const token = auth.createSession(cfg.username);
+        const payload = {
+            user: cfg.username,
+            usingDefaultPassword: cfg.usingDefaultPassword === true
+        };
+
+        // Same-origin keeps the token in an HttpOnly cookie that script cannot
+        // read. A cross-origin caller never receives that cookie, so it gets the
+        // token in the body and must hold it itself.
+        if (CORS_ORIGINS.includes(req.headers.origin)) {
+            payload.token = token;
+            payload.expiresAt = Date.now() + auth.SESSION_TTL_MS;
+        }
+
+        return sendJson(res, 200, payload, {
+            'Set-Cookie': sessionCookie(token, auth.SESSION_TTL_MS / 1000)
+        });
     }
 
     if (route === 'POST /api/auth/logout') {
@@ -189,8 +223,7 @@ async function handleApi(req, res, url) {
     }
 
     if (route === 'GET /api/auth/session') {
-        const token = parseCookies(req.headers.cookie)[COOKIE_NAME];
-        const claims = auth.verifySession(token);
+        const claims = auth.verifySession(sessionToken(req));
         return sendJson(res, claims ? 200 : 401,
             claims ? { user: claims.sub, expiresAt: claims.exp } : { error: 'Not authenticated.' });
     }
@@ -316,6 +349,25 @@ const server = http.createServer(async (req, res) => {
         return serveStatic(req, res, url);
     }
 
+    const origin = req.headers.origin;
+    if (origin && CORS_ORIGINS.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Vary', 'Origin');
+    }
+
+    if (req.method === 'OPTIONS') {
+        if (!origin || !isAllowedOrigin(origin)) {
+            return sendJson(res, 403, { error: 'Cross-origin request rejected.' });
+        }
+        res.writeHead(204, {
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, X-Dev-Mode, Authorization',
+            'Access-Control-Max-Age': '600'
+        });
+        return res.end();
+    }
+
     try {
         await handleApi(req, res, url);
     } catch (error) {
@@ -351,6 +403,9 @@ server.listen(PORT, HOST, () => {
     console.log('  Dev Mode server running');
     console.log(`  →  ${IS_PUBLIC ? PUBLIC_ORIGIN : `http://127.0.0.1:${PORT}`}`);
     console.log(`  Storage: ${store.isRemote ? 'GitHub API' : 'local files'}`);
+    if (CORS_ORIGINS.length) {
+        console.log(`  Cross-origin callers: ${CORS_ORIGINS.join(', ')}`);
+    }
     console.log('');
     if (!cfg.fromEnv) {
         console.log(`  Credentials file: ${path.relative(ROOT, auth.CONFIG_PATH)} (gitignored)`);

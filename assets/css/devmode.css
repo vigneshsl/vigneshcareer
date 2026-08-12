@@ -12,6 +12,12 @@
     position: relative;
 }
 
+/* `.icon-btn { display: grid }` outranks the browser's own `[hidden]` rule, so
+   the hidden attribute needs restating or the button shows on the static site. */
+.icon-btn--dev[hidden] {
+    display: none;
+}
+
 .icon-btn--dev i {
     transition: transform var(--t);
 }
