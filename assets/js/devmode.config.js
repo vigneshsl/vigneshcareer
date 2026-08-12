@@ -8,4 +8,4 @@
  * http://127.0.0.1:4321 serves. Set it to the deployed service (e.g. a Render
  * web service) to run Dev Mode from the published GitHub Pages site.
  */
-export const DEVMODE_API_BASE = '';
+export const DEVMODE_API_BASE = 'https://vigneshcareer-devmode.onrender.com';
