@@ -705,11 +705,9 @@ export function initDevMode({ onRefresh } = {}) {
     trigger.hidden = true;
 
     if (REMOTE) {
-        // A free-tier service sleeps when idle, so it is never woken by a plain
-        // page view: the owner opens the site with #dev to ask for it.
-        const reveal = () => { trigger.hidden = window.location.hash !== '#dev'; };
-        reveal();
-        window.addEventListener('hashchange', reveal);
+        // Shown without probing: a free-tier service sleeps when idle, and a
+        // probe on every page view would wake it for visitors who never log in.
+        trigger.hidden = false;
     } else {
         probe().then(() => { trigger.hidden = !state.available; });
     }
