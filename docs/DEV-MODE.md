@@ -284,6 +284,17 @@ If you fill in `DEVMODE_API_BASE` (section 10), the button is revealed only
 when the page is opened at `#dev`. An ordinary visit still shows nothing and
 makes no request to the service.
 
+That gate applies to the **published** site only. The base is ignored when the
+page is already being served by the service itself, or from `localhost` /
+`127.0.0.1`, because there the API is same-origin: the button appears on its
+own as soon as the health probe answers, exactly as it always did.
+
+| Where the page is opened | API called | Session | Button |
+| --- | --- | --- | --- |
+| `127.0.0.1:4321` | same origin | cookie | shown once the probe answers |
+| the hosted service URL | same origin | cookie | shown once the probe answers |
+| `vigneshsl.github.io` | `DEVMODE_API_BASE` | bearer token | only at `#dev` |
+
 > Two earlier bugs made this visibly wrong on the published site. The button
 > was hidden with the `hidden` attribute, but `.icon-btn { display: grid }` in
 > `style.css` outranks the browser's own `[hidden]` rule, so it stayed on

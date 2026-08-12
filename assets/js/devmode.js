@@ -14,7 +14,13 @@
 
 import { DEVMODE_API_BASE } from './devmode.config.js';
 
-const REMOTE = String(DEVMODE_API_BASE || '').replace(/\/+$/, '');
+const CONFIGURED_BASE = String(DEVMODE_API_BASE || '').trim().replace(/\/+$/, '');
+
+// The base is ignored when it is not actually somewhere else: the hosted
+// service serves this very site, and localhost has start-devmode.cmd. Both
+// keep the cookie flow, so neither needs a token or the #dev gate.
+const IS_LOCAL = ['127.0.0.1', 'localhost', '[::1]'].includes(window.location.hostname);
+const REMOTE = !IS_LOCAL && CONFIGURED_BASE !== window.location.origin ? CONFIGURED_BASE : '';
 const TOKEN_KEY = 'vs_devmode_token';
 
 const API = {
