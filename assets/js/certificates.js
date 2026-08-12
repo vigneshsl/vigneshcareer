@@ -9,7 +9,9 @@ import { initScrollReveal } from './animations.js';
  */
 export function fetchCertificates(bustCache = false) {
     const url = bustCache ? `assets/data/certificates.json?v=${Date.now()}` : 'assets/data/certificates.json';
-    return fetch(url)
+    // GitHub Pages serves this with max-age=600, so without revalidation a
+    // Dev Mode change stays invisible for ten minutes. ETags make it a 304.
+    return fetch(url, { cache: 'no-cache' })
         .then(response => (response.ok ? response.json() : []))
         .catch(() => []);
 }

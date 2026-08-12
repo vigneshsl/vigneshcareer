@@ -102,6 +102,7 @@
 /* --- Shared glass panel -------------------------------------------------- */
 
 .dm-panel {
+    position: relative;
     width: 100%;
     background: linear-gradient(160deg, rgba(255, 255, 255, .94), rgba(245, 250, 247, .88));
     border: 1px solid rgba(255, 255, 255, .9);
@@ -115,6 +116,55 @@
 
 .dm-overlay.is-open .dm-panel {
     transform: none;
+}
+
+/* Signals a dismissal that was refused to protect typed input. */
+.dm-overlay.is-open .dm-panel--nudge {
+    animation: dm-nudge .3s ease;
+}
+
+@keyframes dm-nudge {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    25% {
+        transform: translateX(-6px);
+    }
+
+    75% {
+        transform: translateX(6px);
+    }
+}
+
+.dm-panel__close {
+    position: absolute;
+    top: .85rem;
+    right: .85rem;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: none;
+    color: var(--muted-2);
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: color var(--t-fast), background var(--t-fast);
+}
+
+.dm-panel__close:hover {
+    color: var(--ink);
+    background: rgba(16, 40, 30, .07);
+}
+
+.dm-panel__close:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
 }
 
 /* --- Login --------------------------------------------------------------- */
@@ -219,6 +269,59 @@
     opacity: .65;
     text-transform: none;
     letter-spacing: .02em;
+}
+
+/* --- Password field ------------------------------------------------------ */
+
+.dm-pass__row {
+    position: relative;
+}
+
+/* Keeps the typed value clear of the toggle. */
+.dm-pass__row input {
+    padding-right: 2.9rem;
+}
+
+.dm-pass__toggle {
+    position: absolute;
+    inset-block: 0;
+    right: .3rem;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 9px;
+    background: none;
+    color: var(--muted-2);
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: color var(--t-fast), background var(--t-fast);
+}
+
+.dm-pass__toggle:hover {
+    color: var(--brand);
+    background: rgba(var(--brand-rgb), .1);
+}
+
+.dm-pass__toggle:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+}
+
+.dm-caps {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin-top: .45rem;
+    color: #a16207;
+    font-family: var(--mono);
+    font-size: var(--fs-2xs);
+    letter-spacing: .04em;
+}
+
+.dm-caps[hidden] {
+    display: none;
 }
 
 .dm-grid2 {
@@ -612,5 +715,9 @@
     .dm-btn,
     .icon-btn--dev i {
         transition: none;
+    }
+
+    .dm-overlay.is-open .dm-panel--nudge {
+        animation: none;
     }
 }

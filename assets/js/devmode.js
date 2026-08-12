@@ -65,6 +65,56 @@ function el(tag, props = {}, children = []) {
     return node;
 }
 
+/**
+ * Wraps a password input with a reveal toggle and a Caps Lock warning. A
+ * masked field gives no clue why a login failed; these two say so directly.
+ */
+function passwordControl(input) {
+    const icon = el('i', { class: 'fa-solid fa-eye', 'aria-hidden': 'true' });
+    const toggle = el('button', {
+        type: 'button',
+        class: 'dm-pass__toggle',
+        'aria-label': 'Show password',
+        'aria-pressed': 'false',
+        title: 'Show password'
+    }, icon);
+
+    const caps = el('span', { class: 'dm-caps', hidden: true }, [
+        el('i', { class: 'fa-solid fa-arrow-up', 'aria-hidden': 'true' }),
+        el('span', { text: 'Caps Lock is on' })
+    ]);
+
+    toggle.addEventListener('click', () => {
+        const nowVisible = input.type === 'password';
+        input.type = nowVisible ? 'text' : 'password';
+        icon.className = `fa-solid fa-eye${nowVisible ? '-slash' : ''}`;
+
+        const label = nowVisible ? 'Hide password' : 'Show password';
+        toggle.setAttribute('aria-pressed', String(nowVisible));
+        toggle.setAttribute('aria-label', label);
+        toggle.title = label;
+
+        // Returning the caret keeps a correction flowing without a re-click.
+        const end = input.value.length;
+        input.focus();
+        input.setSelectionRange(end, end);
+    });
+
+    const trackCaps = event => {
+        if (typeof event.getModifierState !== 'function') return;
+        caps.hidden = !event.getModifierState('CapsLock');
+    };
+    input.addEventListener('keydown', trackCaps);
+    input.addEventListener('keyup', trackCaps);
+    input.addEventListener('focus', trackCaps);
+    input.addEventListener('blur', () => { caps.hidden = true; });
+
+    return el('div', { class: 'dm-pass' }, [
+        el('div', { class: 'dm-pass__row' }, [input, toggle]),
+        caps
+    ]);
+}
+
 function apiUrl(path) {
     return REMOTE ? `${REMOTE}/${path}` : path;
 }
@@ -143,7 +193,6 @@ function closeOverlay() {
     if (!openOverlay) return;
     const node = openOverlay;
     openOverlay = null;
-    if (node._onKeydown) document.removeEventListener('keydown', node._onKeydown);
     node.classList.remove('is-open');
     setTimeout(() => node.remove(), 200);
     document.body.style.overflow = '';
@@ -151,9 +200,16 @@ function closeOverlay() {
     state.lastFocus?.focus();
 }
 
+function nudge(overlay) {
+    const panel = overlay.querySelector('.dm-panel');
+    if (!panel) return;
+    panel.classList.remove('dm-panel--nudge');
+    void panel.offsetWidth; // Restarts the animation on a repeated click.
+    panel.classList.add('dm-panel--nudge');
+}
+
 function showOverlay(variant, panel, { label }) {
     if (openOverlay) {
-        if (openOverlay._onKeydown) document.removeEventListener('keydown', openOverlay._onKeydown);
         openOverlay.remove();
         openOverlay = null;
     }
@@ -166,25 +222,16 @@ function showOverlay(variant, panel, { label }) {
         tabindex: '-1'
     }, panel);
 
+    // Only an explicit Close or Cancel button dismisses a dialog. Clicking the
+    // backdrop shakes the panel rather than discarding whatever is half typed.
     overlay.addEventListener('mousedown', event => {
-        if (event.target === overlay) closeOverlay();
+        if (event.target === overlay) nudge(overlay);
     });
 
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
     openOverlay = overlay;
     requestAnimationFrame(() => overlay.classList.add('is-open'));
-
-    // Escape is bound to the document, not the overlay. Saving or deleting
-    // rebuilds the card list, which destroys the focused button and drops focus
-    // back onto <body> — an overlay-scoped listener would stop hearing keys.
-    overlay._onKeydown = event => {
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            closeOverlay();
-        }
-    };
-    document.addEventListener('keydown', overlay._onKeydown);
 
     // Focus trap, so keyboard users cannot tab out into the page behind.
     overlay.addEventListener('keydown', event => {
@@ -209,7 +256,10 @@ function showOverlay(variant, panel, { label }) {
         }
     });
 
-    overlay.querySelector('input, button, textarea')?.focus();
+    // A text field wins over the close button, which now comes first in the DOM.
+    const initial = overlay.querySelector('input:not([type="file"]), textarea')
+        || overlay.querySelector('button');
+    initial?.focus();
     return overlay;
 }
 
@@ -217,7 +267,13 @@ function showOverlay(variant, panel, { label }) {
 
 function openLogin({ waking = false } = {}) {
     const note = el('span', { class: 'dm-note', role: 'status', 'aria-live': 'polite' });
-    const username = el('input', { type: 'text', id: 'dmUser', name: 'username', autocomplete: 'username', required: true, maxlength: '80' });
+    // Phone keyboards capitalise and autocorrect the first word by default,
+    // which silently mangles a username that is typed correctly.
+    const username = el('input', {
+        type: 'text', id: 'dmUser', name: 'username', autocomplete: 'username',
+        required: true, maxlength: '80', spellcheck: 'false',
+        autocapitalize: 'none', autocorrect: 'off'
+    });
     const password = el('input', { type: 'password', id: 'dmPass', name: 'password', autocomplete: 'current-password', required: true, maxlength: '200' });
     const submit = el('button', { type: 'submit', class: 'dm-btn dm-btn--primary dm-btn--block', text: 'Login' });
 
@@ -228,13 +284,21 @@ function openLogin({ waking = false } = {}) {
         ]),
         el('div', { class: 'dm-field' }, [
             el('label', { for: 'dmPass', text: 'Password' }),
-            password
+            passwordControl(password)
         ]),
         submit,
         note
     ]);
 
+    const dismiss = el('button', {
+        type: 'button',
+        class: 'dm-panel__close',
+        'aria-label': 'Close Dev Mode login',
+        title: 'Close'
+    }, el('i', { class: 'fa-solid fa-xmark', 'aria-hidden': 'true' }));
+
     const panel = el('div', { class: 'dm-panel dm-login' }, [
+        dismiss,
         el('div', { class: 'dm-login__mark' }, el('i', { class: 'fa-solid fa-terminal', 'aria-hidden': 'true' })),
         el('p', { class: 'dm-login__title', text: 'Dev Mode' }),
         el('h2', { class: 'dm-login__sub', text: 'Certification Manager' }),
@@ -243,6 +307,7 @@ function openLogin({ waking = false } = {}) {
     ]);
 
     showOverlay('login', panel, { label: 'Dev Mode login' });
+    dismiss.addEventListener('click', closeOverlay);
 
     const setEnabled = (enabled, message, type) => {
         username.disabled = !enabled;
@@ -251,6 +316,11 @@ function openLogin({ waking = false } = {}) {
         setNote(note, message, type);
         if (enabled && message === '') username.focus();
     };
+
+    // Without this the red outline lingers while the mistake is being fixed.
+    [username, password].forEach(input => {
+        input.addEventListener('input', () => input.classList.remove('is-invalid'));
+    });
 
     form.addEventListener('submit', async event => {
         event.preventDefault();
@@ -279,9 +349,11 @@ function openLogin({ waking = false } = {}) {
             submit.disabled = false;
             username.classList.add('is-invalid');
             password.classList.add('is-invalid');
-            password.value = '';
             setNote(note, error.message, 'error');
+            // Selected rather than cleared: typing replaces it, and the reveal
+            // toggle can still show what went in.
             password.focus();
+            password.select();
         }
     });
 
@@ -451,7 +523,7 @@ function field(id, label, { type = 'text', value = '', optional = false, textare
         control,
         node: el('div', { class: `dm-field${optional ? ' dm-field--optional' : ''}` }, [
             el('label', { for: id, text: label }),
-            control
+            type === 'password' && !textarea ? passwordControl(control) : control
         ])
     };
 }
