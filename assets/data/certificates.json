@@ -46,17 +46,5 @@
         "credentialId": "",
         "credentialUrl": "",
         "description": ""
-    },
-    {
-        "id": "powershell-7-essential-training-611744",
-        "image": "certificates/powershell-7-essential-training-3b99a1.jpg",
-        "title": "PowerShell 7 Essential Training",
-        "issuer": "LinkedIn Learning",
-        "date": "",
-        "issueDate": "",
-        "expirationDate": "",
-        "credentialId": "",
-        "credentialUrl": "",
-        "description": ""
     }
 ]
