@@ -464,7 +464,10 @@ it, so **New → Blueprint** works too and only asks for the secrets.
 
 `ALLOWED_ORIGINS` is a comma-separated allowlist. Any origin not on it is
 refused at the preflight, so no other site can call the API even with a stolen
-token in hand.
+token in hand. A browser sends only scheme and host, so
+`https://vigneshsl.github.io/vigneshcareer` and `https://vigneshsl.github.io/`
+are both reduced to `https://vigneshsl.github.io` before comparison. The
+startup log prints what was actually understood.
 
 Render injects `RENDER_EXTERNAL_URL`, which the server falls back to, so the
 first deploy succeeds before you know the URL. Set `PUBLIC_ORIGIN` explicitly
